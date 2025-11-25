@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Online - Catalogo Libri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <header>
+        <h1>Biblioteca Online</h1>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="catalogo.html">Catalogo</a>
+            <a href="#">Corsi</a>
+            <a href="#">Proposte di lettura</a>
+            <a href="#">Personale</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Catalogo libri</h2>
+        <p>
+            In questa pagina saranno mostrati tutti i libri disponibili.
+        </p>
+
+        <table>
+            <caption>Elenco libri</caption>
+            <thead>
+                <tr>
+                    <th>Titolo</th>
+                    <th>Autore</th>
+                    <th>Corso</th>
+                    <th>Anno</th>
+                    <th>Stato</th>
+                    <th>Prenotazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Introduzione alle Basi di Dati</td>
+                    <td>Rossi Mario</td>
+                    <td>Database</td>
+                    <td>2020</td>
+                    <td>Disponibile</td>
+                    <td>
+                        <button type="button">Prenota</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Programmazione Web</td>
+                    <td>Bianchi Luca</td>
+                    <td>Tecnologie Web</td>
+                    <td>2022</td>
+                    <td>Non disponibile</td>
+                    <td>
+                        <button type="button" disabled>Prenota</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Reti di Calcolatori</td>
+                    <td>Verdi Anna</td>
+                    <td>Reti</td>
+                    <td>2019</td>
+                    <td>Disponibile</td>
+                    <td>
+                        <button type="button">Prenota</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+
+</html>
