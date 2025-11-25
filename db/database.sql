@@ -107,3 +107,15 @@ ON DELETE CASCADE
 ON UPDATE CASCADE,
 PRIMARY KEY(`email`, `codice_libro`)
 )Engine=InnoDB;
+
+CREATE TABLE IF NOT EXISTS `weblio`.`utente_corso`(
+`email` VARCHAR(100) NOT NULL,
+`codice_corso` INT NOT NULL,
+FOREIGN KEY(`email`) REFERENCES `weblio`.`utente`(`email`)
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY(`codice_corso`) REFERENCES `weblio`.`corsi`(`codice_corso`)
+ON DELETE CASCADE
+ON UPDATE CASCADE,
+PRIMARY KEY(`email`, `codice_corso`)
+)Engine=InnoDB;
