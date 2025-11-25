@@ -60,10 +60,10 @@
                 <p>Sfoglia il catalogo e trova uno o più libri che ti possano interessare</p>
 
                 <h5>Prenota il libro</h5>
-                <p >Premi il pulsante “Prenota” per visualizzare la disponibilità...</p>
+                <p>Premi il pulsante “Prenota” per visualizzare la disponibilità...</p>
 
                 <h5>Consulta la pagina Prenotazioni</h5>
-                <p >In questa pagina troverai tutti i libri che hai prenotato...</p>
+                <p>In questa pagina troverai tutti i libri che hai prenotato...</p>
 
                 <button class="btn btn-light">Catalogo</button>
                 <button class="btn btn-light">Libro Fortunato</button>
@@ -73,6 +73,29 @@
             <div class="col-12 col-md-6">
                 <img src="../../html/assets/foto.png" class="img-fluid rounded-3" alt="">
             </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container text-center">
+        <h2 class="mb-5">Chi Siamo?</h2>
+
+        <div class="row justify-content-center pb-5">
+
+            <!-- Profilo 1 -->
+            <div class="col-12 col-md-5">
+                <img src="../../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <h5>Lorenzo Casadei</h5>
+                <p>matr:</p>
+            </div>
+
+            <!-- Profilo 2 -->
+            <div class="col-12 col-md-5">
+                <img src="../../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <h5>Adam Paolo Razzino</h5>
+                <p>matr:</p>
+            </div>
+
         </div>
     </div>
 </section>
