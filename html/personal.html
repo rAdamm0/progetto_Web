@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <!--OFF-CANVA-->
+
+        <section>
+            <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    Content for the offcanvas goes here. You can place just about any Bootstrap component or custom elements here.
+                </div>
+            </div>
+        </section>
+        <!--NAVBAR-->
+        <section>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./courses.html">Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown link
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvas">Authors</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <!--PERSONAL-->
+        <section class="mx-4">
+            <h1 class="md-10 mx-auto">Bentornato, Adam!</h1>
+            <article>
+                <figure class="figure">
+                    <img src="assets/foto.png" alt="Tua Immagine Profilo" class="w-25 img-fluid img-thumbnail" />
+                    <figcaption class="figure-caption">Adam Paolo Razzino</figcaption>
+                </figure>
+                <aside>
+                    <ul>
+                        <li>Corso: Ingegneria e Scienze Informatiche</li>
+                        <li>Eta': 23 anni</li>
+                        <li>Numero Matricola: 0001126965</li>
+                        <li>Anno: Terzo</li>
+                    </ul>
+
+                    <span class="badge text-bg-primary">Ingegneria del Software</span>
+                    <span class="badge text-bg-secondary">Tecnologie Web</span>
+                    <span class="badge text-bg-success">OOP</span>
+                    <span class="badge text-bg-danger">Sistemi Operativi</span>
+                    <span class="badge text-bg-warning">Fisica</span>
+                    <span class="badge text-bg-info">Matematica delle Probabilita'</span>
+                    <span class="badge"><button type=" button" class="btn btn-outline-danger">Edit</button></span>
+
+                </aside>
+            </article>
+            <aside>
+                Elenco passate prenotiazioni
+                <ul>
+                    <li>
+                        <p>
+                            Analisi Matematica 1: Marco Bramanti, Carlo D. Pagani, Sandro Salsa
+                            2023-10-04 -> 2023-11-04
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Basi di Dati VI edizione: Paolo Azteni,Stefano Ceri,Piero Fraternali,Stefano Paraboschi,Riccardo Torlone
+                            2024-09-15 -> 2023-10-15
+                        </p>
+                    </li>
+                </ul>
+            </aside>
+        </section>
+
+    </body>
+
+</html>
