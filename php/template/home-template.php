@@ -13,7 +13,7 @@
         <!-- Card 1 -->
         <div class="col-12 col-md-4">
             <div class="card h-100">
-                <img src="../../html/assets/foto.png" class="card-img-top" alt="Profilo">
+                <img src="../html/assets/foto.png" class="card-img-top" alt="Profilo">
                 <div class="card-body">
                     <h5 class="card-title">Profilo</h5>
                     <p class="card-text">
@@ -26,7 +26,7 @@
         <!-- Card 2 -->
         <div class="col-12 col-md-4">
             <div class="card h-100">
-                <img src="../../html/assets/foto.png" class="card-img-top" alt="Catalogo">
+                <img src="../html/assets/foto.png" class="card-img-top" alt="Catalogo">
                 <div class="card-body">
                     <h5 class="card-title">Catalogo</h5>
                     <p class="card-text">
@@ -39,7 +39,7 @@
         <!-- Card 3 -->
         <div class="col-12 col-md-4">
             <div class="card h-100">
-                <img src="../../html/assets/foto.png" class="card-img-top" alt="Prenotazioni">
+                <img src="../html/assets/foto.png" class="card-img-top" alt="Prenotazioni">
                 <div class="card-body">
                     <h5 class="card-title">Prenotazioni</h5>
                     <p class="card-text">
@@ -71,7 +71,7 @@
 
             <!-- Colonna destra (immagine) -->
             <div class="col-12 col-md-6">
-                <img src="../../html/assets/foto.png" class="img-fluid rounded-3" alt="">
+                <img src="../html/assets/foto.png" class="img-fluid rounded-3" alt="">
             </div>
         </div>
     </div>
@@ -84,14 +84,14 @@
 
             <!-- Profilo 1 -->
             <div class="col-12 col-md-5">
-                <img src="../../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
                 <h5>Lorenzo Casadei</h5>
                 <p>matr:</p>
             </div>
 
             <!-- Profilo 2 -->
             <div class="col-12 col-md-5">
-                <img src="../../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
                 <h5>Adam Paolo Razzino</h5>
                 <p>matr:</p>
             </div>
