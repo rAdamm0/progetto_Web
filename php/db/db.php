@@ -10,9 +10,12 @@ class DatabaseHelper{
     }
 
     public function getAvailableBooks($n=-1){
-      $query="SELECT l.*, a.codice_autore, a.nome_autore, a.cognome_autore, CONCAT(a.nome_autore, ' ', a.cognome_autore) AS autore_completo FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.disponibile = 0 ORDER BY l.nome_libro";
+      $query="SELECT l.*, a.codice_autore, a.nome_autore, a.cognome_autore, CONCAT(a.nome_autore, ' ', a.cognome_autore) AS autore_completo 
+      FROM libri l 
+      LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro 
+      LEFT JOIN autori a ON al.codice_autore = a.codice_autore ORDER BY l.nome_libro";
       if($n>0){
-        $query.="LIMIT ?";
+        $query.=" LIMIT ?";
       }
       $stmt = $this->db->prepare($query);
       if($n > 0){
@@ -27,7 +30,7 @@ class DatabaseHelper{
     public function getBookInfo($id){
       $query="SELECT l.nome_libro, l.edizione, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param(`i`,$id);
+      $stmt->bind_param('i',$id);
       $stmt->execute();
       $result = $stmt->get_result();
 
