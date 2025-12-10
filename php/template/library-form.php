@@ -8,10 +8,11 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($templateParams["Libri"] as $libro)?>
+        <?php foreach ($templateParams["Libri"] as $libro): ?>
         <tr>
             <td><?= htmlspecialchars($libro["nome_libro"]) ?></td>
-            <td><?= htmlspecialchars($libro["nome_autore"]) ?></td>
+            <td><?= htmlspecialchars($libro["autore_completo"]) ?></td>
         </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
