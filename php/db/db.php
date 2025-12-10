@@ -10,7 +10,7 @@ class DatabaseHelper{
     }
 
     public function getAvailableBooks($n=-1){
-      $query="SELECT l.*, a.codice_autore, a.nome_autore, a.cognome_autore, CONCAT(a.nome_autore, ' ', a.cognome_autore) AS autore_completo FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.disponibile = 0 ORDER BY l.nome_libro;";
+      $query="SELECT l.*, a.codice_autore, a.nome_autore, a.cognome_autore, CONCAT(a.nome_autore, ' ', a.cognome_autore) AS autore_completo FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.disponibile = 0 ORDER BY l.nome_libro";
       if($n>0){
         $query.="LIMIT ?";
       }
@@ -28,7 +28,7 @@ class DatabaseHelper{
       $query="SELECT l.nome_libro, l.edizione, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
       $stmt = $this->db->prepare($query);
       $stmt->bind_param(`i`,$id);
-      $stmt-execute();
+      $stmt->execute();
       $result = $stmt->get_result();
 
       return $result->fetch_all(MYSQLI_ASSOC);
@@ -57,12 +57,19 @@ class DatabaseHelper{
       return $result->fetch_all();
     }
 
-    public function personalInfo(){
-
+    public function personalInfo($email){
+      $query="SELECT nome, cognome, num_matricola, is_docente";
     }
 
     public function getPersonalCourses($email){
+      $query = "SELECT c.nome_corso, c.codice_corso FROM utente u RIGHT JOIN utente_corso uc ON u.email=uc.email RIGHT JOIN corsi c ON c.codice_corso=uc.codice_corso
+      WHERE u.email=$email";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param('s',$email);
+      $stmt->execute();
+      $result = $stmt->get_result();
 
+      return $result->fetch_all(MYSQLI_ASSOC);
     }
 
 

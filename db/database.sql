@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `cognome` VARCHAR(20) NOT NULL,
   `corso` VARCHAR(50) NOT NULL,
   `attivo` int NOT NULL DEFAULT 0,
+  `corso` VARCHAR(100),
+  `anno` int,
   `num_matricola` INT NOT NULL UNIQUE,
   `immagine_profilo` MEDIUMBLOB,
   `is_docente` INT DEFAULT 0,
@@ -43,6 +45,9 @@ CREATE TABLE IF NOT EXISTS `weblio`.`libri`(
 `codice_libro` INT AUTO_INCREMENT,
 `nome_libro` VARCHAR(50) NOT NULL, 
 `edizione` INT NOT NULL,
+`data_uscita` INT NOT NULL,
+`descrizione` TEXT,
+`disponibile` INT DEFAULT 0,
 PRIMARY KEY(`codice_libro`),
 INDEX `idx_libri`(`nome_libro` ASC)
 )Engine=InnoDB;
