@@ -36,7 +36,7 @@
                             <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="./courses.html">Courses</a>
+                            <a class="nav-link text-white" href="catalogo.php">Courses</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Pricing</a>
@@ -55,12 +55,12 @@
             </div>
         </nav>
     </section>
-    <section>
+    <main>
         <header class="bg-body-tertiary">
             <h1><?= $templateParams["h1"] ?></h1>
         </header>
         <?php require($templateParams["baseUpperPage"]) ?>
-    </section>
+    </main>
 </body>
 
 </html>

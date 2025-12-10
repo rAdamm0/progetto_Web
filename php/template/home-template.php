@@ -4,7 +4,7 @@
     <button type=" button" class="btn btn-outline-dark">Più informazioni</button>
 </section>
 <section>
-    <img src="../../html/assets/foto.png" alt="" class="img-fluid">
+    <img src="../../html/assets/foto.png" alt="" class="img-fluid container-md align-items-center">
 </section>
 <section class="container my-5 bg-dark pb-5 rounded">
     <h2 class="mb-4 fw-bold text-white">Cosa Forniamo</h2>
