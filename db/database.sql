@@ -12,8 +12,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema weblio
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `weblio` DEFAULT CHARACTER SET utf8 ;
-USE `weblio` ;
-
+USE `weblio`;
 CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `email` VARCHAR(100) NOT NULL UNIQUE,
   `password` VARCHAR(512) NOT NULL,
@@ -40,11 +39,14 @@ CREATE TABLE IF NOT EXISTS `weblio`.`corsi`(
 )Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `weblio`.`libri`(
-`codice_libro` INT AUTO_INCREMENT,
-`nome_libro` VARCHAR(50) NOT NULL, 
-`edizione` INT NOT NULL,
-PRIMARY KEY(`codice_libro`),
-INDEX `idx_libri`(`nome_libro` ASC)
+ `codice_libro` INT AUTO_INCREMENT,
+  `nome_libro` VARCHAR(50) NOT NULL,
+  `edizione` INT NOT NULL,
+  `data_uscita` INT NOT NULL,
+  `descrizione` TEXT,
+  `disponibile` INT DEFAULT 0,
+  PRIMARY KEY (`codice_libro`),
+  INDEX `idx_libri` (`nome_libro` ASC)
 )Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `weblio`.`libro_corso`(
