@@ -34,5 +34,37 @@ class DatabaseHelper{
       return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function bookReviews($id){
+      $query="SELECT l.nome_libro, r.valutazione, r.descrizione, r.email AS recensore FROM recensione r LEFT JOIN libri l ON r.codice_libro=l.codice_libro WHERE r.codice_libro = ?";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param(`i`,$id);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function coursesNum($n=-1){
+      $query="SELECT codice_corso, nome_corso, descrizione, lingua, docente FROM corsi";
+      if($n>0){
+        $query.="LIMIT ?";
+      }
+      $stmt = $this->db->prepare($query);
+      if($n>0){
+        $stmt->bind_param('i',$n);
+      }
+      $stmt->execute();
+      $result = $stmt->get_result();
+      return $result->fetch_all();
+    }
+
+    public function personalInfo(){
+
+    }
+
+    public function getPersonalCourses($email){
+
+    }
+
+
 }
 ?>
