@@ -86,7 +86,7 @@ class DatabaseHelper
 
   public function getPastBookings($email)
   {
-    $query = "SELECT l.nome_libro, p.data_inizio, p.data_fine, a.nome_autore,a.cognome_autore FROM prenotazioni p JOIN libri l ON p.codice_libro = l.codice_libro LEFT JOIN autore_libro al ON l.codice_libro=al.codice_libro LEFT JOIN autori a ON a.codice_autore = al.codice_autore WHERE p.email = ?";
+    $query = "SELECT * FROM 'Prenotazioni Passate' where email=?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -105,6 +105,67 @@ class DatabaseHelper
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+
+  public function getCoursesTagsByEmail($email)
+  {
+    $query = "SELECT c.codice_corso, c.nome_corso FROM corso c LEFT JOIN utente_corso uc ON c.codice_corso = uc.codice_corso WHERE uc.email = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function addTagByEmail($email, $codice_corso)
+  {
+    $query = "INSERT INTO `utente_corso`(`email`, `codice_corso`) VALUES (?,?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('si', $email, $codice_corso);
+    return $stmt->execute();
+  }
+
+  public function deleteTagByEmail($email, $codice_corso)
+  {
+    $query = "DELETE FROM `utente_corso` WHERE email = ? AND codice_corso=?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('si', $email, $codice_corso);
+    return $stmt->execute();
+
+  }
+
+  public function getUserInfos($email)
+  {
+    $query = "SELECT nome, cognome, corso, anno, num_matricola,immagine_profilo FROM utente WHERE email = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function updateUserInfos($email, $nome, $cognome, $corso, $anno, $num_matricola, $immagine_profilo)
+  {
+    $params = $this->getUserInfos($email);
+    $newParams["nome"] = $nome != $params["nome"] ? $nome : $params["nome"];
+    $newParams["cognome"] = $cognome != $params["cognome"] ? $cognome : $params["cognome"];
+    $newParams["corso"] = $corso != $params["corso"] ? $corso : $params["corso"];
+    $newParams["anno"] = $anno != $params["anno"] ? $anno : $params["anno"];
+    $newParams["num_matricola"] = $num_matricola != $params["num_matricola"] ? $num_matricola : $params["num_matricola"];
+    $newParams["immagine_profilo"] = $immagine_profilo != $params["immagine_profilo"] ? $immagine_profilo : $params["immagine_profilo"];
+    $tipi = 'sssiib';
+    $query = "UPDATE utente SET nome = ?, cognome = ?, corso = ?, anno = ?, num_matricola=?, immagine_profilo=:img WHERE email = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param(
+      $tipi,
+      $newParams["nome"],
+      $newParams["cognome"],
+      $newParams["corso"],
+      $newParams["anno"],
+      $newParams["num_matricola"],
+      $newParams["immagine_profilo"]
+    );
+  }
+
 
 }
 ?>
