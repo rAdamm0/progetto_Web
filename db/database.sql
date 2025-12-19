@@ -11,6 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema weblio
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `weblio`;
 CREATE SCHEMA IF NOT EXISTS `weblio` DEFAULT CHARACTER SET utf8 ;
 USE `weblio`;
 CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
@@ -20,7 +21,6 @@ CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `cognome` VARCHAR(20) NOT NULL,
   `corso` VARCHAR(50) NOT NULL,
   `attivo` int NOT NULL DEFAULT 0,
-  `corso` VARCHAR(100),
   `anno` int,
   `num_matricola` INT NOT NULL UNIQUE,
   `immagine_profilo` MEDIUMBLOB,

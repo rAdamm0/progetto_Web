@@ -8,7 +8,9 @@
             <th scope = "col">Edizione</th>
             <th scope = "col">Disponibilità</th>
         </tr>
+        <?php var_dump($templateParams["Libri"]) ?>
     </thead>
+    
     <tbody>
         <?php foreach ($templateParams["Libri"] as $libro):?>
         <tr>
