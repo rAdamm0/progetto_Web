@@ -3,8 +3,8 @@
     $id = $_GET["id"];
     $templateParams["titolo"] = "WebLio";
     $templateParams["Libro"] = $dbh->getBookInfo($id);
-    var_dump($templateParams["Libro"]);
-    $templateParams["h1"] = $templateParams["Libro"]["nome_libro"];
+    $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"];
+    $templateParams["recensione"] = $dbh->bookReviews($id);
     $templateParams["header"] = "template/headerBook.php";
     $templateParams["baseUpperPage"] = "template/bookPage.php";
     require("base.php");
