@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `weblio`.`libri`(
 `edizione` INT NOT NULL,
 `data_uscita` INT NOT NULL,
 `descrizione` TEXT,
+`immagine_libro` MEDIUMBLOB,
 `disponibile` INT DEFAULT 0,
 PRIMARY KEY(`codice_libro`),
 INDEX `idx_libri`(`nome_libro` ASC)
@@ -123,3 +124,60 @@ ON DELETE CASCADE
 ON UPDATE CASCADE,
 PRIMARY KEY(`email`, `codice_corso`)
 )Engine=InnoDB;
+<<<<<<< HEAD
+=======
+
+DELIMITER $$
+
+CREATE PROCEDURE SearchAllColumns(
+    IN TableName VARCHAR(64),
+    IN SearchText VARCHAR(255)
+)
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE colName VARCHAR(64);
+    DECLARE sqlText TEXT DEFAULT '';
+    
+    DECLARE cur1 CURSOR FOR 
+        SELECT COLUMN_NAME 
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = TableName 
+          AND TABLE_SCHEMA = DATABASE();
+          
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur1;
+
+    read_loop: LOOP
+        FETCH cur1 INTO colName;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        IF sqlText = '' THEN
+            SET sqlText = CONCAT("COALESCE(", colName, ", '')");
+        ELSE
+            SET sqlText = CONCAT(sqlText, " , ' ' , COALESCE(", colName, ", '')");
+        END IF;
+    END LOOP;
+
+    CLOSE cur1;
+
+    SET @finalSql = CONCAT("SELECT * FROM ", TableName,
+                           " WHERE CONCAT(", sqlText, ") LIKE '%",
+                           SearchText, "%'");
+
+    PREPARE stmt FROM @finalSql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+
+END$$
+
+DELIMITER ;
+
+CREATE VIEW `Prenotazioni Passate` AS
+SELECT u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCAT(a.cognome_autore SEPARATOR ",") AS autori 
+FROM prenotazioni p join libri l on p.codice_libro = l.codice_libro join autore_libro al on l.codice_libro = al.codice_libro join autori a on al.codice_autore = a.codice_autore join utente u on p.email = u.email 
+WHERE p.data_fine<>'' 
+GROUP BY l.nome_libro, l.edizione, u.email,p.data_inizio, p.data_fine; 
+>>>>>>> 4b0b9a08b76c344d449c4026ec85ba0976248f7c
