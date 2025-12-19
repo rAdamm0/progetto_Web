@@ -5,21 +5,40 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Bootstrap demo</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+        <script
+            src="./script.js" async></script>
     </head>
 
     <body>
         <!--OFF-CANVA-->
 
         <section>
-            <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <div class="offcanvas offcanvas-start toggle" tabindex="-1"
+                id="offcanvas" aria-labelledby="offcanvasLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 class="offcanvas-title"
+                        id="offcanvasLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    Content for the offcanvas goes here. You can place just about any Bootstrap component or custom elements here.
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <p>Adam Paolo Razzino</p>
+                            <p>0001126965</p>
+                            <p>adampaolo.razzino@studio.unibo.it</p>
+                        </li>
+                        <li class="list-group-item">Lorenzo Casadei</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -28,27 +47,39 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <div class="collapse navbar-collapse"
+                        id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page"
+                                    href="#">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./courses.html">Courses</a>
+                                <a class="nav-link"
+                                    href="./courses.html">Corsi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
+                                <a class="nav-link" href="#">Catalogo</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown link
+                                <a class="nav-link dropdown-toggle" href="#"
+                                    role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    About You
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvas">Authors</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="#">Prenotazioni</a></li>
+                                    <li><a class="dropdown-item"
+                                            data-bs-toggle="offcanvas"
+                                            href="#offcanvas">Login</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,49 +90,174 @@
 
         <!--PERSONAL-->
         <section class="mx-4">
-            <h1 class="md-10 mx-auto">Bentornato, Adam!</h1>
-            <article>
-                <figure class="figure">
-                    <img src="assets/foto.png" alt="Tua Immagine Profilo" class="w-25 img-fluid img-thumbnail" />
-                    <figcaption class="figure-caption">Adam Paolo Razzino</figcaption>
-                </figure>
-                <aside>
-                    <ul>
-                        <li>Corso: Ingegneria e Scienze Informatiche</li>
-                        <li>Eta': 23 anni</li>
-                        <li>Numero Matricola: 0001126965</li>
-                        <li>Anno: Terzo</li>
-                    </ul>
+            <h1 class="mb-4 mx-auto text-center">About You</h1>
+            <div class="container">
+                <div class="row">
+                    <!-- Immagine - in alto su mobile, destra su desktop -->
+                    <div
+                        class="col-12 col-md-4 order-first order-md-last text-center">
+                        <div class="mb-4">
+                            <img src="./assets/foto.png"
+                                alt="Profile Image"
+                                class="rounded img-fluid ml-3 "
+                                style="object-fit: cover;">
+                        </div>
+                    </div>
 
-                    <span class="badge text-bg-primary">Ingegneria del Software</span>
-                    <span class="badge text-bg-secondary">Tecnologie Web</span>
-                    <span class="badge text-bg-success">OOP</span>
-                    <span class="badge text-bg-danger">Sistemi Operativi</span>
-                    <span class="badge text-bg-warning">Fisica</span>
-                    <span class="badge text-bg-info">Matematica delle Probabilita'</span>
-                    <span class="badge"><button type=" button" class="btn btn-outline-danger">Edit</button></span>
+                    <!-- Lista - sotto l'immagine su mobile, sinistra su desktop -->
+                    <div class="col-12 col-md-8 order-last order-md-first">
+                        <aside>
+                            <ul class="list-group">
+                                <li class="list-group-item">Adam Paolo
+                                    Razzino</li>
+                                <li class="list-group-item">Corso: Ingegneria e
+                                    Scienze Informatiche</li>
+                                <li class="list-group-item">Eta': 23 anni</li>
+                                <li class="list-group-item">Numero Matricola:
+                                    0001126965</li>
+                                <li class="list-group-item">Anno: Terzo</li>
+                                <li class="lsit-group-item text-end"
+                                    style="list-style: none;"><span
+                                        class="badge"><button type=" button"
+                                            class="btn btn-outline-danger">Edit</button></span></li>
+                            </ul>
+                            <section class="mt-3">
+                                <!--Ognuno di questi badge avrà una funzionalità Js in cui onClick verrà eliminato e mandato una query deleteTagByEmail-->
+                                <span class="badge text-bg-secondary">Ingegneria
+                                    del
+                                    Software</span>
+                                <span class="badge text-bg-secondary">Tecnologie
+                                    Web</span>
+                                <span class="badge text-bg-secondary">OOP</span>
+                                <span class="badge text-bg-secondary">Sistemi
+                                    Operativi</span>
+                                <span
+                                    class="badge text-bg-secondary">Fisica</span>
+                                <span class="badge text-bg-secondary">Matematica
+                                    delle Probabilita'</span>
+                                <span class="badge text-bg-warning">Aggiungi
+                                    Corso</span><!--Link gestito da Js Apre una lista di corsi-->
+                            </section>
+                        </aside>
+                    </div>
+                </div>
+            </div>
 
-                </aside>
-            </article>
-            <aside>
-                Elenco passate prenotiazioni
-                <ul>
-                    <li>
-                        <p>
-                            Analisi Matematica 1: Marco Bramanti, Carlo D. Pagani, Sandro Salsa
-                            2023-10-04 -> 2023-11-04
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Basi di Dati VI edizione: Paolo Azteni,Stefano Ceri,Piero Fraternali,Stefano Paraboschi,Riccardo Torlone
-                            2024-09-15 -> 2023-10-15
-                        </p>
-                    </li>
-                </ul>
-            </aside>
+            <hr class="hr my-4" />
+
+            <!--Elenco Passate Prenotazioni-->
+            <div>
+                <h2>Prenotazioni Passate</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Libro</th>
+                            <th scope="col">Autori</th>
+                            <th scope="col">Data Inizio</th>
+                            <th scope="col">Data Fine</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr>
+                            <td scope="row">Analisi Matematica 1</td>
+                            <td>Marco Bramanti, Carlo D.
+                                Pagani, Sandro Salsa</td>
+                            <td>2023-10-04</td>
+                            <td>2023-11-04</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">Basi di Dati VI edizione</td>
+                            <td>Paolo Azteni,Stefano
+                                Ceri,Piero Fraternali,Stefano
+                                Paraboschi,Riccardo
+                                Torlone</td>
+                            <td>2024-09-15</td>
+                            <td>2023-10-15</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="hr my-4" />
+
+            <!--Carousel Reviews-->
+            <div>
+                <h2>Recensioni</h2>
+                <section id="agenda" class="custom-slider">
+                    <div class="container-lg py-5">
+                        <div class="container-lg px-0">
+                            <div class="row">
+                                <div class="col clearfix">
+                                    <span
+                                        class="title-section d-flex justify-content-end">
+
+                                        <button
+                                            class="btn btn-dark btn-sm prev-btn mb-2"
+                                            type="button">
+                                            <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                                            <span
+                                                class>Previous</span>
+                                        </button><span
+                                            class="mx-1">&nbsp;</span>
+                                        <button
+                                            class="btn btn-dark btn-sm next-btn mb-2"
+                                            type="button">
+                                            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                                            <span
+                                                class>Next</span>
+                                        </button>
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col d-inline-flex gap-3">
+                            <div
+                                class="card box-4 shadow-sm h-100 w-100 mb-3">
+                                <div class="card-header"><span><i
+                                            class="far fa-clock"></i>
+                                        [Titolo Libro]</span><span
+                                        class="float-end"><a href><i
+                                                class="fas fa-map-marker-alt grow"></i></a></span>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <p class="card-text">[Corpo
+                                        Recensione]</p>
+                                </div>
+                                <div class="card-footer"><span><i
+                                            class="far fa-clock"></i>
+                                        5 stelle</span><span
+                                        class="float-end"><i
+                                            class="fas fa-map-marker-alt"></i></span></div>
+                            </div>
+
+                            <div
+                                class="card box-4 shadow-sm h-100 w-100 mb-3 ml-4">
+                                <div class="card-header"><span><i
+                                            class="far fa-clock"></i>
+                                        [Titolo Libro]</span><span
+                                        class="float-end"><a href><i
+                                                class="fas fa-map-marker-alt grow"></i></a></span>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <p class="card-text">[Corpo
+                                        Recensione]</p>
+                                </div>
+                                <div class="card-footer"><span><i
+                                            class="far fa-clock"></i>
+                                        5 stelle</span><span
+                                        class="float-end"><i
+                                            class="fas fa-map-marker-alt"></i></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
         </section>
-
+        <!--Fine PERSONAL-->
     </body>
-
 </html>

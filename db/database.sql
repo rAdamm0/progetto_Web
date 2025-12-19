@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `weblio`.`libri`(
 `edizione` INT NOT NULL,
 `data_uscita` INT NOT NULL,
 `descrizione` TEXT,
+`immagine_libro` MEDIUMBLOB,
 `disponibile` INT DEFAULT 0,
 PRIMARY KEY(`codice_libro`),
 INDEX `idx_libri`(`nome_libro` ASC)
@@ -176,4 +177,4 @@ CREATE VIEW `Prenotazioni Passate` AS
 SELECT u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCAT(a.cognome_autore SEPARATOR ",") AS autori 
 FROM prenotazioni p join libri l on p.codice_libro = l.codice_libro join autore_libro al on l.codice_libro = al.codice_libro join autori a on al.codice_autore = a.codice_autore join utente u on p.email = u.email 
 WHERE p.data_fine<>'' 
-GROUP BY l.nome_libro, u.email,p.data_inizio; 
+GROUP BY l.nome_libro, l.edizione, u.email,p.data_inizio, p.data_fine; 

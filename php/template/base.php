@@ -39,15 +39,15 @@
                             <a class="nav-link text-white" href="catalogo.php">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Pricing</a>
+                            <a class="nav-link text-white" href="#">Catalogo</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown link
+                                About You
                             </a>
                             <ul class="dropdown-menu bg-dark">
-                                <li><a class="dropdown-item text-white" href="#">Action</a></li>
-                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="#offcanvas">Authors</a></li>
+                                <li><a class="dropdown-item text-white" href="#">Prenotazioni</a></li>
+                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="#offcanvas">Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -56,7 +56,7 @@
         </nav>
     </section>
     <main>
-        <?php require($templateParams["header"])?>
+        <?php //include($templateParams["header"])?>
         <?php require($templateParams["baseUpperPage"]) ?>
     </main>
 </body>

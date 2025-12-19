@@ -164,6 +164,38 @@ class DatabaseHelper
       $newParams["num_matricola"],
       $newParams["immagine_profilo"]
     );
+    $stmt->execute();
+  }
+
+  public function checkUserInDatabase($email, $password)
+  {
+    $query("SELECT email FROM utente WHERE email = ? AND password = ?");
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function registerUser($email, $password, $nome, $cognome, $numero_matricola)
+  {
+    $query = "INSERT INTO utente(email, password, nome, cognome, numero_matricola) VALUES (?,?,?,?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('ssssi', $email, $password, $nome, $cognome, $numero_matricola);
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function getReviewsByEmail($email){
+    $query = "SELECT l.nome_libro, r.descrizione, r.valutazione FROM recensione r LEFT JOIN libri l ON r.codice_libro = l.codice_libro WHERE r.email = ?";
+    $stmt=$this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result=$stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
   }
 
 
