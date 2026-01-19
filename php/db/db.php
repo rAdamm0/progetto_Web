@@ -208,6 +208,34 @@ class DatabaseHelper
       return $result->fetch_assoc();
 
   }
-
+  public function getRandomCourses($limit = 3){
+    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i',$limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC) ;
+  }
+  public function getCoursesByResearch($search = ""){
+    $search = trim($search);
+    if($search === ""){
+      $query = "SELECT * FROM corsi ORDER BY nome_corso ASC";
+      $stmt = $this->db->prepare($query);
+    }else{
+      $like = "%".$search."%";
+      $query = "SELECT * FROM corsi
+               WHERE nome_corso LIKE ?
+                OR descrizione LIKE ?
+                OR docente LIKE ?
+                OR lingua LIKE ?
+                OR CAST(codice_corso AS CHAR) LIKE ?
+                ORDER BY nome_corso ASC";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param('sssss',$like,$like,$like,$like,$like);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
 }
 ?>

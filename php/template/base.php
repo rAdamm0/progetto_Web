@@ -37,10 +37,10 @@
                             <a class="nav-link active text-white" aria-current="page" href="home.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="catalogo.php">Courses</a>
+                            <a class="nav-link text-white" href="courses.php">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Catalogo</a>
+                            <a class="nav-link text-white" href="catalogo.php">Catalogo</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

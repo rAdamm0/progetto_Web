@@ -124,8 +124,6 @@ ON DELETE CASCADE
 ON UPDATE CASCADE,
 PRIMARY KEY(`email`, `codice_corso`)
 )Engine=InnoDB;
-<<<<<<< HEAD
-=======
 
 DELIMITER $$
 
@@ -180,4 +178,3 @@ SELECT u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCA
 FROM prenotazioni p join libri l on p.codice_libro = l.codice_libro join autore_libro al on l.codice_libro = al.codice_libro join autori a on al.codice_autore = a.codice_autore join utente u on p.email = u.email 
 WHERE p.data_fine<>'' 
 GROUP BY l.nome_libro, l.edizione, u.email,p.data_inizio, p.data_fine; 
->>>>>>> 4b0b9a08b76c344d449c4026ec85ba0976248f7c
