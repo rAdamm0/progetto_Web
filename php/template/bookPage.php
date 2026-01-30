@@ -13,6 +13,9 @@ $descrizione = htmlspecialchars($libro["descrizione"]);
 $data_uscita = htmlspecialchars($libro["data_uscita"]);
 
 ?>
+<header>
+    <h1><?=  $templateParams["h1"]?></h1>
+</header>
 <div class="container py-4">
     <div class="row g-4">
         <div class="col-12 col-md-4 col-lg-3">
