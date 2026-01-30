@@ -19,10 +19,10 @@ INSERT INTO `weblio`.`libri`
 (`codice_libro`, `nome_libro`, `edizione`, `data_uscita`, `descrizione`, `disponibile`) VALUES
 (1, 'Basi di Dati: Concetti e Linguaggi', 5, 2018, 'Manuale introduttivo e avanzato sui concetti fondamentali delle basi di dati relazionali.', 0),
 (2, 'Analisi Matematica 1', 8, 2016, 'Testo universitario di riferimento per lo studio dei limiti, derivate e integrali.', 0),
-(3, 'Fisica Generale: Meccanica e Termodinamica', 4, 2014, 'Volume dedicato alla meccanica classica e ai principi di termodinamica.', 0),
-(4, 'Programmazione Java Avanzata', 3, 2019, 'Guida alla programmazione avanzata in Java con esempi su OOP e pattern.', 0),
+(3, 'Fisica Generale: Meccanica e Termodinamica', 4, 2014, 'Volume dedicato alla meccanica classica e ai principi di termodinamica.', 1),
+(4, 'Programmazione Java Avanzata', 3, 2019, 'Guida alla programmazione avanzata in Java con esempi su OOP e pattern.', 1),
 (5, 'Algebra Lineare e Geometria', 6, 2015, 'Libro che tratta vettori, matrici, spazi vettoriali e geometria analitica.', 0),
-(6, 'Database System Concepts', 7, 2020, 'Classico testo in inglese sulla progettazione e gestione dei database.', 0),
+(6, 'Database System Concepts', 7, 2020, 'Classico testo in inglese sulla progettazione e gestione dei database.', 1),
 (7, 'Calcolo Differenziale e Integrale', 2, 2013, 'Introduzione al calcolo differenziale e integrale con numerosi esercizi.', 0),
 (8, 'Fisica: Elettromagnetismo e Onde', 3, 2017, 'Volume dedicato ai campi elettrici, magnetici e alla propagazione delle onde.', 0);
 

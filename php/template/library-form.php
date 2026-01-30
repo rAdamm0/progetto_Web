@@ -9,6 +9,7 @@
             <th scope = "col">Disponibilità</th>
         </tr>
     </thead>
+    
     <tbody>
         <?php foreach ($templateParams["Libri"] as $libro): ?>
         <tr>

@@ -29,14 +29,14 @@ class DatabaseHelper
 
   public function getBookInfo($id)
   {
-    $query = "SELECT l.nome_libro, l.edizione, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
+    $query = "SELECT l.nome_libro, l.descrizione, l.data_uscita, l.edizione, l.disponibile, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    return $result->fetch_all(MYSQLI_ASSOC);
-  }
+      return $result->fetch_assoc();
+    }
 
   public function bookReviews($id)
   {
@@ -96,7 +96,7 @@ class DatabaseHelper
     $stmt->bind_param('s', $searchTerm);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result->fetch_assoc();
   }
 
   public function getCoursesTagsByEmail($email)
@@ -222,7 +222,65 @@ class DatabaseHelper
     $result=$stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+  public function getCourseByBook($idBook){
+      $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc
+      ON c.codice_corso = lc.codice_corso
+      WHERE lc.codice_libro = ?";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param("i",$idBook);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      return $result->fetch_assoc();
 
-
+  }
+  public function getRandomCourses($limit = 3){
+    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i',$limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC) ;
+  }
+  public function getCoursesByResearch($search = ""){
+    $search = trim($search);
+    if($search === ""){
+      $query = "SELECT * FROM corsi ORDER BY nome_corso ASC";
+      $stmt = $this->db->prepare($query);
+    }else{
+      $like = "%".$search."%";
+      $query = "SELECT * FROM corsi
+               WHERE nome_corso LIKE ?
+                OR descrizione LIKE ?
+                OR docente LIKE ?
+                OR lingua LIKE ?
+                OR CAST(codice_corso AS CHAR) LIKE ?
+                ORDER BY nome_corso ASC";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param('sssss',$like,$like,$like,$like,$like);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  public function getBooksBySearch($search){
+    $search = trim($search);
+    if($search === ""){
+      $query = "SELECT * FROM libri";
+      $stmt = $this->db->prepare($query);
+    }else{
+      $like = "%".$search."%";
+      $query = "SELECT * FROM libri 
+                WHERE nome_corso LIKE ?
+                OR nome_libro LIKE ?
+                OR nome_autore LIKE ?
+                OR data_uscita LIKE ?
+                ORDER BY nome_libro DESC";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param("ssss", $like, $like, $like, $like);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
 }
 ?>

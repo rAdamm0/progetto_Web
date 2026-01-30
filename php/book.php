@@ -2,9 +2,10 @@
     require_once("db/Bootstrap.php");
     $id = $_GET["id"];
     $templateParams["titolo"] = "WebLio";
-    $templateParams["Libro"] = $dbh->getBookInfo(id: $id);
-    $templateParams["h1"] = $templateParams["Libro"]["nome_libro"];
+    $templateParams["Libro"] = $dbh->getBookInfo($id);
+    $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"];
+    $templateParams["recensione"] = $dbh->bookReviews($id);
     $templateParams["header"] = "template/headerBook.php";
-    $templateParams["baseUpperPage"] = "";
+    $templateParams["baseUpperPage"] = "template/bookPage.php";
     require("template/base.php");
 ?>
