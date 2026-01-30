@@ -35,7 +35,7 @@ class DatabaseHelper
     $stmt->execute();
     $result = $stmt->get_result();
 
-      return $result->fetch_assoc();
+      return $result->fetch_assoc(MYSQLI_ASSOC);
     }
 
   public function bookReviews($id)
