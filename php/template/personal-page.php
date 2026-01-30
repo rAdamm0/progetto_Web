@@ -2,6 +2,7 @@
     <?php //var_dump($templateParams) ?>
     <h1 class="mb-4 mx-auto text-center">About You</h1>
     <div class="container">
+        
         <div class="row">
             <!-- Immagine - in alto su mobile, destra su desktop -->
             <div class="col-12 col-md-4 order-first order-md-last text-center">
@@ -144,3 +145,4 @@
 </div>
 
 <hr class="hr my-4" />
+<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie()></span>

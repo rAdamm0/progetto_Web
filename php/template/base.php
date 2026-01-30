@@ -47,7 +47,7 @@
                                 About You
                             </a>
                             <ul class="dropdown-menu bg-dark">
-                                <li><a class="dropdown-item text-white" href="#">Prenotazioni</a></li>
+                                <li><a class="dropdown-item text-white" href="prenotazioni.php">Prenotazioni</a></li>
                                 <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="../php/personal.php">Login</a></li>
                             </ul>
                         </li>

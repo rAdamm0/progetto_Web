@@ -73,17 +73,6 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function getPersonalCourses($email)
-  {
-    $query = "SELECT c.nome_corso, c.codice_corso FROM utente u RIGHT JOIN utente_corso uc ON u.email=uc.email RIGHT JOIN corsi c ON c.codice_corso=uc.codice_corso
-      WHERE u.email=$email";
-    $stmt = $this->db->prepare($query);
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
-  }
-
   public function getPastBookings($email)
   {
     $query = "SELECT * FROM `prenotazioni passate` where email = ?";
