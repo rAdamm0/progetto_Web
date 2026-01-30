@@ -36,10 +36,10 @@
                             <a class="nav-link active text-white" aria-current="page" href="home.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="catalogo.php">Courses</a>
+                            <a class="nav-link text-white" href="#">Courses</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Catalogo</a>
+                            <a class="nav-link text-white" href="../php/catalogo.php">Catalogo</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,7 +47,7 @@
                             </a>
                             <ul class="dropdown-menu bg-dark">
                                 <li><a class="dropdown-item text-white" href="#">Prenotazioni</a></li>
-                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="#offcanvas">Login</a></li>
+                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="../php/personal.php">Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -59,6 +59,8 @@
         <?php //include($templateParams["header"])?>
         <?php require($templateParams["baseUpperPage"]) ?>
     </main>
+    <script src="../js/<?php echo $templateParams["script"] ?>?v=<?php echo time(); ?>"></script>
+
 </body>
 
 </html>

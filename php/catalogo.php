@@ -5,5 +5,5 @@
     $templateParams["header"] = "template/headerCatalogue.php";
     $templateParams["baseUpperPage"] = "template/library-form.php";
     $templateParams["Libri"] = $dbh->getAvailableBooks();
-    require("base.php");
+    require("template/base.php");
 ?>

@@ -11,19 +11,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema weblio
 -- -----------------------------------------------------
-DROP SCHEMA `weblio`;
+DROP SCHEMA IF EXISTS `weblio`;
 CREATE SCHEMA IF NOT EXISTS `weblio` DEFAULT CHARACTER SET utf8 ;
 USE `weblio`;
 CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `email` VARCHAR(100) NOT NULL UNIQUE,
-  `password` VARCHAR(512) NOT NULL,
+  `pw` VARCHAR(512) NOT NULL,
   `nome` VARCHAR(30) NOT NULL,
   `cognome` VARCHAR(20) NOT NULL,
   `attivo` int NOT NULL DEFAULT 0,
   `corso` VARCHAR(100),
   `anno` int,
   `num_matricola` INT NOT NULL UNIQUE,
-  `immagine_profilo` MEDIUMBLOB,
+  `immagine_profilo` VARCHAR(100) NOT NULL,
   `is_docente` INT DEFAULT 0,
   INDEX `idx_nome`(`cognome` ASC),
   PRIMARY KEY(`email`)

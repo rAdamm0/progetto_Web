@@ -6,5 +6,5 @@
     $templateParams["h1"] = $templateParams["Libro"]["nome_libro"];
     $templateParams["header"] = "template/headerBook.php";
     $templateParams["baseUpperPage"] = "";
-    require("base.php");
+    require("template/base.php");
 ?>

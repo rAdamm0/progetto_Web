@@ -60,7 +60,7 @@ class DatabaseHelper
     }
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all();
+    return $result->fetch_all(MYSQLI_ASSOC);
   }
 
   public function personalInfo($email)
@@ -73,21 +73,14 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function getPersonalCourses($email)
-  {
-    $query = "SELECT c.nome_corso, c.codice_corso FROM utente u RIGHT JOIN utente_corso uc ON u.email=uc.email RIGHT JOIN corsi c ON c.codice_corso=uc.codice_corso
-      WHERE u.email=$email";
-    $stmt = $this->db->prepare($query);
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
-  }
-
   public function getPastBookings($email)
   {
-    $query = "SELECT * FROM 'Prenotazioni Passate' where email=?";
+    $query = "SELECT * FROM `prenotazioni passate` where email = ?";
     $stmt = $this->db->prepare($query);
+    if ($stmt === false) {
+    // This will tell you EXACTLY what is wrong with your SQL syntax
+    die("SQL Error: " . $this->db->error);
+}
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -108,7 +101,7 @@ class DatabaseHelper
 
   public function getCoursesTagsByEmail($email)
   {
-    $query = "SELECT c.codice_corso, c.nome_corso FROM corso c LEFT JOIN utente_corso uc ON c.codice_corso = uc.codice_corso WHERE uc.email = ?";
+    $query = "SELECT c.codice_corso, c.nome_corso FROM corsi c LEFT JOIN utente_corso uc ON c.codice_corso = uc.codice_corso WHERE uc.email = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -121,7 +114,15 @@ class DatabaseHelper
     $query = "INSERT INTO `utente_corso`(`email`, `codice_corso`) VALUES (?,?)";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    return $stmt->execute();
+    if($stmt->execute()){
+      return [
+                'success' => true
+            ];
+        } else {
+            return [
+                'success' => false
+            ];; 
+    }
   }
 
   public function deleteTagByEmail($email, $codice_corso)
@@ -129,7 +130,15 @@ class DatabaseHelper
     $query = "DELETE FROM `utente_corso` WHERE email = ? AND codice_corso=?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    return $stmt->execute();
+    if($stmt->execute()){
+      return [
+                'success' => true
+            ];
+        } else {
+            return [
+                'success' => false
+            ];; 
+    }
 
   }
 
@@ -143,50 +152,66 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function updateUserInfos($email, $nome, $cognome, $corso, $anno, $num_matricola, $immagine_profilo)
+  public function updateUserInfos($email, $nome, $cognome, $corso, $anno, $immagine_profilo)
   {
-    $params = $this->getUserInfos($email);
-    $newParams["nome"] = $nome != $params["nome"] ? $nome : $params["nome"];
-    $newParams["cognome"] = $cognome != $params["cognome"] ? $cognome : $params["cognome"];
-    $newParams["corso"] = $corso != $params["corso"] ? $corso : $params["corso"];
-    $newParams["anno"] = $anno != $params["anno"] ? $anno : $params["anno"];
-    $newParams["num_matricola"] = $num_matricola != $params["num_matricola"] ? $num_matricola : $params["num_matricola"];
-    $newParams["immagine_profilo"] = $immagine_profilo != $params["immagine_profilo"] ? $immagine_profilo : $params["immagine_profilo"];
-    $tipi = 'sssiib';
-    $query = "UPDATE utente SET nome = ?, cognome = ?, corso = ?, anno = ?, num_matricola=?, immagine_profilo=:img WHERE email = ?";
+    $tipi = 'sssiss';
+    $query = "UPDATE utente SET nome = ?, cognome = ?, corso = ?, anno = ?, immagine_profilo=? WHERE email = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param(
       $tipi,
-      $newParams["nome"],
-      $newParams["cognome"],
-      $newParams["corso"],
-      $newParams["anno"],
-      $newParams["num_matricola"],
-      $newParams["immagine_profilo"]
+      $nome,
+      $cognome,
+      $corso,
+      $anno,
+      $immagine_profilo,
+      $email
     );
-    $stmt->execute();
+    if ($stmt->execute()) {
+            return [
+                'success' => true
+            ];
+        } else {
+            return [
+                'success' => false
+            ];;
+        }
   }
 
-  public function checkUserInDatabase($email, $password)
+  public function checkUserInDatabase($email, $pw=0)
   {
-    $query("SELECT email FROM utente WHERE email = ? AND password = ?");
+    $query="SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE email = ?";
+    if($pw!=0){
+      $query.=" AND pw = ?";
+    }
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('s', $email);
+    if($pw!=0){
+      $algo = "sha256";
+      $hashed_pw = hash($algo, $pw);
+      $stmt->bind_param('ss', $email,$hashed_pw);
+    }else{
+      $stmt->bind_param('s', $email);
+    }
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function registerUser($email, $password, $nome, $cognome, $numero_matricola)
+  public function registerUser($email, $pw, $nome, $cognome, $numero_matricola)
   {
-    $query = "INSERT INTO utente(email, password, nome, cognome, numero_matricola) VALUES (?,?,?,?, ?)";
+    $algo = "sha256";
+    $hashed_pw = hash($algo, $pw);
+    $query = "INSERT INTO utente(email, pw, nome, cognome, num_matricola, immagine_profilo) VALUES (?,?,?,?,?,\"./uploads/default_avatar.png\")";
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('ssssi', $email, $password, $nome, $cognome, $numero_matricola);
+    $stmt->bind_param('ssssi', $email, $hashed_pw, $nome, $cognome, $numero_matricola);
     if ($stmt->execute()) {
-      return true;
-    } else {
-      return false;
-    }
+            return [
+                'success' => true,
+                'user_id' => $stmt->insert_id,
+                'message' => 'Registration successful'
+            ];
+        } else {
+            throw new Exception("Registration failed: " . $stmt->error);
+        }
   }
 
   public function getReviewsByEmail($email){
