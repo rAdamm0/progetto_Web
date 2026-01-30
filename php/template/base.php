@@ -48,7 +48,7 @@
                             </a>
                             <ul class="dropdown-menu bg-dark">
                                 <li><a class="dropdown-item text-white" href="#">Prenotazioni</a></li>
-                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="#offcanvas">Login</a></li>
+                                <li><a class="dropdown-item text-white" data-bs-toggle="offcanvas" href="../php/personal.php">Login</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -60,6 +60,8 @@
         <?php //include($templateParams["header"])?>
         <?php require($templateParams["baseUpperPage"]) ?>
     </main>
+    <script src="../js/<?php echo $templateParams["script"] ?>?v=<?php echo time(); ?>"></script>
+
 </body>
 
 </html>

@@ -252,17 +252,15 @@ class DatabaseHelper
       $stmt = $this->db->prepare($query);
     } else {
       $like = "%" . $search . "%";
-      $query = "SELECT 
-  l.*,
-  GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
-FROM libri l
-JOIN autore_libro al ON l.codice_libro = al.codice_libro
-JOIN autori a ON a.codice_autore = al.codice_autore
-GROUP BY l.codice_libro
-HAVING l.nome_libro LIKE ?
-   OR autore_completo LIKE ?
-   OR CAST(l.data_uscita AS CHAR) LIKE ?
-ORDER BY l.nome_libro DESC";
+      $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
+                FROM libri l
+                JOIN autore_libro al ON l.codice_libro = al.codice_libro
+                JOIN autori a ON a.codice_autore = al.codice_autore
+                GROUP BY l.codice_libro
+                HAVING l.nome_libro LIKE ?
+                OR autore_completo LIKE ?
+                OR CAST(l.data_uscita AS CHAR) LIKE ?
+                ORDER BY l.nome_libro DESC";
       $stmt = $this->db->prepare($query);
       $stmt->bind_param("ssi", $like, $like, $like);
     }

@@ -1,4 +1,4 @@
-INSERT INTO `weblio`.`utente` (`email`, `password`, `nome`, `cognome`, `corso`, `attivo`, `num_matricola`, `is_docente`) VALUES
+INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `attivo`, `num_matricola`, `is_docente`) VALUES
 ('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica', 1, 100001, 0),
 ('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica', 1, 100002, 0),
 ('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica', 1, 100003, 0),

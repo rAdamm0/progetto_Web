@@ -1,8 +1,10 @@
 <?php
 function registerLoggedUser($user){
+    
     $_SESSION["email"] = $user["email"];
-    $_SESSION["numero"] = $user["nome"];
-    $_SESSION[""] = $user["cognome"];
+    $_SESSION["numero_matricola"] = $user["num_matricola"];
+    $_SESSION["nome"] = $user["nome"];
+    $_SESSION["img"] = $user["immagine_profilo"];
 }
 
 function isUserLoggedIn(){
