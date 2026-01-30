@@ -35,7 +35,7 @@ class DatabaseHelper
     $stmt->execute();
     $result = $stmt->get_result();
 
-      return $result->fetch_assoc(MYSQLI_ASSOC);
+      return $result->fetch_all(MYSQLI_ASSOC);
     }
 
   public function bookReviews($id)
@@ -77,10 +77,6 @@ class DatabaseHelper
   {
     $query = "SELECT * FROM `prenotazioni passate` where email = ?";
     $stmt = $this->db->prepare($query);
-    if ($stmt === false) {
-    // This will tell you EXACTLY what is wrong with your SQL syntax
-    die("SQL Error: " . $this->db->error);
-}
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
