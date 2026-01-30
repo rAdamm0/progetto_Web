@@ -237,5 +237,25 @@ class DatabaseHelper
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+  public function getBooksBySearch($search){
+    $search = trim($search);
+    if($search === ""){
+      $query = "SELECT * FROM libri";
+      $stmt = $this->db->prepare($query);
+    }else{
+      $like = "%".$search."%";
+      $query = "SELECT * FROM libri 
+                WHERE nome_corso LIKE ?
+                OR nome_libro LIKE ?
+                OR nome_autore LIKE ?
+                OR data_uscita LIKE ?
+                ORDER BY nome_libro DESC";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param("ssss", $like, $like, $like, $like);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
 }
 ?>
