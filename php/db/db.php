@@ -7,7 +7,7 @@ class DatabaseHelper
   {
     $this->db = new mysqli($servername, $username, $password, $dbname, $port);
     if ($this->db->connect_error) {
-      die("Connection failed: " . $db->connect_error);
+      die("Connection failed: ".$db->connect_error);
     }
   }
 
@@ -166,26 +166,41 @@ class DatabaseHelper
     $stmt->execute();
   }
 
-  public function checkUserInDatabase($email, $password)
+ public function checkUserInDatabase($email, $pw=0)
   {
-    $query("SELECT email FROM utente WHERE email = ? AND password = ?");
+    $query="SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE email = ?";
+    if($pw!=0){
+      $query.=" AND pw = ?";
+    }
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('s', $email);
+    if($pw!=0){
+      $algo = "sha256";
+      $hashed_pw = hash($algo, $pw);
+      $stmt->bind_param('ss', $email,$hashed_pw);
+    }else{
+      $stmt->bind_param('s', $email);
+    }
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function registerUser($email, $password, $nome, $cognome, $numero_matricola)
+  public function registerUser($email, $pw, $nome, $cognome, $numero_matricola)
   {
-    $query = "INSERT INTO utente(email, password, nome, cognome, numero_matricola) VALUES (?,?,?,?, ?)";
+    $algo = "sha256";
+    $hashed_pw = hash($algo, $pw);
+    $query = "INSERT INTO utente(email, pw, nome, cognome, num_matricola, immagine_profilo) VALUES (?,?,?,?,?,'./uploads/default_avatar.png')";
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('ssssi', $email, $password, $nome, $cognome, $numero_matricola);
+    $stmt->bind_param('ssssi', $email, $hashed_pw, $nome, $cognome, $numero_matricola);
     if ($stmt->execute()) {
-      return true;
-    } else {
-      return false;
-    }
+            return [
+                'success' => true,
+                'user_id' => $stmt->insert_id,
+                'message' => 'Registration successful'
+            ];
+        } else {
+            throw new Exception("Registration failed: " . $stmt->error);
+        }
   }
 
   public function getReviewsByEmail($email)
