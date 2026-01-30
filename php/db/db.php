@@ -7,7 +7,7 @@ class DatabaseHelper
   {
     $this->db = new mysqli($servername, $username, $password, $dbname, $port);
     if ($this->db->connect_error) {
-      die("Connection failed: " . $db->connect_error);
+      die("Connection failed: ".$db->connect_error);
     }
   }
 
@@ -60,7 +60,7 @@ class DatabaseHelper
     }
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result->fetch_all();
   }
 
   public function personalInfo($email)
@@ -73,9 +73,20 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
+  public function getPersonalCourses($email)
+  {
+    $query = "SELECT c.nome_corso, c.codice_corso FROM utente u RIGHT JOIN utente_corso uc ON u.email=uc.email RIGHT JOIN corsi c ON c.codice_corso=uc.codice_corso
+      WHERE u.email=$email";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
   public function getPastBookings($email)
   {
-    $query = "SELECT * FROM `prenotazioni passate` where email = ?";
+    $query = "SELECT * FROM 'Prenotazioni Passate' where email=?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -97,7 +108,7 @@ class DatabaseHelper
 
   public function getCoursesTagsByEmail($email)
   {
-    $query = "SELECT c.codice_corso, c.nome_corso FROM corsi c LEFT JOIN utente_corso uc ON c.codice_corso = uc.codice_corso WHERE uc.email = ?";
+    $query = "SELECT c.codice_corso, c.nome_corso FROM corso c LEFT JOIN utente_corso uc ON c.codice_corso = uc.codice_corso WHERE uc.email = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -110,15 +121,7 @@ class DatabaseHelper
     $query = "INSERT INTO `utente_corso`(`email`, `codice_corso`) VALUES (?,?)";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    if($stmt->execute()){
-      return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];; 
-    }
+    return $stmt->execute();
   }
 
   public function deleteTagByEmail($email, $codice_corso)
@@ -126,16 +129,7 @@ class DatabaseHelper
     $query = "DELETE FROM `utente_corso` WHERE email = ? AND codice_corso=?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    if($stmt->execute()){
-      return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];; 
-    }
-
+    return $stmt->execute();
   }
 
   public function getUserInfos($email)
@@ -148,32 +142,31 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function updateUserInfos($email, $nome, $cognome, $corso, $anno, $immagine_profilo)
+  public function updateUserInfos($email, $nome, $cognome, $corso, $anno, $num_matricola, $immagine_profilo)
   {
-    $tipi = 'sssiss';
-    $query = "UPDATE utente SET nome = ?, cognome = ?, corso = ?, anno = ?, immagine_profilo=? WHERE email = ?";
+    $params = $this->getUserInfos($email);
+    $newParams["nome"] = $nome != $params["nome"] ? $nome : $params["nome"];
+    $newParams["cognome"] = $cognome != $params["cognome"] ? $cognome : $params["cognome"];
+    $newParams["corso"] = $corso != $params["corso"] ? $corso : $params["corso"];
+    $newParams["anno"] = $anno != $params["anno"] ? $anno : $params["anno"];
+    $newParams["num_matricola"] = $num_matricola != $params["num_matricola"] ? $num_matricola : $params["num_matricola"];
+    $newParams["immagine_profilo"] = $immagine_profilo != $params["immagine_profilo"] ? $immagine_profilo : $params["immagine_profilo"];
+    $tipi = 'sssiib';
+    $query = "UPDATE utente SET nome = ?, cognome = ?, corso = ?, anno = ?, num_matricola=?, immagine_profilo=:img WHERE email = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param(
       $tipi,
-      $nome,
-      $cognome,
-      $corso,
-      $anno,
-      $immagine_profilo,
-      $email
+      $newParams["nome"],
+      $newParams["cognome"],
+      $newParams["corso"],
+      $newParams["anno"],
+      $newParams["num_matricola"],
+      $newParams["immagine_profilo"]
     );
-    if ($stmt->execute()) {
-            return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];;
-        }
+    $stmt->execute();
   }
 
-  public function checkUserInDatabase($email, $pw=0)
+ public function checkUserInDatabase($email, $pw=0)
   {
     $query="SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE email = ?";
     if($pw!=0){
@@ -196,7 +189,7 @@ class DatabaseHelper
   {
     $algo = "sha256";
     $hashed_pw = hash($algo, $pw);
-    $query = "INSERT INTO utente(email, pw, nome, cognome, num_matricola, immagine_profilo) VALUES (?,?,?,?,?,\"./uploads/default_avatar.png\")";
+    $query = "INSERT INTO utente(email, pw, nome, cognome, num_matricola, immagine_profilo) VALUES (?,?,?,?,?,'./uploads/default_avatar.png')";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('ssssi', $email, $hashed_pw, $nome, $cognome, $numero_matricola);
     if ($stmt->execute()) {
@@ -210,40 +203,43 @@ class DatabaseHelper
         }
   }
 
-  public function getReviewsByEmail($email){
+  public function getReviewsByEmail($email)
+  {
     $query = "SELECT l.nome_libro, r.descrizione, r.valutazione FROM recensione r LEFT JOIN libri l ON r.codice_libro = l.codice_libro WHERE r.email = ?";
-    $stmt=$this->db->prepare($query);
+    $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
-  public function getCourseByBook($idBook){
-      $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc
+  public function getCourseByBook($idBook)
+  {
+    $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc
       ON c.codice_corso = lc.codice_corso
       WHERE lc.codice_libro = ?";
-      $stmt = $this->db->prepare($query);
-      $stmt->bind_param("i",$idBook);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      return $result->fetch_assoc();
-
-  }
-  public function getRandomCourses($limit = 3){
-    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('i',$limit);
+    $stmt->bind_param("i", $idBook);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC) ;
+    return $result->fetch_assoc();
   }
-  public function getCoursesByResearch($search = ""){
+  public function getRandomCourses($limit = 3)
+  {
+    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i', $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  public function getCoursesByResearch($search = "")
+  {
     $search = trim($search);
-    if($search === ""){
+    if ($search === "") {
       $query = "SELECT * FROM corsi ORDER BY nome_corso ASC";
       $stmt = $this->db->prepare($query);
-    }else{
-      $like = "%".$search."%";
+    } else {
+      $like = "%" . $search . "%";
       $query = "SELECT * FROM corsi
                WHERE nome_corso LIKE ?
                 OR descrizione LIKE ?
@@ -252,31 +248,39 @@ class DatabaseHelper
                 OR CAST(codice_corso AS CHAR) LIKE ?
                 ORDER BY nome_corso ASC";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param('sssss',$like,$like,$like,$like,$like);
+      $stmt->bind_param('sssss', $like, $like, $like, $like, $like);
     }
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
-  public function getBooksBySearch($search){
+  public function getBooksBySearch($search)
+  {
     $search = trim($search);
-    if($search === ""){
-      $query = "SELECT * FROM libri";
+    if ($search === "") {
+      $query = $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
+                         FROM libri l
+                         LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro
+                         LEFT JOIN autori a ON a.codice_autore = al.codice_autore
+                         GROUP BY l.codice_libro
+                         ORDER BY l.nome_libro;";
       $stmt = $this->db->prepare($query);
-    }else{
-      $like = "%".$search."%";
-      $query = "SELECT * FROM libri 
-                WHERE nome_corso LIKE ?
-                OR nome_libro LIKE ?
-                OR nome_autore LIKE ?
-                OR data_uscita LIKE ?
-                ORDER BY nome_libro DESC";
+    } else {
+      $like = "%" . $search . "%";
+      $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
+                FROM libri l
+                JOIN autore_libro al ON l.codice_libro = al.codice_libro
+                JOIN autori a ON a.codice_autore = al.codice_autore
+                GROUP BY l.codice_libro
+                HAVING l.nome_libro LIKE ?
+                OR autore_completo LIKE ?
+                OR CAST(l.data_uscita AS CHAR) LIKE ?
+                ORDER BY l.nome_libro DESC";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param("ssss", $like, $like, $like, $like);
+      $stmt->bind_param("ssi", $like, $like, $like);
     }
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 }
-?>
