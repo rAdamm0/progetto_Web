@@ -145,4 +145,4 @@
 </div>
 
 <hr class="hr my-4" />
-<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie()></span>
+<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie("PHPSESSID")></span>
