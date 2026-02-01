@@ -1,7 +1,7 @@
 const modal = document.getElementById('editModal');
 
 function openEditModal() {
-    modal.showModal(); // showModal() makes it a popup, show() makes it a flat element
+    modal.showModal(); 
 }
 
 function closeEditModal() {

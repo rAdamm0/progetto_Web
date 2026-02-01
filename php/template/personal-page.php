@@ -1,5 +1,4 @@
 <section class="mx-4">
-    <?php //var_dump($templateParams) ?>
     <h1 class="mb-4 mx-auto text-center">About You</h1>
     <div class="container">
         
@@ -116,11 +115,11 @@
     </div>
 </section>
 <hr class="hr my-4" />
-
+<section class="mx-4">
 <!--Elenco Passate Prenotazioni-->
 <div>
-    <h2>Prenotazioni Passate</h2>
-    <table class="table">
+    <h2>Prenotazioni</h2>
+    <table class="table mh-100 overflow-auto">
         <thead>
             <tr>
                 <th scope="col">Libro</th>
@@ -146,3 +145,4 @@
 
 <hr class="hr my-4" />
 <span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie("PHPSESSID")></span>
+                </section>
