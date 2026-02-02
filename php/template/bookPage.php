@@ -4,6 +4,7 @@ if (!$libro) {
     echo '<div class= "container py-5"><div class = "alert alert-danger">Libro non trovato.</div></div>';
     return;
 }
+var_dump($libro);
 # dati del libro
 $nome = htmlspecialchars($libro["nome_libro"]);
 $edizione = htmlspecialchars($libro["edizione"]);

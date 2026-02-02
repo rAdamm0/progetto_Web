@@ -35,7 +35,7 @@ class DatabaseHelper
     $stmt->execute();
     $result = $stmt->get_result();
 
-      return $result->fetch_all(MYSQLI_ASSOC);
+      return $result->fetch_assoc();
     }
 
   public function bookReviews($id)
@@ -287,4 +287,122 @@ class DatabaseHelper
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+  public function getAllAuthors(){
+    $query = "SELECT * FROM autori";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $results = $stmt->get_result();
+    return $results->fetch_all(MYSQLI_ASSOC);
+  }
+  public function getAllUsers(){
+    $query = "SELECT * FROM utente";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  public function deleteUser($email){
+    $query = "DELETE FROM utente WHERE email = ? ";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("s",$email);
+    return $stmt->execute();
+  }
+  public function deleteCourse($idCourse){
+    $query = "DELETE FROM corsi WHERE codice_corso = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i",$idCourse);
+    return $stmt->execute();
+  }
+  public function deleteAuthor($idAuthor){
+    $query = "DELETE FROM autore WHERE codice_autore = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i",$idAuthor);
+    return $stmt->execute();
+  }
+  public function deleteReview($email, $idBook){
+    $query = "DELETE FROM recensione WHERE email = ?
+              AND codice_libro = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("si",$email, $idBook);
+    return $stmt->execute();         
+  }
+  public function deleteBook($idBook){
+    $query = "DELETE FROM libri WHERE codice_libro = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i",$idBook);
+    return $stmt->execute();
+  }
+  public function addUser(string $email,
+                          string $password,
+                          string $nome,
+                          string $cognome,
+                          string $corso,
+                          int $numMatricola,
+                          string $immagineProfilo,
+                          int $anno,
+                          int $isDocente = 0){
+    $query = "INSERT INTO utente (email, pw, nome, cognome, corso, num_matricola, immagine_profilo, anno, is_docente)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("sssssisii",
+        $email,
+        $password,
+              $nome,
+              $cognome,
+              $corso,
+              $numMatricola,
+              $immagineProfilo,
+              $anno,
+              $isDocente);
+    return $stmt->execute();
+  }
+  public function addBook(string $nomeLibro,
+                          int $edizione,
+                          int $dataUscita,
+                          string $descrizione,
+                          int $disponibile = 0){
+    $query = "INSERT INTO libri (nome_libro, edizione, data_uscita, descrizione, disponibile)
+              VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("siisi", $nomeLibro, $edizione, $dataUscita, $descrizione, $disponibile);
+    return $stmt->execute();
+  }
+  public function addCourse(int $codiceCorso,
+                            string $nomeCorso,
+                            string $descrizione,
+                            string $lingua = 'Italiano',
+                            string $docente){
+    $query = "INSERT INTO corsi (codice_corso, nome_corso, descrizione, lingua, docente)
+              VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("issss", $codiceCorso, $nomeCorso, $descrizione, $lingua, $docente);
+    return $stmt->execute();
+  }
+  public function addAuthor(string $nome, string $cognome, string $descrizione){
+    $query = "INSERT INTO autori (nome_autore, cognome_autore, descrizione)
+              VALUES (?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("sss", $nome, $cognome, $descrizione);
+    return $stmt->execute();
+  }
+  public function linkBookToCourse(int $idLibro, int $codiceCorso) {
+    $query = "INSERT INTO libro_corso (codice_libro, codice_corso)
+              VALUES (?, ?)";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("ii", $idLibro, $codiceCorso);
+    return $stmt->execute();
+  }
+  public function linkUserToCourse(string $email, int $codiceCorso) {
+      $query = "INSERT INTO utente_corso (email, codice_corso) VALUES (?, ?)";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param("si", $email, $codiceCorso);
+      return $stmt->execute();
+  }
+  public function linkAuthorToBook(int $codiceAutore, int $codiceLibro) {
+      $query = "INSERT INTO autore_libro (codice_autore, codice_libro) VALUES (?, ?)";
+      $stmt = $this->db->prepare($query);
+      $stmt->bind_param("ii", $codiceAutore, $codiceLibro);
+      return $stmt->execute();
+  }
+
 }

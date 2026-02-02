@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Card 2 -->
         <div class="col-12 col-md-4">
             <div class="card h-100">
