@@ -110,14 +110,15 @@ class DatabaseHelper
     $query = "INSERT INTO `utente_corso`(`email`, `codice_corso`) VALUES (?,?)";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    if($stmt->execute()){
+    if ($stmt->execute()) {
       return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];; 
+        'success' => true
+      ];
+    } else {
+      return [
+        'success' => false
+      ];
+      ;
     }
   }
 
@@ -126,14 +127,15 @@ class DatabaseHelper
     $query = "DELETE FROM `utente_corso` WHERE email = ? AND codice_corso=?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('si', $email, $codice_corso);
-    if($stmt->execute()){
+    if ($stmt->execute()) {
       return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];; 
+        'success' => true
+      ];
+    } else {
+      return [
+        'success' => false
+      ];
+      ;
     }
 
   }
@@ -163,28 +165,29 @@ class DatabaseHelper
       $email
     );
     if ($stmt->execute()) {
-            return [
-                'success' => true
-            ];
-        } else {
-            return [
-                'success' => false
-            ];;
-        }
+      return [
+        'success' => true
+      ];
+    } else {
+      return [
+        'success' => false
+      ];
+      ;
+    }
   }
 
-  public function checkUserInDatabase($email, $pw=0)
+  public function checkUserInDatabase($email, $pw = 0)
   {
-    $query="SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE email = ?";
-    if($pw!=0){
-      $query.=" AND pw = ?";
+    $query = "SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE email = ?";
+    if ($pw != 0) {
+      $query .= " AND pw = ?";
     }
     $stmt = $this->db->prepare($query);
-    if($pw!=0){
+    if ($pw != 0) {
       $algo = "sha256";
       $hashed_pw = hash($algo, $pw);
-      $stmt->bind_param('ss', $email,$hashed_pw);
-    }else{
+      $stmt->bind_param('ss', $email, $hashed_pw);
+    } else {
       $stmt->bind_param('s', $email);
     }
     $stmt->execute();
@@ -200,50 +203,54 @@ class DatabaseHelper
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('ssssi', $email, $hashed_pw, $nome, $cognome, $numero_matricola);
     if ($stmt->execute()) {
-            return [
-                'success' => true,
-                'user_id' => $stmt->insert_id,
-                'message' => 'Registration successful'
-            ];
-        } else {
-            throw new Exception("Registration failed: " . $stmt->error);
-        }
+      return [
+        'success' => true,
+        'user_id' => $stmt->insert_id,
+        'message' => 'Registration successful'
+      ];
+    } else {
+      throw new Exception("Registration failed: " . $stmt->error);
+    }
   }
 
-  public function getReviewsByEmail($email){
+  public function getReviewsByEmail($email)
+  {
     $query = "SELECT l.nome_libro, r.descrizione, r.valutazione FROM recensione r LEFT JOIN libri l ON r.codice_libro = l.codice_libro WHERE r.email = ?";
-    $stmt=$this->db->prepare($query);
+    $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
-  public function getCourseByBook($idBook){
-      $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc
+  public function getCourseByBook($idBook)
+  {
+    $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc
       ON c.codice_corso = lc.codice_corso
       WHERE lc.codice_libro = ?";
-      $stmt = $this->db->prepare($query);
-      $stmt->bind_param("i",$idBook);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      return $result->fetch_assoc();
-
-  }
-  public function getRandomCourses($limit = 3){
-    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
     $stmt = $this->db->prepare($query);
-    $stmt->bind_param('i',$limit);
+    $stmt->bind_param("i", $idBook);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC) ;
+    return $result->fetch_assoc();
+
   }
-  public function getCoursesByResearch($search = ""){
+  public function getRandomCourses($limit = 3)
+  {
+    $query = "SELECT * FROM corsi ORDER BY RAND() LIMIT ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i', $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+  public function getCoursesByResearch($search = "")
+  {
     $search = trim($search);
-    if($search === ""){
+    if ($search === "") {
       $query = "SELECT * FROM corsi ORDER BY nome_corso ASC";
       $stmt = $this->db->prepare($query);
-    }else{
-      $like = "%".$search."%";
+    } else {
+      $like = "%" . $search . "%";
       $query = "SELECT * FROM corsi
                WHERE nome_corso LIKE ?
                 OR descrizione LIKE ?
@@ -252,7 +259,7 @@ class DatabaseHelper
                 OR CAST(codice_corso AS CHAR) LIKE ?
                 ORDER BY nome_corso ASC";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param('sssss',$like,$like,$like,$like,$like);
+      $stmt->bind_param('sssss', $like, $like, $like, $like, $like);
     }
     $stmt->execute();
     $result = $stmt->get_result();
@@ -405,4 +412,70 @@ class DatabaseHelper
       return $stmt->execute();
   }
 
+  public function getAllBookingsStarts($email)
+  {
+    $query = "SELECT id_prenotazioni as id, nome_libro as title, data_inizio as start, data_fine as description
+              FROM `prenotazioni passate` 
+              WHERE email = ?";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function getAllBookingsEnds($email)
+  {
+    $query = "SELECT id_prenotazioni as id, nome_libro as title, data_fine as start 
+              FROM `prenotazioni passate` 
+              WHERE email = ?";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function getBookable()
+  {
+    $query = "SELECT codice_libro as id, nome_libro as libro, edizione 
+            FROM libri";
+    $result = $this->db->query($query);
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function bookABook($email, $codice_libro, $data_inizio, $data_fine) {
+    $checkQuery = "SELECT id_prenotazioni FROM prenotazioni WHERE codice_libro = ? 
+                   AND (data_inizio <= ? AND data_fine >= ?)";
+    $stmtCheck = $this->db->prepare($checkQuery);
+    
+    $stmtCheck->bind_param('iss', $codice_libro, $data_fine, $data_inizio);
+    $stmtCheck->execute();
+    if ($stmtCheck->get_result()->num_rows > 0) {
+        return "Questo libro è già prenotato per le date selezionate.";
+    }
+    $checkQuery = "SELECT COUNT(*) as num FROM prenotazioni WHERE email = ? AND data_fine>?";
+    $today = date("Y/m/d");
+    $stmtCheck = $this->db->prepare($checkQuery);
+    $stmtCheck->bind_param('ss', $email, $today);
+    $stmtCheck->execute();
+    if($stmtCheck->get_result()->fetch_assoc()["num"] > 5){
+      return "Hai già prenotato 5 libri in questo periodo";
+    }
+    $query = "INSERT INTO `prenotazioni` (`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES (?, ?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    
+    $stmt->bind_param('siss', $email, $codice_libro, $data_inizio, $data_fine);
+    
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return "Errore tecnico durante il salvataggio.";
+    }
 }
+}
+

@@ -65,18 +65,21 @@ PRIMARY KEY (`codice_libro`,`codice_corso`)
 )Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `weblio`.`prenotazioni`(
+`id_prenotazioni` INT AUTO_INCREMENT,
 `email` VARCHAR(100) NOT NULL,
 `codice_libro` INT NOT NULL,
 `data_inizio` DATE NOT NULL,
-`data_fine` DATE,
+`data_fine` DATE NOT NULL,
 FOREIGN KEY(`email`) REFERENCES `weblio`.`utente`(`email`)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
 FOREIGN KEY(`codice_libro`) REFERENCES `weblio`.`libri`(`codice_libro`)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
-PRIMARY KEY(`email`, `codice_libro`, `data_inizio`),
-INDEX `idx_chronological_order`(`data_inizio` DESC)
+PRIMARY KEY(`id_prenotazioni`),
+INDEX `idx_chronological_order`(`data_inizio` DESC),
+CONSTRAINT chk_date CHECK (`start_date`<`end_date`),
+CONSTRAINT chk_duration CHECK(DATEDIFF(`end_date`, `start_date`)<31)
 )Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `weblio`.`autori`(
@@ -174,7 +177,7 @@ END$$
 DELIMITER ;
 
 CREATE VIEW `Prenotazioni Passate` AS
-SELECT u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCAT(a.cognome_autore SEPARATOR ",") AS autori 
+SELECT p.id_prenotazioni,u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCAT(a.cognome_autore SEPARATOR ",") AS autori 
 FROM prenotazioni p join libri l on p.codice_libro = l.codice_libro join autore_libro al on l.codice_libro = al.codice_libro join autori a on al.codice_autore = a.codice_autore join utente u on p.email = u.email 
 WHERE p.data_fine<>'' 
-GROUP BY l.nome_libro, l.edizione, u.email,p.data_inizio, p.data_fine; 
+GROUP BY p.id_prenotazioni,l.nome_libro, l.edizione, u.email,p.data_inizio, p.data_fine; 

@@ -1,0 +1,49 @@
+<section class="mx-4">
+  
+
+  <h2 class="mx-auto w-50 text-center">Prenotazioni</h2>
+  <div class="container">
+    <div id="calendar"></div>
+  </div>
+  <hr class="hr my-4" />
+  <h2 class="mx-auto w-50 text-center">Prenota un libro</h2>
+  <div id="prenotazione mb-5">
+    <form method="post" onsubmit="event.preventDefault(); addBooking(this);">
+  <fieldset>
+    <div class="form-group">
+      <label for="libro">Scegli un libro: </label>
+      <select class="form-select form-select-lg mb-3" name="libro" id="libro" required data-bs-toggle="popover" data-bs-placement="top">
+        <?php if(isset($_GET["id"])):?>
+          <option value="<?php echo $_GET["id"]?>" selected ><?php echo $_GET["nome"]?> - <?php echo $_GET["edizione"]; ?>° Edizione</option>
+          <script>scrollTo('#data-inizio');</script>
+          <?php else:?>
+        <option value="" selected disabled>Seleziona un libro...</option>
+        <?php endif;?>
+        <?php foreach ($templateParams["prenotabili"] as $book): ?>
+          <option value="<?php echo $book["id"]; ?>">
+            <?php echo $book["libro"]; ?> - <?php echo $book["edizione"]; ?>° Edizione
+          </option>
+        <?php endforeach; ?>
+      </select>
+      <div id="validationServer03Feedback" class="invalid-feedback">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="data-inizio">Data Inizio</label>
+      <input type="date" name="data-inizio" id="data-inizio" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="data-fine">Data Fine</label>
+      <input type="date" name="data-fine" id="data-fine" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <input type="submit" id="save-event" name="save-event" value="Prenota" class="btn btn-success" />
+    </div>
+
+  </fieldset>
+</form>
+  </div>
+</section>

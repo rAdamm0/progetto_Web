@@ -27,7 +27,7 @@ $data_uscita = htmlspecialchars($libro["data_uscita"]);
                 </div>
             </div>
             <div class="d-grid gap-2 mt-3">
-                <a href="#" class="btn btn-primary">Prenota</a>
+                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $libro["nome_libro"]?>&edizione=<?php echo $libro["edizione"]?>" class="btn btn-primary">Prenota</a>
             </div>
         </div>
         <div class="cik-12 col-md-8 col-lg-9">
