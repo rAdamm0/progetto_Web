@@ -4,7 +4,7 @@
     $q = $templateParams["searchQuery"];
     $h1 = $templateParams["h1"];
 ?>
-<div class="container py-4">
+<div class="container-fluid my-3 px-3 px-md-4">
     <h1 class="display-4 fw-semibold mb-4"><?php echo htmlspecialchars($h1) ?></h1>
     <div id="coursesCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
         <div class="carousel-inner">

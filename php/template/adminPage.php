@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container-fluid my-3 px-3 px-md-4 admin-page">
 
     <h1 class="text-dark">Pannello Admin</h1>
 
@@ -8,6 +8,7 @@
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-autori" type="button">Autori</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relazioni" type="button">Relazioni</button></li>
             <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-utenti" type="button">Utenti</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-recensioni" type="button">Recensioni</button></li>
         </ul>
 
   <div class="tab-content p-3 bg-dark text-white border border-top-0">
@@ -33,19 +34,19 @@
             <table class="table table-dark table-striped align-middle">
             <thead>
               <tr>
-                <th>Codice</th>
+                <th class="d-none d-md-table-cell">Codice</th>
                 <th>Nome</th>
-                <th>Lingua</th>
-                <th>Docente</th>
-                <th></th>
+                <th class="d-none d-md-table-cell">Lingua</th>
+                <th class="d-none d-md-table-cell">Docente</th>
+                <th ></th>
               </tr></thead>
             <tbody>
             <?php foreach ($templateParams["corsi"] as $c): ?>
                 <tr>
-                <td><?= htmlspecialchars($c["codice_corso"]) ?></td>
+                <td class="d-none d-md-table-cell"><?= htmlspecialchars($c["codice_corso"]) ?></td>
                 <td><?= htmlspecialchars($c["nome_corso"]) ?></td>
-                <td><?= htmlspecialchars($c["lingua"]) ?></td>
-                <td><?= htmlspecialchars($c["docente"] ?? "") ?></td>
+                <td class="d-none d-md-table-cell"><?= htmlspecialchars($c["lingua"]) ?></td>
+                <td class="d-none d-md-table-cell"><?= htmlspecialchars($c["docente"] ?? "") ?></td>
                 <td class="text-end">
                     <form method="POST" class="d-inline">
                     <input type="hidden" name="action" value="delete_course">
@@ -84,14 +85,22 @@
       <h3>Lista libri</h3>
       <div class="table-responsive">
         <table class="table table-dark table-striped align-middle">
-          <thead><tr><th>ID</th><th>Titolo</th><th>Ed.</th><th>Anno</th><th>Disp.</th><th></th></tr></thead>
-          <tbody>
+          <thead><tr>
+            <th class="d-none d-md-table-cell">ID</th>
+            <th>Titolo</th>
+            <th class="d-none d-md-table-cell">Ed.</th>
+            <th class="d-none d-md-table-cell">Anno</th>
+            <th>Disp.</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
           <?php foreach ($templateParams["libri"] as $l): ?>
             <tr>
-              <td><?= (int)$l["codice_libro"] ?></td>
+              <td class="d-none d-md-table-cell"><?= (int)$l["codice_libro"] ?></td>
               <td><?= htmlspecialchars($l["nome_libro"]) ?></td>
-              <td><?= (int)$l["edizione"] ?></td>
-              <td><?= (int)$l["data_uscita"] ?></td>
+              <td class="d-none d-md-table-cell"><?= (int)$l["edizione"] ?></td>
+              <td class="d-none d-md-table-cell"><?= (int)$l["data_uscita"] ?></td>
               <td><?= (int)$l["disponibile"] ?></td>
               <td class="text-end">
                 <form method="POST" class="d-inline">
@@ -124,7 +133,14 @@
       <h3>Lista autori</h3>
       <div class="table-responsive">
         <table class="table table-dark table-striped align-middle">
-          <thead><tr><th>ID</th><th>Nome</th><th>Cognome</th><th></th></tr></thead>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
           <?php foreach ($templateParams["autori"] as $a): ?>
             <tr>
@@ -219,18 +235,26 @@
     </div>
 
     <!-- UTENTI -->
-    <div class="tab-pane fade" id="tab-utenti">
+    <div class=" table-responsive tab-pane fade" id="tab-utenti">
       <h3>Lista utenti</h3>
       <div class="table-responsive">
         <table class="table table-dark table-striped align-middle">
-          <thead><tr><th>Email</th><th>Nome</th><th>Cognome</th><th>Matricola</th><th></th></tr></thead>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th class="d-none d-md-table-cell">Nome</th>
+              <th class="d-none d-md-table-cell">Cognome</th>
+              <th class="d-none d-md-table-cell">Matricola</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
           <?php foreach ($templateParams["utenti"] as $u): ?>
             <tr>
               <td><?= htmlspecialchars($u["email"]) ?></td>
-              <td><?= htmlspecialchars($u["nome"]) ?></td>
-              <td><?= htmlspecialchars($u["cognome"]) ?></td>
-              <td><?= (int)$u["num_matricola"] ?></td>
+              <td class="d-none d-md-table-cell"><?= htmlspecialchars($u["nome"]) ?></td>
+              <td class="d-none d-md-table-cell"><?= htmlspecialchars($u["cognome"]) ?></td>
+              <td class="d-none d-md-table-cell"><?= (int)$u["num_matricola"] ?></td>
               <td class="text-end">
                 <form method="POST" class="d-inline">
                   <input type="hidden" name="action" value="delete_user">
@@ -245,5 +269,40 @@
       </div>
     </div>
 
+    <!-- Recensioni -->
+    <div class=" table-responsive tab-pane fade" id="tab-recensioni">
+      <h3>Lista recensioni</h3>
+      <div class="table-responsive">
+        <table class="table table-dark table-striped align-middle">
+          <thead>
+            <tr>
+              <th>Email Utente</th>
+              <th>Codice Libro</th>
+              <th class="d-none d-md-table-cell">Valutazione</th>
+              <th class="d-none d-md-table-cell">Descrizione</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($templateParams["recensioni"] as $r): ?>
+            <tr>
+              <td><?= htmlspecialchars($r["email"]) ?></td>
+              <td><?= htmlspecialchars($r["codice_libro"]) ?></td>
+              <td class="d-none d-md-table-cell"><?= htmlspecialchars($r["valutazione"]) ?></td>
+              <td class="d-none d-md-table-cell"><?= htmlspecialchars($r["descrizione"]) ?></td>
+              <td class="text-end">
+                <form method="POST" class="d-inline">
+                  <input type="hidden" name="action" value="delete_review">
+                  <input type="hidden" name="email_recensore" value="<?= htmlspecialchars($r["email"]) ?>">
+                  <input type="hidden" name="codice_libro" value="<?= (int)$r["codice_libro"]?>">
+                  <button class="btn btn-sm btn-danger" type="submit">Elimina</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>        
   </div>
 </div>

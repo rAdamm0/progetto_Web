@@ -222,6 +222,35 @@ class DatabaseHelper
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
+  public function getAllReviews(){
+    $query = "SELECT * FROM recensione";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $results = $stmt->get_result();
+    return $results->fetch_all(MYSQLI_ASSOC);
+  }
+ public function addReview($email, $bookId, $valutation, $description){
+    $query = "
+        INSERT INTO recensione (email, codice_libro, valutazione, descrizione)
+        VALUES (?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+            valutazione = VALUES(valutazione),
+            descrizione = VALUES(descrizione)
+    ";
+
+    $stmt = $this->db->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $this->db->error);
+    }
+
+    $stmt->bind_param("siis", $email, $bookId, $valutation, $description);
+
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+
+    return true;
+}
   public function getCourseByBook($idBook)
   {
     $query = "SELECT c.* FROM corsi as c JOIN libro_corso as lc

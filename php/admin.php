@@ -9,7 +9,7 @@ if (!isset($_SESSION["email"]) || $_SESSION["email"] !== "admin@university.it") 
 // 2) Gestione azioni
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $action = $_POST["action"] ?? "";
-
+    var_dump($_POST);
     switch ($action) {
         case "add_course":
             $codice = (int)($_POST["codice_corso"] ?? 0);
@@ -76,6 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $email = trim($_POST["email"] ?? "");
             $dbh->deleteUser($email);
             break;
+        
+        case "delete_review":
+            $email = trim($_POST["email_recensore"] ?? "");
+            $id = (int)($_POST["codice_libro"]);
+            $dbh->deleteReview($email,$id);
+            break;
     }
     header("Location: admin.php");
     exit;
@@ -88,6 +94,7 @@ $templateParams["script"] = "";
 $templateParams["libri"] = $dbh->getAvailableBooks();     
 $templateParams["corsi"] = $dbh->coursesList();   
 $templateParams["autori"] = $dbh->getAllAuthors();  
-$templateParams["utenti"] = $dbh->getAllUsers();    
+$templateParams["utenti"] = $dbh->getAllUsers();
+$templateParams["recensioni"] = $dbh->getAllReviews();    
 
 require("template/base.php");

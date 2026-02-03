@@ -4,7 +4,6 @@ if (!$libro) {
     echo '<div class= "container py-5"><div class = "alert alert-danger">Libro non trovato.</div></div>';
     return;
 }
-var_dump($libro);
 # dati del libro
 $nome = htmlspecialchars($libro["nome_libro"]);
 $edizione = htmlspecialchars($libro["edizione"]);
@@ -17,7 +16,7 @@ $data_uscita = htmlspecialchars($libro["data_uscita"]);
 <header>
     <h1><?=  $templateParams["h1"]?></h1>
 </header>
-<div class="container py-4">
+<div class="container-fluid my-3 px-3 px-md-4">
     <div class="row g-4">
         <div class="col-12 col-md-4 col-lg-3">
             <div class="card shadow-sm">
@@ -79,6 +78,44 @@ $data_uscita = htmlspecialchars($libro["data_uscita"]);
                             <span class="fw-semibold"><?= $data_uscita ?></span>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="card shadow-sm mt-4">
+                <div class="card-body shadow-sm bg-light">
+                    <?php if(!empty($_SESSION["email"])): ?>
+                        <h6 class="fw-semibold mb-3">Scrivi recensione</h6>
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-body">
+                                    <form method="POST" action="book.php?id=<?= (int)$id ?>" class="row g-2">
+                                        <input type="hidden" name="action" value="add_review">
+                                        <input type="hidden" name="id" value="<?= (int)$id ?>">
+                                        <div class="col-12 col-md-4">
+                                            <label class="form-label mb-1">Valutazione</label>
+                                            <select name="valutazione" class="form-select" required>
+                                                <option value="">Seleziona</option>
+                                                <option value="5"> - Ottimo</option>
+                                                <option value="4"> - Discreto</option>
+                                                <option value="3"> - Buono</option>
+                                                <option value="2"> - Mediocre</option>
+                                                <option value="1"> - Pessimo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label mb-1" required>Testo</label>
+                                            <textarea name="descrizione" class="form-control" rows="3" placeholder="Scrivi qui la tua recensione..." required></textarea>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <button class="btn btn-primary w-100" type="submit">
+                                                Invia
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        
+                    <?php else : ?>
+                        <div class="alert alert-info">Per scrivere una recensione devi effetuare il login</div>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="card shadow-sm mt-4">

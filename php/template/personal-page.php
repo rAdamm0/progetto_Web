@@ -10,7 +10,7 @@
                         alt="Profile Image" class="rounded img-fluid ml-3 " style="object-fit: cover;">
                 </div>
             </div>
-
+            <?php var_dump($templateParams)?>
             <!-- Lista - sotto l'immagine su mobile, sinistra su desktop -->
             <div class="col-12 col-md-8 order-last order-md-first">
                 <aside>
