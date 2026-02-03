@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<?= $templateParams["css"] ?> ">
     <?php if (!empty($templateParams["calendario"])): ?>
     <?php foreach ($templateParams["calendario"] as $cal):?>
         <?php echo $cal;?>
@@ -19,7 +18,7 @@
 <body>
     <!--OFF-CANVA-->
     <section>
-        <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+        <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasLabel">Offcanvas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -30,7 +29,7 @@
         </div>
     </section>
     <!--NAVBAR-->
-    <section>
+    <div>
         <nav class="navbar navbar-expand-lg text-white bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand text-white" href="#">Navbar</a>
@@ -66,7 +65,7 @@
                 </div>
             </div>
         </nav>
-    </section>
+    </div>
     <main>
         <?php //include($templateParams["header"])?>
         <?php require($templateParams["baseUpperPage"]) ?>

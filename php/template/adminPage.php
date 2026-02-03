@@ -3,19 +3,19 @@
     <h1 class="text-dark">Pannello Admin</h1>
 
         <ul class="nav nav-tabs mt-3" role="tablist">
-            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-corsi" type="button">Corsi</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-libri" type="button">Libri</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-autori" type="button">Autori</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relazioni" type="button">Relazioni</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-utenti" type="button">Utenti</button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-recensioni" type="button">Recensioni</button></li>
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-corsi" type="button" aria-controls="tab-corsi" aria-selected="true">Corsi</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-libri" type="button" aria-controls="tab-libri" aria-selected="false">Libri</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-autori" type="button" aria-controls="tab-autori" aria-selected="false">Autori</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relazioni" type="button" aria-controls="tab-relazioni" aria-selected="false">Relazioni</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-utenti" type="button" aria-controls="tab-utenti" aria-selected="false">Utenti</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-recensioni" type="button" aria-controls="tab-recensioni" aria-selected="false">Recensioni</button></li>
         </ul>
 
   <div class="tab-content p-3 bg-dark text-white border border-top-0">
 
     <!-- CORSI -->
-    <div class="tab-pane fade show active" id="tab-corsi">
-        <h3>Aggiungi corso</h3>
+    <div class="tab-pane fade show active" id="tab-corsi" role="tabpanel" aria-labelledby="tab-corsi">
+        <h2>Aggiungi corso</h2>
 
         <form method="POST" class="row g-2">
             <input type="hidden" name="action" value="add_course">
@@ -62,7 +62,7 @@
     </div>
 
     <!-- LIBRI -->
-    <div class="tab-pane fade" id="tab-libri">
+    <div class="tab-pane fade" id="tab-libri" role="tabpanel" aria-labelledby="tab-libri">
       <h3>Aggiungi libro</h3>
 
       <form method="POST" class="row g-2">
@@ -117,7 +117,7 @@
     </div>
 
     <!-- AUTORI -->
-    <div class="tab-pane fade" id="tab-autori">
+    <div class="tab-pane fade" id="tab-autori" role="tabpanel" aria-labelledby="tab-autori">
       <h3>Aggiungi autore</h3>
 
       <form method="POST" class="row g-2">
@@ -162,7 +162,7 @@
     </div>
 
     <!-- RELAZIONI -->
-    <div class="tab-pane fade" id="tab-relazioni">
+    <div class="tab-pane fade" id="tab-relazioni" role="tabpanel" aria-labelledby="tab-relazioni">
       <h3>Associa libro ↔ corso</h3>
       <form method="POST" class="row g-2">
         <input type="hidden" name="action" value="link_book_course">
@@ -235,7 +235,7 @@
     </div>
 
     <!-- UTENTI -->
-    <div class=" table-responsive tab-pane fade" id="tab-utenti">
+    <div class=" table-responsive tab-pane fade" id="tab-utenti" role="tabpanel"aria-labelledby="tab-utenti">
       <h3>Lista utenti</h3>
       <div class="table-responsive">
         <table class="table table-dark table-striped align-middle">
@@ -270,7 +270,7 @@
     </div>
 
     <!-- Recensioni -->
-    <div class=" table-responsive tab-pane fade" id="tab-recensioni">
+    <div class=" table-responsive tab-pane fade" id="tab-recensioni" role="tabpanel" aria-labelledby="tab-recensioni">
       <h3>Lista recensioni</h3>
       <div class="table-responsive">
         <table class="table table-dark table-striped align-middle">
