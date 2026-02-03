@@ -95,3 +95,5 @@ INSERT INTO `weblio`.`utente_corso` (`email`, `codice_corso`) VALUES
 ('prof.rossi@university.it', 105), -- Paolo Rossi insegna Algebra Lineare
 -- Elena Ferrari (Fisica - utente non attivo)
 ('elena.ferrari@university.it', 103); -- Fisica Generale
+
+INSERT INTO config (last_date) VALUES (CURDATE());

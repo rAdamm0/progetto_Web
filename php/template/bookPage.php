@@ -11,6 +11,7 @@ $autori = htmlspecialchars($libro["autori"]);
 $disponibilità = intval($libro["disponibile"]);
 $descrizione = htmlspecialchars($libro["descrizione"]);
 $data_uscita = htmlspecialchars($libro["data_uscita"]);
+$img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
 
 ?>
 <header>
@@ -19,14 +20,12 @@ $data_uscita = htmlspecialchars($libro["data_uscita"]);
 <div class="container py-4">
     <div class="row g-4">
         <div class="col-12 col-md-4 col-lg-3">
-            <div class="card shadow-sm">
-                <div class="ratio ratio-3x4">
-                    <!-- spazio per mettere un immagine-->
-                    <span class="text-muted">Immagine</span>
-                </div>
+            <div class="card shadow-sm ratio ratio-6x9">
+                    <img src="uploads/books/<?php echo $img?>" alt="Copertina del libro: <?php echo $nome?>"/>
             </div>
             <div class="d-grid gap-2 mt-3">
-                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $libro["nome_libro"]?>&edizione=<?php echo $libro["edizione"]?>" class="btn btn-primary">Prenota</a>
+                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $libro["nome_libro"]?>&edizione=<?php echo $libro["edizione"]?>" 
+                class="btn btn-<?php if($disponibilità==1): echo "danger";else:echo "success";endif;?>" <?php if($disponibilità==1): echo "disabled"; endif;?>>Prenota</a>
             </div>
         </div>
         <div class="cik-12 col-md-8 col-lg-9">

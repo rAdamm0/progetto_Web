@@ -1,21 +1,24 @@
 <?php
 require_once 'db/Bootstrap.php';
 
-    $templateParams["titolo"] = "Login";
 
 
 if (isset($_POST["email-registrazione"]) && isset($_POST["password-registrazione"]) && isset($_POST["nome-registrazione"]) && isset($_POST["cognome-registrazione"]) && isset($_POST["matricola-registrazione"])) {
-    $registrato = $dbh->checkUserInDatabase($_POST["email-registrazione"]);
-    if (count($registrato) == 0) {
-        if ($dbh->registerUser($_POST["email-registrazione"], $_POST["password-registrazione"], $_POST["nome-registrazione"], $_POST["cognome-registrazione"], $_POST["matricola-registrazione"])) {
-            $registrato = $dbh->checkUserInDatabase($_POST["email-registrazione"], $_POST["password-registrazione"]);
-            registerLoggedUser($registrato[0]);
+    if (strlen($_POST['matricola-registrazione']) !== 10) {
+        $templateParams["errore_registrazione"]="Errore: La matricola deve essere di 10 cifre.";
+    }else{
+        $registrato = $dbh->checkUserInDatabase($_POST["email-registrazione"]);
+        if (count($registrato) == 0) {
+            if ($dbh->registerUser($_POST["email-registrazione"], $_POST["password-registrazione"], $_POST["nome-registrazione"], $_POST["cognome-registrazione"], $_POST["matricola-registrazione"])) {
+                $registrato = $dbh->checkUserInDatabase($_POST["email-registrazione"], $_POST["password-registrazione"]);
+                registerLoggedUser($registrato[0]);
+            } else {
+                $templateParams["errore_registrazione"] = "Errore durante la fase di registrazione. Riprovare";
+            }
         } else {
-            $templateParams["errore_registrazione"] = "Errore durante la fase di registrazione. Riprovare";
+            $templateParams["errore_registrazione"] = "Utente già registrato";
         }
-    } else {
-        $templateParams["errore_registrazione"] = "Utente già registrato";
-    }
+    }  
 }
 
 
@@ -40,6 +43,7 @@ if (isUserLoggedIn()) {
     $templateParams["script"] = "personal.js";
     $templateParams["courses"] = $dbh->coursesList();
 } else {
+    $templateParams["titolo"] = "Login";
     $templateParams["baseUpperPage"] = 'template/login-form.php';
 }
 

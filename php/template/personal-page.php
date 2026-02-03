@@ -1,5 +1,5 @@
 <section class="mx-4">
-    <h1 class="mb-4 mx-auto text-center">About You</h1>
+    <h1 class="mb-4 mx-auto text-center">Bentornato <?php echo $templateParams["infos"][0]["nome"]?></h1>
     <div class="container">
         
         <div class="row">
@@ -10,7 +10,6 @@
                         alt="Profile Image" class="rounded img-fluid ml-3 " style="object-fit: cover;">
                 </div>
             </div>
-
             <!-- Lista - sotto l'immagine su mobile, sinistra su desktop -->
             <div class="col-12 col-md-8 order-last order-md-first">
                 <aside>
@@ -19,7 +18,6 @@
                             <?php echo $templateParams["infos"][0]["nome"] . " " . $templateParams["infos"][0]["cognome"] ?>
                         </li>
                         <li class="list-group-item">Corso: <?php echo $templateParams["infos"][0]["corso"] ?></li>
-                        <!--<li class="list-group-item">Eta': 23 anni</li>-->
                         <li class="list-group-item">Numero Matricola:
                             <?php echo str_pad($templateParams["infos"][0]["num_matricola"], 10, "0", STR_PAD_LEFT); ?>
                         </li>
@@ -119,7 +117,7 @@
 <!--Elenco Passate Prenotazioni-->
 <div>
     <h2>Prenotazioni</h2>
-    <table class="table mh-100 overflow-auto">
+    <table class="table  mh-100 overflow-auto">
         <thead>
             <tr>
                 <th scope="col">Libro</th>

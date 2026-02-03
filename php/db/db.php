@@ -29,7 +29,7 @@ class DatabaseHelper
 
   public function getBookInfo($id)
   {
-    $query = "SELECT l.nome_libro, l.descrizione, l.data_uscita, l.edizione, l.disponibile, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
+    $query = "SELECT l.nome_libro, l.descrizione, l.data_uscita, l.edizione, l.disponibile, GROUP_CONCAT(CONCAT(a.nome_autore, ' ', a.cognome_autore) SEPARATOR ', ') AS autori, immagine_libro as immagine FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore WHERE l.codice_libro = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('i', $id);
     $stmt->execute();
@@ -75,7 +75,7 @@ class DatabaseHelper
 
   public function getPastBookings($email)
   {
-    $query = "SELECT * FROM `prenotazioni passate` where email = ?";
+    $query = "SELECT * FROM `prenotazioni passate` where email = ? order by data_fine ASC";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -215,7 +215,9 @@ class DatabaseHelper
 
   public function getReviewsByEmail($email)
   {
-    $query = "SELECT l.nome_libro, r.descrizione, r.valutazione FROM recensione r LEFT JOIN libri l ON r.codice_libro = l.codice_libro WHERE r.email = ?";
+    $query = "SELECT l.nome_libro, r.descrizione, r.valutazione 
+    FROM recensione r LEFT JOIN libri l ON r.codice_libro = l.codice_libro
+     WHERE r.email = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -325,39 +327,114 @@ class DatabaseHelper
   public function getBookable()
   {
     $query = "SELECT codice_libro as id, nome_libro as libro, edizione 
-            FROM libri";
+            FROM libri
+            WHERE disponibile = 0";
     $result = $this->db->query($query);
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
-  public function bookABook($email, $codice_libro, $data_inizio, $data_fine) {
+  public function bookABook($email, $codice_libro, $data_inizio, $data_fine)
+  {
     $checkQuery = "SELECT id_prenotazioni FROM prenotazioni WHERE codice_libro = ? 
                    AND (data_inizio <= ? AND data_fine >= ?)";
     $stmtCheck = $this->db->prepare($checkQuery);
-    
+
     $stmtCheck->bind_param('iss', $codice_libro, $data_fine, $data_inizio);
     $stmtCheck->execute();
     if ($stmtCheck->get_result()->num_rows > 0) {
-        return "Questo libro è già prenotato per le date selezionate.";
+      return "Questo libro è già prenotato per le date selezionate.";
     }
     $checkQuery = "SELECT COUNT(*) as num FROM prenotazioni WHERE email = ? AND data_fine>?";
     $today = date("Y/m/d");
     $stmtCheck = $this->db->prepare($checkQuery);
     $stmtCheck->bind_param('ss', $email, $today);
     $stmtCheck->execute();
-    if($stmtCheck->get_result()->fetch_assoc()["num"] > 5){
+    if ($stmtCheck->get_result()->fetch_assoc()["num"] > 5) {
       return "Hai già prenotato 5 libri in questo periodo";
     }
-    $query = "INSERT INTO `prenotazioni` (`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES (?, ?, ?, ?)";
-    $stmt = $this->db->prepare($query);
-    
-    $stmt->bind_param('siss', $email, $codice_libro, $data_inizio, $data_fine);
-    
-    if ($stmt->execute()) {
-        return true;
-    } else {
-        return "Errore tecnico durante il salvataggio.";
+    $updateQuery = "UPDATE `libri` SET disponibile = 1 where `codice_libro` = ?";
+    $stmtUpd = $this->db->prepare($updateQuery);
+    $stmtUpd->bind_param('i', $codice_libro);
+    $stmtCheck->execute();
+    if (!$stmtCheck) {
+      return "Qualcosa è andato storto durante la prenotazione";
     }
-}
+    $stmtCheck->close();
+    $query = "INSERT INTO `prenotazioni` (`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES (?, ?, ?, ?);";
+    $stmt = $this->db->prepare($query);
+    if (!$stmt) {
+        return "Errore SQL Insert: " . $this->db->error;
+    }
+    $stmt->bind_param('siss', $email, $codice_libro, $data_inizio, $data_fine);
+
+    if ($stmt->execute()) {
+      $stmt->close();
+      $this->disponibilityUpdate($codice_libro);
+      return true;
+    } else {
+      return "Errore tecnico durante il salvataggio.";
+    }
+  }
+
+  public function disponibilityUpdate($codice_libro){
+    $query = "UPDATE `libri` SET `disponibile`=1 WHERE `codice_libro`=?;";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i', $codice_libro);
+    if($stmt->execute()){
+      return 'success';
+    }
+    return 'failure';
+  }
+
+  public function checkDailyTask()
+  {
+    $stmt = $this->db->prepare("SELECT last_date from config LIMIT 1");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $lastRun = $row ? $row['last_date'] : '0000-00-00';
+    $today = date('Y-m-d');
+
+    if ($lastRun !== $today) {
+      // ESEGUI LA TUA FUNZIONE (es. pulizia prenotazioni vecchie)
+      $this->disponibilityCheck();
+
+      // AGGIORNA la data dell'ultima esecuzione
+      // UPDATE config SET last_run = '$today'
+      $stmt = $this->db->prepare("UPDATE config SET last_date = '$today' where last_date = '$lastRun'");
+      $stmt->execute();
+    }
+  }
+
+  public function disponibilityCheck()
+  {
+    $query = "UPDATE libri l
+    LEFT JOIN (
+    SELECT codice_libro, MAX(data_fine) as ultima_prenotazione
+    FROM prenotazioni
+    GROUP BY codice_libro
+    ) p ON l.codice_libro = p.codice_libro
+    SET l.disponibile = 0
+    WHERE 
+    p.codice_libro IS NULL 
+    OR p.ultima_prenotazione < CURRENT_DATE;  ";
+    $stmt = $this->db->prepare($query);
+    if (!$stmt->execute()) {
+      return "Errore nell'aggiornamento";
+    }
+    return "Aggiornamento svolto con successo";
+
+
+  }
+
+  public function getRange()
+  {
+    $query = "SELECT MAX(codice_libro) as max, MIN(codice_libro) as min
+              FROM libri";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+  }
 }
 
