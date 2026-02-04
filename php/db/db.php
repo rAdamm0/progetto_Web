@@ -294,31 +294,49 @@ class DatabaseHelper
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
   }
-  public function getBooksBySearch($search)
-  {
+  public function getBooksBySearch($search, $courseId){
     $search = trim($search);
-    if ($search === "") {
-      $query = $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
-                         FROM libri l
-                         LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro
-                         LEFT JOIN autori a ON a.codice_autore = al.codice_autore
-                         GROUP BY l.codice_libro
-                         ORDER BY l.nome_libro;";
-      $stmt = $this->db->prepare($query);
+    $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
+              FROM libri l
+              LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro
+              LEFT JOIN autori a ON a.codice_autore = al.codice_autore";
+
+    $params = [];
+    $types  = "";
+
+    if ($courseId != 0) {
+        $query .= " INNER JOIN libro_corso lc ON lc.codice_libro = l.codice_libro ";
+        $query .= " WHERE lc.codice_corso = ? ";
+        $params[] = (int)$courseId;
+        $types .= "i";
     } else {
-      $like = "%" . $search . "%";
-      $query = "SELECT l.*, GROUP_CONCAT(CONCAT(a.nome_autore,' ',a.cognome_autore) SEPARATOR ', ') AS autore_completo
-                FROM libri l
-                JOIN autore_libro al ON l.codice_libro = al.codice_libro
-                JOIN autori a ON a.codice_autore = al.codice_autore
-                GROUP BY l.codice_libro
-                HAVING l.nome_libro LIKE ?
-                OR autore_completo LIKE ?
-                OR CAST(l.data_uscita AS CHAR) LIKE ?
-                ORDER BY l.nome_libro DESC";
-      $stmt = $this->db->prepare($query);
-      $stmt->bind_param("ssi", $like, $like, $like);
+        $query .= " WHERE 1=1 ";
+    }if($search !== "") {
+        $like = "%".$search."%";
+        $query .= " AND (l.nome_libro LIKE ?
+                   OR CAST(l.data_uscita AS CHAR) LIKE ?
+                   OR EXISTS (
+                   SELECT 1
+                   FROM autore_libro al2
+                   JOIN autori a2 ON a2.codice_autore = al2.codice_autore
+                   WHERE al2.codice_libro = l.codice_libro
+                   AND CONCAT(a2.nome_autore,' ',a2.cognome_autore) LIKE ?)) ";
+        $params[] = $like; $types .= "s";
+        $params[] = $like; $types .= "s";
+        $params[] = $like; $types .= "s";
     }
+
+    $query .= "
+        GROUP BY l.codice_libro
+        ORDER BY l.nome_libro ASC
+    ";
+
+    $stmt = $this->db->prepare($query);
+
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
+    }
+
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);

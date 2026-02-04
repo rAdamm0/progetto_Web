@@ -82,7 +82,9 @@
                             <p class="mb-3">
                                 <?= htmlspecialchars($c["descrizione"]); ?>
                             </p>
-                            <a class = "link-primary" href="catalogo.php">Vai ai libri</a>
+                            <a class="link-primary" href="catalogo.php?course=<?= urlencode($c["codice_corso"]) ?>">
+                                Vai ai libri
+                            </a>
                         </div>
                     </div>
                 </div>

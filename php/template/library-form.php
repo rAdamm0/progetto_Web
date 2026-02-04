@@ -7,8 +7,7 @@
             type="search" 
             name="q"
             placeholder="Cerca un libro..." 
-            aria-label="Search"
-        >
+            aria-label="Search">
         <button class="btn btn-outline-primary flex-shrink-0" type="submit">Cerca</button>
     </form>
 </div>

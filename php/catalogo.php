@@ -2,10 +2,12 @@
     require_once("db/Bootstrap.php");
     $templateParams["Titolo"] = "WebLio";
     $q = isset($_GET["q"]) ? trim($_GET["q"]) : "";
+    $course = isset($_GET["course"]) ? (int) $_GET["course"] : 0;
     $templateParams["h1"] = "Catalogo libri";
+    $templateParams["selectedCourse"] = $course;
     $templateParams["css"] = "../html/css/catalogo.css";
     $templateParams["header"] = "template/headerCatalogue.php";
     $templateParams["baseUpperPage"] = "template/library-form.php";
-    $templateParams["Libri"] = $dbh->getBooksBySearch($q);
+    $templateParams["Libri"] = $dbh->getBooksBySearch($q,$course);
     require("template/base.php");
 ?>
