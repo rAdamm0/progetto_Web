@@ -25,8 +25,7 @@
         <main class="flex-grow-1">
             <!--OFF-CANVA-->
             <section>
-                <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas"
-                    aria-labelledby="offcanvasLabel">
+                <div class="offcanvas offcanvas-start toggle" tabindex="-1" id="offcanvas">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasLabel">Informazioni aggiuntive</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -106,7 +105,7 @@
             <div class="container d-flex flex-wrap justify-content-between align-items-center">
             <p class="col-md-4 mb-0 text-muted">© 2026, WeBlio</p>
 
-            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <a href="../php/home.php" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <i class="bi bi-book-fill fs-3"></i>
             </a>
 

@@ -101,3 +101,23 @@ async function addBooking(formElement) {
                 confirmButtonText: 'OK'
             });
         }
+
+async function cancelBooking(formElement){
+  const formData = new FormData(formElement);
+  const response = await fetch('utilis/cancelBook.php',{
+    method : 'POST',
+    body : formData
+  });
+  const result = await response.json();
+  if(result.success){
+    alert("Prenotazione Cancellata");
+    location.reload();
+  }else{
+    console.error("Server Error: ", result.message);
+    const libroSelect = document.querySelector("#id");
+    const feedback = document.querySelector(".invalid-feedback.cancel");
+
+    libroSelect.classList.add("is-invalid"); // Questo rende visibile il feedback
+    feedback.textContent = result.message;
+  }
+}

@@ -195,6 +195,16 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
+  public function checkMatrInDatabase($matricola)
+  {
+    $query = "SELECT email, num_matricola, nome, immagine_profilo FROM utente WHERE num_matricola = ?";
+    $stmt = $this->db->prepare($query);
+      $stmt->bind_param('i', $matricola);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
   public function registerUser($email, $pw, $nome, $cognome, $numero_matricola)
   {
     $algo = "sha256";
@@ -333,6 +343,27 @@ class DatabaseHelper
     return $result->fetch_all(MYSQLI_ASSOC);
   }
 
+  public function getBooked($email){
+  $query = "SELECT p.id_prenotazioni as id, l.nome_libro as libro, l.edizione
+            FROM prenotazioni p LEFT JOIN libri l ON  p.codice_libro = l.codice_libro
+            WHERE p.email = ?
+            AND data_fine > CURDATE()";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function cancelBooking($id){
+    $query = "UPDATE prenotazioni SET data_fine = CURDATE() WHERE id_prenotazioni=?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('i', $id);
+    if($stmt->execute()){
+      return 'success';
+    }return 'failure';
+  }
+
   public function bookABook($email, $codice_libro, $data_inizio, $data_fine)
   {
     $checkQuery = "SELECT id_prenotazioni FROM prenotazioni WHERE codice_libro = ? 
@@ -369,7 +400,6 @@ class DatabaseHelper
 
     if ($stmt->execute()) {
       $stmt->close();
-      $this->disponibilityUpdate($codice_libro);
       return true;
     } else {
       return "Errore tecnico durante il salvataggio.";

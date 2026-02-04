@@ -95,13 +95,4 @@ async function updateTags(formElement){
     location.replace('personal.php');
 }
 
-async function login(formElement){
-   const formData = new FormData(formElement);
-
-}
-
-async function registration(formElement){
-    const formData = new FormData(formElement);
-}
-
 

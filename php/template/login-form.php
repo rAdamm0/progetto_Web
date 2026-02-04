@@ -2,79 +2,75 @@
 <div class="container my-5">
     <div class="form-container row max-vw-50">
         <section class="col-md-6 mb-4 border-md-end pe-md-5">
-            <h3 class="section-title">Login</h3>
-            <form action="#" method="POST">
+            <h2 class="section-title">Login</h2>
+            <form action="#" method="POST" onsubmit="event.preventDefault(); login(this)">
                 <div class="mb-3">
-                    <label for="email-login" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email-login" name="email-login" required
-                        placeholder="Enter your email"
-                        value="<?php echo htmlspecialchars($_POST['email-login'] ?? ''); ?>">
+                    <label for="emailLogin" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailLogin" name="emailLogin" required
+                        placeholder="Inserisci la tua email" value="<?php echo htmlspecialchars($_POST['emailLogin'] ?? ''); ?>" />
+                    <div id="validationServer01Feedback" class="invalid-feedback login">
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="password-login" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password-login" name="password-login" required
-                        placeholder="Enter your password"
-                        value="<?php echo htmlspecialchars($_POST['password-login'] ?? ''); ?>">
+                    <label for="passwordLogin" class="form-label">Password</label>
+                    <input type="password" class="form-control mb-3" id="passwordLogin" name="passwordLogin" required
+                        placeholder="Inserisci la tua password"
+                        value="<?php echo htmlspecialchars($_POST['passwordLogin'] ?? ''); ?>"/>
+                        <input type="checkbox" class="btn-check" id="btncheck1"
+                        onclick="const input = document.getElementById('passwordLogin'); input.type = this.checked ? 'text' : 'password';">
+                        <label class="btn btn-outline-primary" for="btncheck1">Mostra password</label>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Sign
-                        in</button>
+                    <button type="submit" class="btn btn-primary">Entra</button>
                 </div>
             </form>
         </section>
 
         <section class="col-md-6 ps-md-5">
             <!-- Registration Section -->
-            <h3 class="section-title">Registrazione</h3>
-            <form action="#" method="POST">
+            <h2 class="section-title">Registrazione</h2>
+            <form action="#" method="POST" onsubmit="event.preventDefault(); registration(this);">
                 <div class="mb-3">
-                    <label for="email-registrazione" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email-registrazione" name="email-registrazione"
-                        placeholder="Enter your email"
-                        value="<?php echo htmlspecialchars($_POST['email-registrazione'] ?? ''); ?>">
+                    <label for="emailReg" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailReg" name="emailReg" placeholder="Inserisci la tua email"
+                        value="<?php echo htmlspecialchars($_POST['emailReg'] ?? ''); ?>"/>
+                        <div id="validationServer02Feedback" class="invalid-feedback registration">
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="password-registrazione" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password-registrazione"
-                        name="password-registrazione" placeholder="Create a password"
-                        value="<?php echo htmlspecialchars($_POST['password-registrazione'] ?? ''); ?>">
+                    <label for="passwordReg" class="form-label">Password</label>
+                    <input type="password" class="form-control mb-3" id="passwordReg" name="passwordReg"
+                        placeholder="Create a password"
+                        value="<?php echo htmlspecialchars($_POST['passwordReg'] ?? ''); ?>"/>
+                    <input type="checkbox" class="btn-check top-100" id="btncheck2"
+                    onclick="const input = document.getElementById('passwordReg'); input.type = this.checked ? 'text' : 'password';">
+                    <label class="btn btn-outline-success" for="btncheck2">Mostra password</label>
                 </div>
                 <div class="mb-3">
-                    <label for="nome-registrazione" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome-registrazione" name="nome-registrazione"
-                        placeholder="Inserisci il tuo nome"
-                        value="<?php echo htmlspecialchars($_POST['nome-registrazione'] ?? ''); ?>">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Inserisci il tuo nome"
+                        value="<?php echo htmlspecialchars($_POST['nome'] ?? ''); ?>">
                 </div>
                 <div class="mb-3">
-                    <label for="cognome-registrazione" class="form-label">Cognome</label>
-                    <input type="text" class="form-control" id="cognome-registrazione" name="cognome-registrazione"
+                    <label for="cognome" class="form-label">Cognome</label>
+                    <input type="text" class="form-control" id="cognome" name="cognome"
                         placeholder="Inserisci il tuo cognome"
-                        value="<?php echo htmlspecialchars($_POST['cognome-registrazione'] ?? ''); ?>" />
+                        value="<?php echo htmlspecialchars($_POST['cognome'] ?? ''); ?>" />
                 </div>
                 <div class="mb-3">
-                    <label for="matricola-registrazione" class="form-label">N° Matricola</label>
-                    <input type="number" class="form-control" id="matricola-registrazione"
-                        name="matricola-registrazione" minlength="10" maxlength="10"
-                        placeholder="Inserisci il numero matricola"
-                        value="<?php echo htmlspecialchars($_POST['matricola-registrazione'] ?? ''); ?>">
-                        <?php if (isset($templateParams["errore_registrazione"])): ?>
-                            <div id="validationServer03Feedback" class="invalid-feedback">
-                                <?php echo $templateParams["errore_registrazione"]; ?>
-                            </div>
-                        <?php endif; ?>
+                    <label for="matricola" class="form-label">N° Matricola</label>
+                    <input type="number" class="form-control" id="matricola" name="matricola"
+                        placeholder="Inserisci il Numero di matricola"
+                        value="<?php echo htmlspecialchars($_POST['matricola'] ?? ''); ?>"/>
+                        <div id="validationServer03Feedback" class="invalid-feedback matricola">
+                    </div>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success">Sign Up</button>
+                    <button type="submit" class="btn btn-success">Registrati</button>
                 </div>
             </form>
         </section>
 
     </div>
-    <?php if (isset($templateParams["errorelogin"])): ?>
-        <p style><?php echo $templateParams["errorelogin"]; ?></p>
-    <?php endif; ?>
-
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
-</script>

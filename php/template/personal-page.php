@@ -52,13 +52,13 @@
                                 value="<?php echo htmlspecialchars($templateParams["infos"][0]["corso"]); ?>" required>
 
                             <label class="form-label">Anno:</label>
-                            <input type="text" name="anno" class="form-control mb-2"
+                            <input type="text" name="anno" class="form-control mb-3"
                                 value="<?php echo htmlspecialchars($templateParams["infos"][0]["anno"]); ?>" required>
 
 
-                            <label class="form-label ">Profile Picture:</label>
-                            <img id="profilePreview" src="uploads/default_avatar.png"
-                                style="width:100px; height:100px; border-radius:50%;" class="mb-2">
+                            <label class="form-label me-3">Profile Picture:</label>
+                            <img id="profilePreview" src="uploads/default_avatar.png" alt="Anteprima Immagine Profilo"
+                                style="width:100px; height:100px;" class="mb-3 object-fit-contain">
                             <input type="file" name="profile_pic" class="form-control mb-2"
                                 onchange="previewImage(event)" accept="image/*">
                             <input type="hidden" name="current_image_hidden"
@@ -92,9 +92,9 @@
                                     ?>
                                     <div class="form-check">
                                         <input type="checkbox" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
-                                            id="<?php echo $course["nome_corso"]; ?>">
+                                            id="<?php echo $course["codice_corso"]; ?>">
 
-                                        <label for="<?php echo $course["nome_corso"]; ?>">
+                                        <label for="<?php echo $course["codice_corso"]; ?>">
                                             <?php echo $course["nome_corso"]; ?>
                                         </label>
                                     </div>
@@ -130,7 +130,7 @@
             <?php if (array_key_exists("bookings", $templateParams)): ?>
                 <?php foreach ($templateParams["bookings"] as $booking): ?>
                     <tr>
-                        <td scope="row"><?php echo $booking["nome_libro"] ?></td>
+                        <td><?php echo $booking["nome_libro"] ?></td>
                         <td><?php echo $booking["autori"] ?></td>
                         <td><?php echo $booking["data_inizio"] ?></td>
                         <td><?php echo $booking["data_fine"] ?></td>

@@ -1,7 +1,7 @@
 <section class="border bg-dark rounded p-4">
     <p class="text-start text-white">Benvenuta matricola su WebLio, la prima biblioteca totalmente online.
         Qui puoi trovare qualsiasi libro utile per il tuo processo di studio</p>
-    <button type=" button" class="btn btn-light">Più informazioni</button>
+    <button type=" button" class="btn btn-light justify-content-end ">Più informazioni</button>
 </section>
 <section>
     <img src="../../html/assets/foto.png" alt="" class="img-fluid container-md align-items-center">
