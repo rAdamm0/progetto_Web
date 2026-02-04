@@ -1,11 +1,11 @@
-INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `attivo`, `num_matricola`, `is_docente`) VALUES
-('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica', 1, 100001, 0),
-('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica', 1, 100002, 0),
-('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica', 1, 100003, 0),
-('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1, 100004, 0),
-('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 1, 200001, 1),
-('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 1, 200002, 1),
-('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 0, 100005, 0);
+INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `attivo`, `num_matricola`,`immagine_profilo`, `is_docente`) VALUES
+('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica', 1, 100001,'', 0),
+('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica', 1, 100002,'', 0),
+('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica', 1, 100003,'', 0),
+('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1, 100004,'', 0),
+('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 1, 200001,'', 1),
+('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 1, 200002,'', 1),
+('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 0, 100005,'', 0);
 
 INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `lingua`, `docente`) VALUES
 (101, 'Basi di Dati', 'Corso fondamentale sulle basi di dati e SQL', 'Italiano', 'John Smith'),
@@ -59,13 +59,13 @@ INSERT INTO `weblio`.`autore_libro` (`codice_autore`, `codice_libro`) VALUES
 (2, 7),
 (3, 8);
 
-INSERT INTO `weblio`.`prenotazioni` (`p.id_prenotazioni`,`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES
-(1,'mario.rossi@university.it', 1, '2024-01-15', '2024-02-15'),
-(2,'laura.bianchi@university.it', 2, '2024-01-20', '2024-02-20'),
-(3,'giuseppe.verdi@university.it', 3, '2024-02-01', '2024-03-01'),
-(4,'anna.russo@university.it', 4, '2024-02-10', NULL),
-(5,'mario.rossi@university.it', 6, '2024-02-05', '2024-03-05'),
-(6,'laura.bianchi@university.it', 5, '2024-02-15', NULL);
+INSERT INTO `weblio`.`prenotazioni` (`id_prenotazioni`,`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES
+(1,'mario.rossi@university.it', 1, '2024-01-15', '2024-02-10'),
+(2,'laura.bianchi@university.it', 2, '2024-01-20', '2024-02-19'),
+(3,'giuseppe.verdi@university.it', 3, '2024-02-01', '2024-02-20'),
+(4,'anna.russo@university.it', 4, '2024-02-10', '2024-02-20'),
+(5,'mario.rossi@university.it', 6, '2024-02-05', '2024-03-03'),
+(6,'laura.bianchi@university.it', 5, '2024-02-15', '2024-02-25');
 
 INSERT INTO `weblio`.`recensione` (`email`, `codice_libro`, `valutazione`, `descrizione`) VALUES
 ('mario.rossi@university.it', 1, 5, 'Libro eccellente, molto chiaro negli esempi'),

@@ -78,8 +78,8 @@ ON UPDATE CASCADE
 ON DELETE CASCADE,
 PRIMARY KEY(`id_prenotazioni`),
 INDEX `idx_chronological_order`(`data_inizio` DESC),
-CONSTRAINT chk_date CHECK (`start_date`<`end_date`),
-CONSTRAINT chk_duration CHECK(DATEDIFF(`end_date`, `start_date`)<31)
+CONSTRAINT chk_date CHECK (`data_inizio`<`data_fine`),
+CONSTRAINT chk_duration CHECK(DATEDIFF(`data_fine`, `data_inizio`)<31)
 )Engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `weblio`.`autori`(
