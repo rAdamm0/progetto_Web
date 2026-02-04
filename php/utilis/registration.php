@@ -13,14 +13,14 @@ if (isset($_POST["emailReg"]) && isset($_POST["passwordReg"]) && isset($_POST["n
                 if ($dbh->registerUser($_POST["emailReg"], $_POST["passwordReg"], $_POST["nome"], $_POST["cognome"], $_POST["matricola"])) {
                     $registrato = $dbh->checkUserInDatabase($_POST["emailReg"], $_POST["passwordReg"]);
                     registerLoggedUser($registrato[0]);
-                echo json_encode(["success"=>true, "messaggio"=>"Registrazione effettuata con successo!"]);
+                echo json_encode(["success"=>true, "message"=>"Registrazione effettuata con successo!"]);
                     
                 } else {
-                echo json_encode(["success"=>false, "messaggio"=>"Errore durante la fase di registrazione. Riprovare","cause"=>"general"]);
+                echo json_encode(["success"=>false, "message"=>"Errore durante la fase di registrazione. Riprovare","cause"=>"general"]);
     
                 }
             } else {
-                echo json_encode(["success"=>false, "messaggio"=>"Utente già registrato","cause"=>"utente"]);
+                echo json_encode(["success"=>false, "message"=>"Utente già registrato","cause"=>"utente"]);
             }
         }
     }  

@@ -5,14 +5,13 @@ if (!$libro) {
     return;
 }
 # dati del libro
-$nome = htmlspecialchars($libro["nome_libro"]);
+$nome = htmlspecialchars(str_replace('_', ' ', $libro["nome_libro"]));
 $edizione = htmlspecialchars($libro["edizione"]);
 $autori = htmlspecialchars($libro["autori"]);
 $disponibilità = intval($libro["disponibile"]);
 $descrizione = htmlspecialchars($libro["descrizione"]);
 $data_uscita = htmlspecialchars($libro["data_uscita"]);
 $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
-
 ?>
 <header>
     <h1><?=  $templateParams["h1"]?></h1>
@@ -24,8 +23,8 @@ $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
                     <img src="uploads/books/<?php echo $img?>" alt="Copertina del libro: <?php echo $nome?>"/>
             </div>
             <div class="d-grid gap-2 mt-3">
-                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $libro["nome_libro"]?>&edizione=<?php echo $libro["edizione"]?>" 
-                class="btn btn-<?php if($disponibilità==1): echo "danger";else:echo "success";endif;?>" <?php if($disponibilità==1): echo "disabled"; endif;?>>Prenota</a>
+                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $nome?>&edizione=<?php echo $libro["edizione"]?>" 
+                class="btn btn-<?php if($disponibilità==1): echo "danger";else:echo "success";endif;?>" <?php if($disponibilità==1): echo 'style="pointer-events: none;"'; endif;?>>Prenota</a>
             </div>
         </div>
         <div class="cik-12 col-md-8 col-lg-9">
@@ -52,13 +51,13 @@ $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
                         </div>
                     </div>
                     <hr class="my-4">
-                    <h5>Descrizione</h5>
+                    <h3>Descrizione</h3>
                     <p class="text-muted mb-0"><?= $descrizione ?></p>
                 </div>
             </div>
             <div class="card shadow-sm mt-4">
                 <div class="card-body bg-light">
-                    <h5 class="mb-3">Dettagli</h5>
+                    <h4 class="mb-3">Dettagli</h4>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between">
                             <span class="text-muted">Titolo</span>
@@ -82,7 +81,7 @@ $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
             <div class="card shadow-sm mt-4">
                 <div class="card-body shadow-sm bg-light">
                     <?php if(!empty($_SESSION["email"])): ?>
-                        <h6 class="fw-semibold mb-3">Scrivi recensione</h6>
+                        <h5 class="fw-semibold mb-3">Scrivi recensione</h5>
                             <div class="card mb-3 shadow-sm">
                                 <div class="card-body">
                                     <form method="POST" action="book.php?id=<?= (int)$id ?>" class="row g-2">
@@ -119,7 +118,7 @@ $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
             </div>
             <div class="card shadow-sm mt-4">
                 <div class="card-body bg-light">
-                    <h5 class="fw-semibold mb-3">Recensioni</h5>
+                    <h4 class="fw-semibold mb-3">Recensioni</h4>
 
                     <?php if (empty($templateParams["recensione"])): ?>
                         <p class="text-muted">Nessuna recensione disponibile.</p>
@@ -127,9 +126,9 @@ $img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
                         <?php foreach ($templateParams["recensione"] as $recensione): ?>
                             <div class="card mb-3 shadow-sm">
                                 <div class="card-body">
-                                    <h6 class="card-title fw-semibold">
+                                    <h5 class="card-title fw-semibold">
                                         <?= htmlspecialchars($recensione["recensore"]) ?>
-                                    </h6>
+                                    </h5>
 
                                     <div class="mb-2">
                                         <span class="badge bg-primary">

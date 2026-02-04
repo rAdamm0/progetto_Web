@@ -2,7 +2,7 @@
 require_once 'db/Bootstrap.php';
 
 if (isUserLoggedIn()) {
-    $templateParams["titolo"] = "Personal";
+    $templateParams["titolo"] = "WebLio - Personal";
     $templateParams["infos"] = $dbh->getUserInfos($_SESSION["email"]);
     $templateParams["tags"] = $dbh->getCoursesTagsByEmail($_SESSION["email"]);
     $templateParams["bookings"] = $dbh->getPastBookings($_SESSION["email"]);
@@ -12,7 +12,7 @@ if (isUserLoggedIn()) {
     $templateParams["courses"] = $dbh->coursesList();
 } else {
     $templateParams["script"] = "login.js";
-    $templateParams["titolo"] = "Login";
+    $templateParams["titolo"] = "WebLio - Login";
     $templateParams["baseUpperPage"] = 'template/login-form.php';
 }
 

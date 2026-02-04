@@ -55,7 +55,7 @@
             <section>
                 <nav class="navbar navbar-expand-lg text-white bg-dark mb-3">
                     <div class="container-fluid">
-                        <a class="navbar-brand text-white" href="home.php">WeBlio</a>
+                        <a class="navbar-brand text-white" href="home.php">WebLio</a>
                         <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                             aria-label="Toggle navigation">

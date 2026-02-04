@@ -24,8 +24,8 @@
         header("Location: book.php?id=" . $id . ($ok ? "&ok=review" : "&err=review") . "#recensioni");
         exit;
     }
-    $templateParams["titolo"] = "WebLio";
     $templateParams["Libro"] = $dbh->getBookInfo($id);
+    $templateParams["titolo"] = "WebLio - ".$templateParams["Libro"]["nome_libro"];
     $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"];
     $templateParams["recensione"] = $dbh->bookReviews($id);
     $templateParams["header"] = "template/headerBook.php";

@@ -54,14 +54,8 @@ $(document).ready(function () {
 
 
 function createEvent(date) {
-  const start = document.querySelector("#data-inizio");
   const end = document.querySelector("#data-fine");
-  if (document.activeElement == start) {
-    //start.value = date.format();
-  }
-  if (document.activeElement == end) {
     end.value = date.format();
-  }
 }
 
 function createSelection(startDate, endDate) {
@@ -79,7 +73,7 @@ async function addBooking(formElement) {
   });
   const result = await response.json();
   if (result.success) {
-    showSweetAlert();
+    await showSweetAlert();
     location.reload();  
   } else {
     console.error("Server Error: ", result.message);
@@ -94,8 +88,8 @@ async function addBooking(formElement) {
  function showSweetAlert() {
             window.alert = function () { };
 
-            Swal.fire({
-                title: 'Custom Alert',
+           return Swal.fire({
+                title: 'Prenotazione Completata',
                 text: 'Libro prenotato con successo!',
                 icon: 'success',
                 confirmButtonText: 'OK'

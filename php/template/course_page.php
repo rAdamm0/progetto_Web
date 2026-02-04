@@ -13,12 +13,12 @@
             <?php
                 $activeClass = $first ? "active" : "";
                 $first  = false;
-                $imgUrl = "../html/assets/analisi_matematica.png";  
+                $imgUrl = "../php/uploads/courses/".rand(1,3).".png";  
             ?>
             <div class="carousel-item <?php echo $activeClass; ?>">
                 <div class="d-flex justify-content-center">
                     <img src="<?= $imgUrl;?>" 
-                    class="d-block"
+                    class="d-block rounded"
                     style="max-width: 420px;width : 100%;"
                     alt="cover corso">
                 </div>
@@ -58,7 +58,7 @@
                 <input class = "form-control" type="search" name="q"
                                 value="<?= htmlspecialchars($q) ?>"
                                 placeholder="Search">
-                <button class="btn btn-outline-success" type="sunmit">Search</button>
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>

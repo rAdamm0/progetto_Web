@@ -13,7 +13,7 @@
           href="personal.php">Login</a></p>
     <?php endif; ?>
   </div>
-  <div id="prenotazione mb-5">
+  <div id="prenotazione">
     <form method="post" onsubmit="event.preventDefault(); addBooking(this);">
       <fieldset>
         <div class="form-group">
@@ -21,7 +21,7 @@
           <select class="form-select mb-3" name="libro" id="libro" required data-bs-toggle="popover"
             data-bs-placement="top">
             <?php if (isset($_GET["id"])): ?>
-              <option value="<?php echo $_GET["id"] ?>" selected><?php echo $_GET["nome"] ?> -
+              <option value="<?php echo $_GET["id"] ?>" selected><?php echo str_replace('_', ' ', $_GET["nome"]); ?> -
                 <?php echo $_GET["edizione"]; ?>° Edizione</option>
             <?php else: ?>
               <option value="" selected disabled>Seleziona un libro...</option>
@@ -32,7 +32,7 @@
               </option>
             <?php endforeach; ?>
           </select>
-          <div id="validationServer03Feedback" class="invalid-feedback">
+          <div id="validationServer01Feedback" class="invalid-feedback">
           </div>
         </div>
 
@@ -58,19 +58,23 @@
   <h2 class="mx-auto w-50 text-center">Annulla Prenotazione</h2>
   <div class="mb-5">
       <fieldset>
-        <form action="" method="POST" onsubmit="event.preventDefault(); cancelBooking(this);">
-          <select class="form-select mb-3" name="id" id="id cancel" required data-bs-toggle="popover"
+        <form method="POST" onsubmit="event.preventDefault(); cancelBooking(this);">
+          <select class="form-select mb-3 cancel" name="id" id="id" required data-bs-toggle="popover"
       data-bs-placement="top">
-      <option value="none">Seleziona un libro</option>
+      <option value="">Seleziona un libro</option>
+              <?php if(isset($templateParams["prenotati"])):?>
               <?php foreach ($templateParams["prenotati"] as $booked):?>
                 <option value="<?php echo $booked["id"]?>">
                   <?php echo $booked["libro"]; ?> - <?php echo $booked["edizione"]; ?>° Edizione
                 </option>
                 <?php endforeach;?>
+              <?php else:?>
+               <option value = none>Non sei loggato</option>
+              <?php endif;?>
               </select>
-              <div id="validationServer03Feedback" class="invalid-feedback cancel">
+              <div id="validationServer02Feedback" class="invalid-feedback cancel">
               </div>
-              <input type="submit" class="btn btn-danger" value="Annulla Prenotazione"/>
+              <input <?php if (isset($_SESSION["email"])): echo 'type="submit"'; endif;?> class="btn btn-danger" value="Annulla Prenotazione"/>
         </form>
       </fieldset>
   </div>

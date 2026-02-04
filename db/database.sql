@@ -20,11 +20,9 @@ CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `nome` VARCHAR(30) NOT NULL,
   `cognome` VARCHAR(20) NOT NULL,
   `corso` VARCHAR(50) NOT NULL,
-  `attivo` int NOT NULL DEFAULT 0,
   `anno` int,
   `num_matricola` INT NOT NULL UNIQUE,
   `immagine_profilo` VARCHAR(100) NOT NULL,
-  `is_docente` INT DEFAULT 0,
   INDEX `idx_nome`(`cognome` ASC),
   PRIMARY KEY(`email`)
 ) Engine=InnoDB;

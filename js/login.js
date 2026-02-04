@@ -31,12 +31,12 @@ async function registration(formElement){
         switch(result.cause){
           case "general":
           loginInput = document.getElementById("emailReg");
-           feedback = document.querySelector(".invalid-feedback.registration");  
+           feedback = loginInput.parentElement.querySelector(".invalid-feedback");  
           ;
             break;
           case "utente":
            loginInput = document.getElementById("emailReg");
-           feedback = document.querySelector(".invalid-feedback.registration");  
+           feedback = loginInput.parentElement.querySelector(".invalid-feedback");  
           ;
             break;
           case "matricola":
@@ -46,6 +46,7 @@ async function registration(formElement){
             break;
         }
         loginInput.classList.add("is-invalid"); // Questo rende visibile il feedback
+        console.log(feedback);
         feedback.textContent = result.message;
     }
 }

@@ -513,6 +513,9 @@ class DatabaseHelper
 
   public function bookABook($email, $codice_libro, $data_inizio, $data_fine)
   {
+    if(date_sub($data_fine,$data_inizio)>31){
+      return "Non puoi prenotare un libro per più di un mese";
+    }
     $checkQuery = "SELECT id_prenotazioni FROM prenotazioni WHERE codice_libro = ? 
                    AND (data_inizio <= ? AND data_fine >= ?)";
     $stmtCheck = $this->db->prepare($checkQuery);
@@ -530,13 +533,6 @@ class DatabaseHelper
     if ($stmtCheck->get_result()->fetch_assoc()["num"] > 5) {
       return "Hai già prenotato 5 libri in questo periodo";
     }
-    $updateQuery = "UPDATE `libri` SET disponibile = 1 where `codice_libro` = ?";
-    $stmtUpd = $this->db->prepare($updateQuery);
-    $stmtUpd->bind_param('i', $codice_libro);
-    $stmtCheck->execute();
-    if (!$stmtCheck) {
-      return "Qualcosa è andato storto durante la prenotazione";
-    }
     $stmtCheck->close();
     $query = "INSERT INTO `prenotazioni` (`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES (?, ?, ?, ?);";
     $stmt = $this->db->prepare($query);
@@ -547,6 +543,7 @@ class DatabaseHelper
 
     if ($stmt->execute()) {
       $stmt->close();
+      $this->disponibilityUpdate($codice_libro);
       return true;
     } else {
       return "Errore tecnico durante il salvataggio.";

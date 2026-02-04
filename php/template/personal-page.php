@@ -80,29 +80,30 @@
                         <span class="badge text-bg-warning" id="add-course">Aggiungi
                             Corso</span><!--Link gestito da Js Apre una lista di corsi-->
 
-                        <dialog id="course-edit" class="modal-sm ">
+                        <dialog id="course-edit" class="modal-sm border-0 bg-dark-subtle ">
                             <h2>Add Course</h2>
                             <form method="POST" action="utilis/update_tags.php"
                             onsubmit="event.preventDefault(); updateTags(this);">
+                            <div class="btn-group-vertical d-block" role="group" aria-label="Basic checkbox toggle button group">
                                 <?php foreach ($templateParams["courses"] as $course): ?>
                                     <?php
                                     // Controlla che questo corso sia fra quelli già registrati
                                     $isChecked = in_array($course["nome_corso"], array_column($templateParams["tags"], 'nome_corso')) ? "checked" : "";
                                     if($isChecked!="checked"):
                                     ?>
-                                    <div class="form-check">
-                                        <input type="checkbox" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
+                                        <input type="checkbox" class="btn-check" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
                                             id="<?php echo $course["codice_corso"]; ?>">
 
-                                        <label for="<?php echo $course["codice_corso"]; ?>">
+                                        <label class="btn btn-outline-light text-black" for="<?php echo $course["codice_corso"]; ?>">
                                             <?php echo $course["nome_corso"]; ?>
                                         </label>
+                                        <?php endif;?>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <?php endif;?>
-                                <?php endforeach; ?>
-
-                                <input type="submit" class="btn btn-primary" value="Save Changes"/>
-                                <input type="button" class="btn btn-danger" value="Cancel" onclick=closeTagModal()>
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" class="btn btn-primary m-3 " value="Save Changes"/>
+                                    <input type="button" class="btn btn-danger m-3" value="Cancel" onclick=closeTagModal()>
+                                </div>
                             
                             </form>
                         </dialog>
