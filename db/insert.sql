@@ -1,12 +1,12 @@
 INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `num_matricola`,`immagine_profilo`) VALUES
-('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica',  1000000001,''),
-('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica',  1000000002,''),
-('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica',  1000000003,''),
-('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1000000004,''),
-('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 2000000001,''),
-('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 2000000002,''),
-('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 1000000005,''),
-('admin@university.it', SHA2('adminpw123',512),'admin','admin','admin',0000000000,'');
+('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica',  1000000001,'./uploads/default_avatar.png'),
+('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica',  1000000002,'./uploads/default_avatar.png'),
+('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica',  1000000003,'./uploads/default_avatar.png'),
+('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1000000004,'./uploads/default_avatar.png'),
+('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 2000000001,'./uploads/default_avatar.png'),
+('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 2000000002,'./uploads/default_avatar.png'),
+('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 1000000005,'./uploads/default_avatar.png'),
+('admin@university.it', SHA2('adminpw123',512),'admin','admin','admin',0000000000,'./uploads/default_avatar.png');
 
 INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `lingua`, `docente`) VALUES
 (101, 'Basi di Dati', 'Corso fondamentale sulle basi di dati e SQL', 'Italiano', 'John Smith'),

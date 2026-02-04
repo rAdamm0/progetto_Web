@@ -184,7 +184,7 @@ class DatabaseHelper
     }
     $stmt = $this->db->prepare($query);
     if ($pw != 0) {
-      $algo = "sha256";
+      $algo = "sha512";
       $hashed_pw = hash($algo, $pw);
       $stmt->bind_param('ss', $email, $hashed_pw);
     } else {
@@ -207,7 +207,7 @@ class DatabaseHelper
 
   public function registerUser($email, $pw, $nome, $cognome, $numero_matricola)
   {
-    $algo = "sha256";
+    $algo = "sha512";
     $hashed_pw = hash($algo, $pw);
     $query = "INSERT INTO utente(email, pw, nome, cognome, num_matricola, immagine_profilo) VALUES (?,?,?,?,?,\"./uploads/default_avatar.png\")";
     $stmt = $this->db->prepare($query);
@@ -531,9 +531,9 @@ class DatabaseHelper
 
   public function bookABook($email, $codice_libro, $data_inizio, $data_fine)
   {
-    if(date_sub($data_fine,$data_inizio)>31){
+    /*if(date_sub($data_fine,$data_inizio)>31){
       return "Non puoi prenotare un libro per più di un mese";
-    }
+    }*/
     $checkQuery = "SELECT id_prenotazioni FROM prenotazioni WHERE codice_libro = ? 
                    AND (data_inizio <= ? AND data_fine >= ?)";
     $stmtCheck = $this->db->prepare($checkQuery);

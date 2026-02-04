@@ -76,7 +76,7 @@ ON UPDATE CASCADE
 ON DELETE CASCADE,
 PRIMARY KEY(`id_prenotazioni`),
 INDEX `idx_chronological_order`(`data_inizio` DESC),
-CONSTRAINT chk_date CHECK (`data_inizio`<`data_fine`),
+CONSTRAINT chk_date CHECK (`data_inizio`<=`data_fine`),
 CONSTRAINT chk_duration CHECK(DATEDIFF(`data_fine`, `data_inizio`)<31)
 )Engine=InnoDB;
 

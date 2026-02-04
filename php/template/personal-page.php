@@ -6,7 +6,7 @@
             <!-- Immagine - in alto su mobile, destra su desktop -->
             <div class="col-12 col-md-4 order-first order-md-last text-center">
                 <div class="mb-4">
-                    <img src="<?php echo htmlspecialchars($templateParams["infos"][0]["immagine_profilo"]) ?>"
+                    <img src="<?php echo $templateParams["infos"][0]["immagine_profilo"] ?: './uploads/default_avatar.png'?>"
                         alt="Profile Image" class="rounded img-fluid ml-3 " style="object-fit: cover;">
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
                     <!--updateUserInfos($email, $nome, $cognome, $corso, $anno, $num_matricola, $immagine_profilo);-->
 
-                    <dialog id="editModal">
+                    <dialog id="editModal" class="modal-sm border-0 bg-light ">
                         <h2>Edit Profile</h2>
                         <form method="POST" action="utilis/update_profile.php"
                             onsubmit="event.preventDefault(); updateProfile(this);">
@@ -80,7 +80,7 @@
                         <span class="badge text-bg-warning" id="add-course">Aggiungi
                             Corso</span><!--Link gestito da Js Apre una lista di corsi-->
 
-                        <dialog id="course-edit" class="modal-sm border-0 bg-dark-subtle ">
+                        <dialog id="course-edit" class="modal-sm border-0 bg-light ">
                             <h2>Add Course</h2>
                             <form method="POST" action="utilis/update_tags.php"
                             onsubmit="event.preventDefault(); updateTags(this);">
@@ -94,7 +94,7 @@
                                         <input type="checkbox" class="btn-check" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
                                             id="<?php echo $course["codice_corso"]; ?>">
 
-                                        <label class="btn btn-outline-light text-black" for="<?php echo $course["codice_corso"]; ?>">
+                                        <label class="btn btn-outline-warning text-black" for="<?php echo $course["codice_corso"]; ?>">
                                             <?php echo $course["nome_corso"]; ?>
                                         </label>
                                         <?php endif;?>
