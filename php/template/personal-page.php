@@ -1,5 +1,5 @@
 <section class="mx-4">
-    <h1 class="mb-4 mx-auto text-center">About You</h1>
+    <h1 class="mb-4 mx-auto text-center">Bentornato <?php echo $templateParams["infos"][0]["nome"]?></h1>
     <div class="container">
         
         <div class="row">
@@ -10,7 +10,6 @@
                         alt="Profile Image" class="rounded img-fluid ml-3 " style="object-fit: cover;">
                 </div>
             </div>
-            <?php var_dump($templateParams)?>
             <!-- Lista - sotto l'immagine su mobile, sinistra su desktop -->
             <div class="col-12 col-md-8 order-last order-md-first">
                 <aside>
@@ -19,7 +18,6 @@
                             <?php echo $templateParams["infos"][0]["nome"] . " " . $templateParams["infos"][0]["cognome"] ?>
                         </li>
                         <li class="list-group-item">Corso: <?php echo $templateParams["infos"][0]["corso"] ?></li>
-                        <!--<li class="list-group-item">Eta': 23 anni</li>-->
                         <li class="list-group-item">Numero Matricola:
                             <?php echo str_pad($templateParams["infos"][0]["num_matricola"], 10, "0", STR_PAD_LEFT); ?>
                         </li>
@@ -54,13 +52,13 @@
                                 value="<?php echo htmlspecialchars($templateParams["infos"][0]["corso"]); ?>" required>
 
                             <label class="form-label">Anno:</label>
-                            <input type="text" name="anno" class="form-control mb-2"
+                            <input type="text" name="anno" class="form-control mb-3"
                                 value="<?php echo htmlspecialchars($templateParams["infos"][0]["anno"]); ?>" required>
 
 
-                            <label class="form-label ">Profile Picture:</label>
-                            <img id="profilePreview" src="uploads/default_avatar.png"
-                                style="width:100px; height:100px; border-radius:50%;" class="mb-2">
+                            <label class="form-label me-3">Profile Picture:</label>
+                            <img id="profilePreview" src="uploads/default_avatar.png" alt="Anteprima Immagine Profilo"
+                                style="width:100px; height:100px;" class="mb-3 object-fit-contain">
                             <input type="file" name="profile_pic" class="form-control mb-2"
                                 onchange="previewImage(event)" accept="image/*">
                             <input type="hidden" name="current_image_hidden"
@@ -82,29 +80,30 @@
                         <span class="badge text-bg-warning" id="add-course">Aggiungi
                             Corso</span><!--Link gestito da Js Apre una lista di corsi-->
 
-                        <dialog id="course-edit" class="modal-sm ">
+                        <dialog id="course-edit" class="modal-sm border-0 bg-dark-subtle ">
                             <h2>Add Course</h2>
                             <form method="POST" action="utilis/update_tags.php"
                             onsubmit="event.preventDefault(); updateTags(this);">
+                            <div class="btn-group-vertical d-block" role="group" aria-label="Basic checkbox toggle button group">
                                 <?php foreach ($templateParams["courses"] as $course): ?>
                                     <?php
                                     // Controlla che questo corso sia fra quelli già registrati
                                     $isChecked = in_array($course["nome_corso"], array_column($templateParams["tags"], 'nome_corso')) ? "checked" : "";
                                     if($isChecked!="checked"):
                                     ?>
-                                    <div class="form-check">
-                                        <input type="checkbox" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
-                                            id="<?php echo $course["nome_corso"]; ?>">
+                                        <input type="checkbox" class="btn-check" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
+                                            id="<?php echo $course["codice_corso"]; ?>">
 
-                                        <label for="<?php echo $course["nome_corso"]; ?>">
+                                        <label class="btn btn-outline-light text-black" for="<?php echo $course["codice_corso"]; ?>">
                                             <?php echo $course["nome_corso"]; ?>
                                         </label>
+                                        <?php endif;?>
+                                        <?php endforeach; ?>
                                     </div>
-                                    <?php endif;?>
-                                <?php endforeach; ?>
-
-                                <input type="submit" class="btn btn-primary" value="Save Changes"/>
-                                <input type="button" class="btn btn-danger" value="Cancel" onclick=closeTagModal()>
+                                <div class="d-flex justify-content-center">
+                                    <input type="submit" class="btn btn-primary m-3 " value="Save Changes"/>
+                                    <input type="button" class="btn btn-danger m-3" value="Cancel" onclick=closeTagModal()>
+                                </div>
                             
                             </form>
                         </dialog>
@@ -119,7 +118,7 @@
 <!--Elenco Passate Prenotazioni-->
 <div>
     <h2>Prenotazioni</h2>
-    <table class="table mh-100 overflow-auto">
+    <table class="table  mh-100 overflow-auto">
         <thead>
             <tr>
                 <th scope="col">Libro</th>
@@ -132,7 +131,7 @@
             <?php if (array_key_exists("bookings", $templateParams)): ?>
                 <?php foreach ($templateParams["bookings"] as $booking): ?>
                     <tr>
-                        <td scope="row"><?php echo $booking["nome_libro"] ?></td>
+                        <td><?php echo $booking["nome_libro"] ?></td>
                         <td><?php echo $booking["autori"] ?></td>
                         <td><?php echo $booking["data_inizio"] ?></td>
                         <td><?php echo $booking["data_fine"] ?></td>

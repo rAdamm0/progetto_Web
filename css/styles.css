@@ -1,0 +1,61 @@
+.fc-content{
+  text-align: center;
+  
+}
+
+a{
+  text-decoration: none;
+}
+
+button>a{
+  color:#000;
+}
+
+.badge:not(.disp){
+  cursor: pointer;
+}
+
+.disp{
+  cursor:default;
+}
+
+.ratio-6x9 {
+  --bs-aspect-ratio: 150%; 
+}
+
+div>ul>li>ul>li>a:hover{
+  background: #555555 !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/*h1 { font-family: "Playfair Display"; font-size: 23px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; } 
+h2 { font-family: "Playfair Display"; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; } 
+p { font-family: "Playfair Display"; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; } 
+blockquote { font-family: "Playfair Display"; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; } 
+pre { font-family: "Playfair Display"; font-size: 11px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; }
+*/
+
+@media (min-width: 768px) {
+    .border-md-end {
+        border-right: 1px solid #dee2e6 !important;
+    }
+    
+}
+
+@media(max-width:768px){
+.ratio-6x9{
+      max-width: 20%;
+    }
+}

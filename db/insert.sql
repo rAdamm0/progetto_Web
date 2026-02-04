@@ -1,11 +1,12 @@
-INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `attivo`, `num_matricola`,`immagine_profilo`, `is_docente`) VALUES
-('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica', 1, 100001,'', 0),
-('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica', 1, 100002,'', 0),
-('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica', 1, 100003,'', 0),
-('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1, 100004,'', 0),
-('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 1, 200001,'', 1),
-('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 1, 200002,'', 1),
-('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 0, 100005,'', 0);
+INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `num_matricola`,`immagine_profilo`) VALUES
+('mario.rossi@university.it', SHA2('password123', 512), 'Mario', 'Rossi', 'Informatica',  1000000001,''),
+('laura.bianchi@university.it', SHA2('password123', 512), 'Laura', 'Bianchi', 'Matematica',  1000000002,''),
+('giuseppe.verdi@university.it', SHA2('password123', 512), 'Giuseppe', 'Verdi', 'Fisica',  1000000003,''),
+('anna.russo@university.it', SHA2('password123', 512), 'Anna', 'Russo', 'Informatica', 1000000004,''),
+('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 2000000001,''),
+('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 2000000002,''),
+('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 1000000005,''),
+('admin@university.it', SHA2('adminpw123',512),'admin','admin','admin',0000000000,'');
 
 INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `lingua`, `docente`) VALUES
 (101, 'Basi di Dati', 'Corso fondamentale sulle basi di dati e SQL', 'Italiano', 'John Smith'),
@@ -16,15 +17,15 @@ INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `ling
 (201, 'Advanced Databases', 'Advanced database concepts and NoSQL', 'English', 'John Smith');
 
 INSERT INTO `weblio`.`libri` 
-(`codice_libro`, `nome_libro`, `edizione`, `data_uscita`, `descrizione`, `disponibile`) VALUES
-(1, 'Basi di Dati: Concetti e Linguaggi', 5, 2018, 'Manuale introduttivo e avanzato sui concetti fondamentali delle basi di dati relazionali.', 0),
-(2, 'Analisi Matematica 1', 8, 2016, 'Testo universitario di riferimento per lo studio dei limiti, derivate e integrali.', 0),
-(3, 'Fisica Generale: Meccanica e Termodinamica', 4, 2014, 'Volume dedicato alla meccanica classica e ai principi di termodinamica.', 1),
-(4, 'Programmazione Java Avanzata', 3, 2019, 'Guida alla programmazione avanzata in Java con esempi su OOP e pattern.', 1),
-(5, 'Algebra Lineare e Geometria', 6, 2015, 'Libro che tratta vettori, matrici, spazi vettoriali e geometria analitica.', 0),
-(6, 'Database System Concepts', 7, 2020, 'Classico testo in inglese sulla progettazione e gestione dei database.', 1),
-(7, 'Calcolo Differenziale e Integrale', 2, 2013, 'Introduzione al calcolo differenziale e integrale con numerosi esercizi.', 0),
-(8, 'Fisica: Elettromagnetismo e Onde', 3, 2017, 'Volume dedicato ai campi elettrici, magnetici e alla propagazione delle onde.', 0);
+(`codice_libro`, `nome_libro`, `edizione`, `data_uscita`, `descrizione`, `disponibile`, `immagine_libro`) VALUES
+(1, 'Basi di Dati: Concetti e Linguaggi', 5, 2018, 'Manuale introduttivo e avanzato sui concetti fondamentali delle basi di dati relazionali.', 0,'base_di_dati.png'),
+(2, 'Analisi Matematica 1', 8, 2016, 'Testo universitario di riferimento per lo studio dei limiti, derivate e integrali.', 0, 'analisi_matematica.png'),
+(3, 'Fisica Generale: Meccanica e Termodinamica', 4, 2014, 'Volume dedicato alla meccanica classica e ai principi di termodinamica.', 1, 'fisica_generale.jpg'),
+(4, 'Programmazione Java Avanzata', 3, 2019, 'Guida alla programmazione avanzata in Java con esempi su OOP e pattern.', 1,'OOP.jpg'),
+(5, 'Algebra Lineare e Geometria', 6, 2015, 'Libro che tratta vettori, matrici, spazi vettoriali e geometria analitica.', 0,'algebra_e_geometria.jpg'),
+(6, 'Database System Concepts', 7, 2020, 'Classico testo in inglese sulla progettazione e gestione dei database.', 1,'database.jpeg'),
+(7, 'Calcolo Differenziale e Integrale', 2, 2013, 'Introduzione al calcolo differenziale e integrale con numerosi esercizi.', 0, 'calcolo_diff.jpg'),
+(8, 'Fisica: Elettromagnetismo e Onde', 3, 2017, 'Volume dedicato ai campi elettrici, magnetici e alla propagazione delle onde.', 0, 'fisica_elettr.jpg');
 
 INSERT INTO `weblio`.`libro_corso` (`codice_libro`, `codice_corso`) VALUES
 (1, 101),
@@ -75,23 +76,19 @@ INSERT INTO `weblio`.`recensione` (`email`, `codice_libro`, `valutazione`, `desc
 ('mario.rossi@university.it', 6, 4, 'Ottimo per database avanzati, richiede buone basi preliminari');
 
 INSERT INTO `weblio`.`utente_corso` (`email`, `codice_corso`) VALUES
--- Mario Rossi (Informatica)
-('mario.rossi@university.it', 101), -- Basi di Dati
-('mario.rossi@university.it', 104), -- Programmazione Java
--- Laura Bianchi (Matematica)
-('laura.bianchi@university.it', 102), -- Analisi Matematica 1
-('laura.bianchi@university.it', 105), -- Algebra Lineare
--- Giuseppe Verdi (Fisica)
-('giuseppe.verdi@university.it', 103), -- Fisica Generale
--- Anna Russo (Informatica)
-('anna.russo@university.it', 101), -- Basi di Dati
-('anna.russo@university.it', 104), -- Programmazione Java
-('anna.russo@university.it', 201), -- Advanced Databases (inglese)
--- Docenti
-('prof.smith@university.it', 101), -- John Smith insegna Basi di Dati
-('prof.smith@university.it', 104), -- John Smith insegna Programmazione Java
-('prof.smith@university.it', 201), -- John Smith insegna Advanced Databases
-('prof.rossi@university.it', 102), -- Paolo Rossi insegna Analisi Matematica 1
-('prof.rossi@university.it', 105), -- Paolo Rossi insegna Algebra Lineare
--- Elena Ferrari (Fisica - utente non attivo)
-('elena.ferrari@university.it', 103); -- Fisica Generale
+('mario.rossi@university.it', 101),
+('mario.rossi@university.it', 104),
+('laura.bianchi@university.it', 102),
+('laura.bianchi@university.it', 105),
+('giuseppe.verdi@university.it', 103),
+('anna.russo@university.it', 101),
+('anna.russo@university.it', 104),
+('anna.russo@university.it', 201),
+('prof.smith@university.it', 101),
+('prof.smith@university.it', 104),
+('prof.smith@university.it', 201),
+('prof.rossi@university.it', 102),
+('prof.rossi@university.it', 105),
+('elena.ferrari@university.it', 103);
+
+INSERT INTO config (last_date) VALUES (CURDATE());

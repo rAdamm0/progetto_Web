@@ -54,20 +54,14 @@ $(document).ready(function () {
 
 
 function createEvent(date) {
-  const start = document.querySelector("#data-inizio");
   const end = document.querySelector("#data-fine");
-  if (document.activeElement == start) {
-    start.value = date.format();
-  }
-  if (document.activeElement == end) {
     end.value = date.format();
-  }
 }
 
 function createSelection(startDate, endDate) {
-  const start = document.querySelector("#data-inizio");
-  const end = document.querySelector("#data-fine");
-  start.value = startDate.format();
+  //const start = document.querySelector("#data-inizio");
+  const end = document.getElementById("data-fine");
+  //start.value = startDate.format();
   end.value = endDate.format();
 }
 
@@ -79,12 +73,43 @@ async function addBooking(formElement) {
   });
   const result = await response.json();
   if (result.success) {
-    alert("Libro Prenotato con Successo!");
+    await showSweetAlert();
     location.reload();  
   } else {
     console.error("Server Error: ", result.message);
     const libroSelect = document.querySelector("#libro");
     const feedback = document.querySelector(".invalid-feedback");
+
+    libroSelect.classList.add("is-invalid"); // Questo rende visibile il feedback
+    feedback.textContent = result.message;
+  }
+}
+
+ function showSweetAlert() {
+            window.alert = function () { };
+
+           return Swal.fire({
+                title: 'Prenotazione Completata',
+                text: 'Libro prenotato con successo!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        }
+
+async function cancelBooking(formElement){
+  const formData = new FormData(formElement);
+  const response = await fetch('utilis/cancelBook.php',{
+    method : 'POST',
+    body : formData
+  });
+  const result = await response.json();
+  if(result.success){
+    alert("Prenotazione Cancellata");
+    location.reload();
+  }else{
+    console.error("Server Error: ", result.message);
+    const libroSelect = document.querySelector("#id");
+    const feedback = document.querySelector(".invalid-feedback.cancel");
 
     libroSelect.classList.add("is-invalid"); // Questo rende visibile il feedback
     feedback.textContent = result.message;

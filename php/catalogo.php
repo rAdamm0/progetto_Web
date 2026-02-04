@@ -1,6 +1,6 @@
 <?php
     require_once("db/Bootstrap.php");
-    $templateParams["Titolo"] = "WebLio";
+    $templateParams["titolo"] = "WebLio - Catalogo";
     $q = isset($_GET["q"]) ? trim($_GET["q"]) : "";
     $course = isset($_GET["course"]) ? (int) $_GET["course"] : 0;
     $templateParams["h1"] = "Catalogo libri";

@@ -94,3 +94,5 @@ async function updateTags(formElement){
   fetch('utilis/logout.php',{method:'POST', credentials: 'include'});
     location.replace('personal.php');
 }
+
+

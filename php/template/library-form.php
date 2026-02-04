@@ -47,9 +47,9 @@
 
               <td>
                   <?php if ($libro["disponibile"] == 0): ?>
-                      <span class="badge bg-success">Disponibile</span>
+                      <span class="badge bg-success disp">Disponibile</span>
                   <?php else: ?>
-                      <span class="badge bg-danger">Non disponibile</span>
+                      <span class="badge bg-danger disp">Non disponibile</span>
                   <?php endif; ?>
               </td>
           </tr>
