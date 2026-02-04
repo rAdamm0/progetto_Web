@@ -6,7 +6,12 @@ INSERT INTO `weblio`.`utente` (`email`, `pw`, `nome`, `cognome`, `corso`, `num_m
 ('prof.smith@university.it', SHA2('prof123', 512), 'John', 'Smith', 'Informatica', 2000000001,'./uploads/default_avatar.png'),
 ('prof.rossi@university.it', SHA2('prof123', 512), 'Paolo', 'Rossi', 'Matematica', 2000000002,'./uploads/default_avatar.png'),
 ('elena.ferrari@university.it', SHA2('password123', 512), 'Elena', 'Ferrari', 'Fisica', 1000000005,'./uploads/default_avatar.png'),
-('admin@university.it', SHA2('adminpw123',512),'admin','admin','admin',0000000000,'./uploads/default_avatar.png');
+('admin@university.it', SHA2('adminpw123',512),'admin','admin','admin',0000000000,'./uploads/default_avatar.png'),
+('luca.conti@university.it', SHA2('password123', 512), 'Luca', 'Conti', 'Ingegneria Informatica', 100000006, './uploads/default_avatar.png'),
+('martina.galli@university.it', SHA2('password123', 512), 'Martina', 'Galli', 'Ingegneria Informatica', 100000007, './uploads/default_avatar.png'),
+('andrea.moretti@university.it', SHA2('password123', 512), 'Andrea', 'Moretti', 'Scienze Informatiche', 100000008, './uploads/default_avatar.png'),
+('chiara.romano@university.it', SHA2('password123', 512), 'Chiara', 'Romano', 'Scienze Informatiche', 100000009, './uploads/default_avatar.png'),
+('federico.lombardi@university.it', SHA2('password123', 512), 'Federico', 'Lombardi', 'Ingegneria Informatica', 100000010, './uploads/default_avatar.png');
 
 INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `lingua`, `docente`) VALUES
 (101, 'Basi di Dati', 'Corso fondamentale sulle basi di dati e SQL', 'Italiano', 'John Smith'),
@@ -14,7 +19,12 @@ INSERT INTO `weblio`.`corsi` (`codice_corso`, `nome_corso`, `descrizione`, `ling
 (103, 'Fisica Generale', 'Principi fondamentali della fisica classica', 'Italiano', 'Maria Bianchi'),
 (104, 'Programmazione Java', 'Corso avanzato di programmazione in Java', 'Italiano', 'John Smith'),
 (105, 'Algebra Lineare', 'Corso di algebra lineare e geometria', 'Italiano', 'Paolo Rossi'),
-(201, 'Advanced Databases', 'Advanced database concepts and NoSQL', 'English', 'John Smith');
+(201, 'Advanced Databases', 'Advanced database concepts and NoSQL', 'English', 'John Smith'),
+(301, 'Ingegneria del Software', 'Principi e metodologie per lo sviluppo di software complesso', 'Italiano', 'John Smith'),
+(302, 'Sistemi Operativi', 'Gestione delle risorse e architettura dei sistemi operativi', 'Italiano', 'Paolo Rossi'),
+(303, 'Reti di Calcolatori', 'Protocolli di rete e architetture distribuite', 'Italiano', 'John Smith'),
+(304, 'Algoritmi e Strutture Dati', 'Algoritmi fondamentali e strutture dati efficienti', 'Italiano', 'Paolo Rossi'),
+(305, 'Intelligenza Artificiale', 'Fondamenti di AI e machine learning', 'English', 'John Smith');
 
 INSERT INTO `weblio`.`libri` 
 (`codice_libro`, `nome_libro`, `edizione`, `data_uscita`, `descrizione`, `disponibile`, `immagine_libro`) VALUES
@@ -25,7 +35,18 @@ INSERT INTO `weblio`.`libri`
 (5, 'Algebra Lineare e Geometria', 6, 2015, 'Libro che tratta vettori, matrici, spazi vettoriali e geometria analitica.', 0,'algebra_e_geometria.jpg'),
 (6, 'Database System Concepts', 7, 2020, 'Classico testo in inglese sulla progettazione e gestione dei database.', 1,'database.jpeg'),
 (7, 'Calcolo Differenziale e Integrale', 2, 2013, 'Introduzione al calcolo differenziale e integrale con numerosi esercizi.', 0, 'calcolo_diff.jpg'),
-(8, 'Fisica: Elettromagnetismo e Onde', 3, 2017, 'Volume dedicato ai campi elettrici, magnetici e alla propagazione delle onde.', 0, 'fisica_elettr.jpg');
+(8, 'Fisica: Elettromagnetismo e Onde', 3, 2017, 'Volume dedicato ai campi elettrici, magnetici e alla propagazione delle onde.', 0, 'fisica_elettr.jpg'),
+(9, 'Ingegneria del Software', 9, 2019, 'Testo completo sui processi di sviluppo software, requisiti, progettazione e testing.', 1, ''),
+(10, 'Design Patterns', 1, 1994, 'Catalogo dei principali pattern di progettazione orientati agli oggetti.', 1, ''),
+(11, 'Sistemi Operativi Moderni', 4, 2018, 'Studio approfondito dei sistemi operativi moderni: processi, memoria e file system.', 1, ''),
+(12, 'Operating System Concepts', 10, 2020, 'Libro di riferimento internazionale sui concetti fondamentali dei sistemi operativi.', 0, ''),
+(13, 'Reti di Calcolatori', 6, 2017, 'Introduzione alle reti di calcolatori e ai protocolli TCP/IP.', 1, ''),
+(14, 'Computer Networking: A Top-Down Approach', 8, 2021, 'Approccio top-down allo studio delle reti di computer e Internet.', 1, ''),
+(15, 'Algoritmi e Strutture Dati', 5, 2016, 'Algoritmi classici, strutture dati e analisi della complessità.', 1, ''),
+(16, 'Introduction to Algorithms', 3, 2022, 'Testo avanzato sugli algoritmi e sulla loro analisi computazionale.', 0, ''),
+(17, 'Intelligenza Artificiale: Un Approccio Moderno', 4, 2020, 'Panoramica completa sull''intelligenza artificiale e i suoi algoritmi fondamentali.', 1, ''),
+(18, 'Machine Learning', 1, 2018, 'Introduzione teorica e pratica al machine learning.', 1, '');
+
 
 INSERT INTO `weblio`.`libro_corso` (`codice_libro`, `codice_corso`) VALUES
 (1, 101),
@@ -36,7 +57,17 @@ INSERT INTO `weblio`.`libro_corso` (`codice_libro`, `codice_corso`) VALUES
 (8, 103),
 (4, 104),
 (5, 105),
-(6, 201);
+(6, 201),
+(9, 301),
+(10, 301),
+(11, 302),
+(12, 302),
+(13, 303),
+(14, 303),
+(15, 304),
+(16, 304),
+(17, 305),
+(18, 305);
 
 INSERT INTO `weblio`.`autori` (`codice_autore`, `nome_autore`, `cognome_autore`, `descrizione`) VALUES
 (1, 'Carlo', 'Bianchi', 'Professore di Informatica con 20 anni di esperienza'),
@@ -46,7 +77,23 @@ INSERT INTO `weblio`.`autori` (`codice_autore`, `nome_autore`, `cognome_autore`,
 (5, 'Sarah', 'Johnson', 'Professore di Algebra presso MIT'),
 (6, 'Abraham', 'Silberschatz', 'Co-autore di Database System Concepts'),
 (7, 'Henry', 'Korth', 'Co-autore di Database System Concepts'),
-(8, 'S.', 'Sudarshan', 'Co-autore di Database System Concepts');
+(8, 'S.', 'Sudarshan', 'Co-autore di Database System Concepts'),
+(9, 'Ian', 'Sommerville', 'Autore di riferimento nel campo dell ingegneria del software'),
+(10, 'Erich', 'Gamma', 'Co-autore del libro Design Patterns'),
+(11, 'Richard', 'Helm', 'Co-autore del libro Design Patterns'),
+(12, 'Ralph', 'Johnson', 'Co-autore del libro Design Patterns'),
+(13, 'John', 'Vlissides', 'Co-autore del libro Design Patterns'),
+(14, 'Andrew', 'Tanenbaum', 'Esperto internazionale di sistemi operativi e reti'),
+(15, 'Herbert', 'Bos', 'Ricercatore nel campo dei sistemi operativi'),
+(16, 'James', 'Kurose', 'Autore di testi universitari sulle reti di calcolatori'),
+(17, 'Keith', 'Ross', 'Co-autore di libri sulle reti di computer'),
+(18, 'Thomas', 'Cormen', 'Co-autore del celebre testo Introduction to Algorithms'),
+(19, 'Charles', 'Leiserson', 'Co-autore del celebre testo Introduction to Algorithms'),
+(20, 'Ronald', 'Rivest', 'Co-autore del celebre testo Introduction to Algorithms'),
+(21, 'Clifford', 'Stein', 'Co-autore del celebre testo Introduction to Algorithms'),
+(22, 'Stuart', 'Russell', 'Autore di testi fondamentali di intelligenza artificiale'),
+(23, 'Peter', 'Norvig', 'Co-autore di testi di intelligenza artificiale'),
+(24, 'Tom', 'Mitchell', 'Ricercatore e autore nel campo del machine learning');
 
 INSERT INTO `weblio`.`autore_libro` (`codice_autore`, `codice_libro`) VALUES
 (1, 1),
@@ -58,7 +105,27 @@ INSERT INTO `weblio`.`autore_libro` (`codice_autore`, `codice_libro`) VALUES
 (7, 6),
 (8, 6),
 (2, 7),
-(3, 8);
+(3, 8),
+(9, 9),
+(10, 10),
+(11, 10),
+(12, 10),
+(13, 10),
+(14, 11),
+(15, 11),
+(14, 12),
+(16, 13),
+(17, 13),
+(16, 14),
+(17, 14),
+(18, 16),
+(19, 16),
+(20, 16),
+(21, 16),
+(18, 15),
+(22, 17),
+(23, 17),
+(24, 18);
 
 INSERT INTO `weblio`.`prenotazioni` (`id_prenotazioni`,`email`, `codice_libro`, `data_inizio`, `data_fine`) VALUES
 (1,'mario.rossi@university.it', 1, '2024-01-15', '2024-02-10'),
@@ -69,26 +136,53 @@ INSERT INTO `weblio`.`prenotazioni` (`id_prenotazioni`,`email`, `codice_libro`, 
 (6,'laura.bianchi@university.it', 5, '2024-02-15', '2024-02-25');
 
 INSERT INTO `weblio`.`recensione` (`email`, `codice_libro`, `valutazione`, `descrizione`) VALUES
-('mario.rossi@university.it', 1, 5, 'Libro eccellente, molto chiaro negli esempi'),
-('laura.bianchi@university.it', 2, 4, 'Buon testo, ma alcuni argomenti potrebbero essere spiegati meglio'),
-('giuseppe.verdi@university.it', 3, 3, 'Testo completo ma a volte troppo tecnico'),
-('anna.russo@university.it', 4, 5, 'Perfetto per chi vuole approfondire Java'),
-('mario.rossi@university.it', 6, 4, 'Ottimo per database avanzati, richiede buone basi preliminari');
+('luca.conti@university.it', 9, 5, 'Libro fondamentale per comprendere tutto il ciclo di vita del software'),
+('martina.galli@university.it', 9, 4, 'Molto completo, ma richiede una buona base iniziale'),
+('andrea.moretti@university.it', 10, 5, 'Pattern spiegati in modo chiaro e con esempi intramontabili'),
+('chiara.romano@university.it', 11, 4, 'Ottimo testo, denso ma molto formativo'),
+('luca.conti@university.it', 12, 5, 'Libro impegnativo ma estremamente completo'),
+('martina.galli@university.it', 13, 4, 'Buona introduzione alle reti e ai protocolli principali'),
+('andrea.moretti@university.it', 14, 5, 'Approccio top-down davvero efficace e intuitivo'),
+('chiara.romano@university.it', 15, 4, 'Spiegazioni chiare con ottimi esempi'),
+('luca.conti@university.it', 16, 5, 'Testo avanzato ma imprescindibile per chi studia algoritmi'),
+('andrea.moretti@university.it', 17, 5, 'Panoramica completa e ben strutturata sull AI moderna'),
+('martina.galli@university.it', 18, 4, 'Ottima introduzione pratica al machine learning'),
+('anna.russo@university.it', 1, 5, 'Uno dei migliori libri per imparare le basi dei database'),
+('federico.lombardi@university.it', 4, 4, 'Ottimo testo per approfondire Java e OOP'),
+('elena.ferrari@university.it', 8, 4, 'Libro chiaro e ben strutturato sui campi elettromagnetici');
 
 INSERT INTO `weblio`.`utente_corso` (`email`, `codice_corso`) VALUES
 ('mario.rossi@university.it', 101),
 ('mario.rossi@university.it', 104),
-('laura.bianchi@university.it', 102),
-('laura.bianchi@university.it', 105),
-('giuseppe.verdi@university.it', 103),
+('mario.rossi@university.it', 301),
 ('anna.russo@university.it', 101),
 ('anna.russo@university.it', 104),
 ('anna.russo@university.it', 201),
+('anna.russo@university.it', 301),
+('laura.bianchi@university.it', 102),
+('laura.bianchi@university.it', 105),
+('giuseppe.verdi@university.it', 103),
+('elena.ferrari@university.it', 103),
+('luca.conti@university.it', 301),
+('luca.conti@university.it', 302),
+('luca.conti@university.it', 303),
+('martina.galli@university.it', 301),
+('martina.galli@university.it', 304),
+('martina.galli@university.it', 305),
+('andrea.moretti@university.it', 301),
+('andrea.moretti@university.it', 304),
+('andrea.moretti@university.it', 305),
+('chiara.romano@university.it', 301),
+('chiara.romano@university.it', 302),
+('chiara.romano@university.it', 304),
 ('prof.smith@university.it', 101),
 ('prof.smith@university.it', 104),
 ('prof.smith@university.it', 201),
+('prof.smith@university.it', 301),
+('prof.smith@university.it', 303),
+('prof.smith@university.it', 305),
 ('prof.rossi@university.it', 102),
 ('prof.rossi@university.it', 105),
-('elena.ferrari@university.it', 103);
-
+('prof.rossi@university.it', 302),
+('prof.rossi@university.it', 304);
 INSERT INTO config (last_date) VALUES (CURDATE());

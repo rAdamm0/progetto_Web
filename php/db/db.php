@@ -13,7 +13,12 @@ class DatabaseHelper
 
   public function getAvailableBooks($n = -1)
   {
-    $query = "SELECT l.*, a.codice_autore, a.nome_autore, a.cognome_autore, CONCAT(a.nome_autore, ' ', a.cognome_autore) AS autore_completo FROM libri l LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro LEFT JOIN autori a ON al.codice_autore = a.codice_autore ORDER BY l.nome_libro";
+    $query = "SELECT l.*,GROUP_CONCAT(DISTINCT CONCAT(a.nome_autore, ' ', a.cognome_autore) ORDER BY a.cognome_autore, a.nome_autore SEPARATOR ', ') AS autori
+              FROM libri l
+              LEFT JOIN autore_libro al ON l.codice_libro = al.codice_libro
+              LEFT JOIN autori a ON al.codice_autore = a.codice_autore
+              GROUP BY l.codice_libro
+              ORDER BY l.nome_libro";
     if ($n > 0) {
       $query .= " LIMIT ?";
     }
