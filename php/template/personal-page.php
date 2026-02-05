@@ -75,10 +75,10 @@
                         <!--Ognuno di questi badge avrà una funzionalità Js in cui onClick verrà eliminato e mandato una query deleteTagByEmail-->
                         <?php foreach ($templateParams["tags"] as $pill): ?>
 
-                            <span class="badge text-bg-secondary coursePill" id="<?php echo $pill["codice_corso"] ?>"><?php echo $pill["nome_corso"] ?></span>
+                            <button class="badge text-bg-secondary coursePill border-0" id="<?php echo $pill["codice_corso"] ?>"><?php echo $pill["nome_corso"] ?></button>
                         <?php endforeach; ?>
-                        <span class="badge text-bg-warning" id="add-course">Aggiungi
-                            Corso</span><!--Link gestito da Js Apre una lista di corsi-->
+                        <button class="badge text-bg-warning border-0" id="add-course" >Aggiungi
+                            Corso</button><!--Link gestito da Js Apre una lista di corsi-->
 
                         <dialog id="course-edit" class="modal-sm border-0 bg-light w-50">
                             <h2 class="text-center">Aggiungi Corso/i</h2>

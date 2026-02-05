@@ -88,6 +88,7 @@
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Se disponibilie clicca il tasto prenota</span></li>
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Visualizza il <a href="prenotazioni.php">calendario</a> e clicca su una data per selezionarla come ultimo giorno della prenotazione</span></li>
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Clicca il pulsante prenota e il libro ti verra inviato direttamente sulla tua mail!</span></li>
+            <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Puoi inoltre annullare la prenotazione, ma avrai disponibilità fino alla fine del giorno!</span></li>
         </ol>
     </div>
 </section>
