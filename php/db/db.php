@@ -385,7 +385,7 @@ class DatabaseHelper
     return $stmt->execute();
   }
   public function deleteAuthor($idAuthor){
-    $query = "DELETE FROM autore WHERE codice_autore = ?";
+    $query = "DELETE FROM autori WHERE codice_autore = ?";
     $stmt = $this->db->prepare($query);
     $stmt->bind_param("i",$idAuthor);
     return $stmt->execute();
@@ -441,8 +441,8 @@ class DatabaseHelper
   public function addCourse(int $codiceCorso,
                             string $nomeCorso,
                             string $descrizione,
-                            string $lingua = 'Italiano',
-                            string $docente){
+                            string $docente,
+                            string $lingua = 'Italiano'){
     $query = "INSERT INTO corsi (codice_corso, nome_corso, descrizione, lingua, docente)
               VALUES (?, ?, ?, ?, ?)";
     $stmt = $this->db->prepare($query);

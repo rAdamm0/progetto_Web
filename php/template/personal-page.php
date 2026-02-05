@@ -49,11 +49,11 @@
 
                             <label class="form-label">Corso:</label>
                             <input type="text" name="corso" class="form-control mb-2"
-                                value="<?php echo htmlspecialchars($templateParams["infos"][0]["corso"]); ?>" required>
+                                value="<?php echo htmlspecialchars(!empty($templateParams["infos"][0]["corso"]) ? $templateParams["infos"][0]["corso"] : ""); ?>" required>
 
                             <label class="form-label">Anno:</label>
                             <input type="text" name="anno" class="form-control mb-3"
-                                value="<?php echo htmlspecialchars($templateParams["infos"][0]["anno"]); ?>" required>
+                                value="<?php echo htmlspecialchars(!empty($templateParams["infos"][0]["anno"]) ? $templateParams["infos"][0]["anno"] : ""); ?>" required>
 
 
                             <label class="form-label me-3">Profile Picture:</label>
@@ -80,8 +80,8 @@
                         <span class="badge text-bg-warning" id="add-course">Aggiungi
                             Corso</span><!--Link gestito da Js Apre una lista di corsi-->
 
-                        <dialog id="course-edit" class="modal-sm border-0 bg-light ">
-                            <h2>Add Course</h2>
+                        <dialog id="course-edit" class="modal-sm border-0 bg-light w-50">
+                            <h2 class="text-center">Aggiungi Corso/i</h2>
                             <form method="POST" action="utilis/update_tags.php"
                             onsubmit="event.preventDefault(); updateTags(this);">
                             <div class="btn-group-vertical d-block" role="group" aria-label="Basic checkbox toggle button group">
@@ -143,5 +143,5 @@
 </div>
 
 <hr class="hr my-4" />
-<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie("PHPSESSID")></span>
+<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie()></span>
                 </section>

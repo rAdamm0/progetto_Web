@@ -185,4 +185,5 @@ INSERT INTO `weblio`.`utente_corso` (`email`, `codice_corso`) VALUES
 ('prof.rossi@university.it', 105),
 ('prof.rossi@university.it', 302),
 ('prof.rossi@university.it', 304);
-INSERT INTO config (last_date) VALUES (CURDATE());
+
+INSERT INTO `weblio`.`config` (last_date) VALUES (CURDATE());

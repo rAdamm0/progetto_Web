@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `weblio`.`utente`(
   `pw` VARCHAR(512) NOT NULL,
   `nome` VARCHAR(30) NOT NULL,
   `cognome` VARCHAR(20) NOT NULL,
-  `corso` VARCHAR(50) NOT NULL,
+  `corso` VARCHAR(50),
   `anno` int,
   `num_matricola` INT NOT NULL UNIQUE,
   `immagine_profilo` VARCHAR(100) NOT NULL,
@@ -178,7 +178,7 @@ END$$
 
 DELIMITER ;
 
-CREATE VIEW `Prenotazioni Passate` AS
+CREATE VIEW `prenotazioni passate` AS
 SELECT p.id_prenotazioni,u.email,l.nome_libro, l.edizione, p.data_inizio, p.data_fine, GROUP_CONCAT(a.cognome_autore SEPARATOR ",") AS autori 
 FROM prenotazioni p join libri l on p.codice_libro = l.codice_libro join autore_libro al on l.codice_libro = al.codice_libro join autori a on al.codice_autore = a.codice_autore join utente u on p.email = u.email 
 WHERE p.data_fine<>'' 

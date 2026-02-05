@@ -78,8 +78,8 @@
 <section class="container my-5 bg-dark p-5 rounded text-white text-center position-relative overflow-hidden">
     <h2 class="mb-4 fw-bold" id="infos">Come funziona</h2>
     <div class="mx-auto d-inline-block">
-        <img src="../php/uploads/service/calendar.jpg" class="img-decorativa1" style="width: 200px;" alt="Descrizione">
-        <img src="../php/uploads/service/inbox.png" class="img-decorativa2" style="width: 200px;" alt="Descrizione">
+        <img src="../php/uploads/service/calendar.jpg" class="img-decorativa1" style="width: 200px;" alt="Immagine di un calendario. Rappresenta la pagina di prenotazioni">
+        <img src="../php/uploads/service/inbox.png" class="img-decorativa2" style="width: 200px;" alt="Immagine figurativa di un postino che consegna la posta elettronica. Rappresenta il metodo di consegna dei libri per posta elettronica">
 
         <ol class="p-0"><li class="homeList"><span>Effettua il <a href="personal.php">login</a></span></li>
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Personalizza la tua pagina personale</span></li>
@@ -107,7 +107,7 @@
 
             <!-- Profilo 2 -->
             <div class="col-12 col-md-5">
-                <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <img src="../php/uploads/service/Adam.jpg" class="rounded w-75 img-fluid mb-3" alt="Immagine di profilo github di Razzino Adam Paolo">
                 <h2>Adam Paolo Razzino</h2>
                 <p>Email: <a href="mailto:adampaolo.razzino@studio.unibo.it">adampaolo.razzino@studio.unibo.it</a></p>
                 <p>N° Matricola: 0001126965</p>

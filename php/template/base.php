@@ -34,14 +34,15 @@
                         <h6>Creatori del sito</h6>
                         <ul>
                             <li>
-                                Casadei Lorenzo - 
-                                n° matricola:
-                                email: lorenzo.casadei16@studio.unibo.it
+                                <p>Casadei Lorenzo - </p>
+                                <p>n° matricola:</p>
+                                <p>email: lorenzo.casadei16@studio.unibo.it</p>
                             </li>
                             <li>
-                                Razzino Adam Paolo - 
-                                n° matricola: 0001126965
-                                email: adampaolo.razzino@studio.unibo.it
+                                <p>Razzino Adam Paolo -</p>
+                                <p>n° matricola: 0001126965</p>
+                                <p>email: adampaolo.razzino@studio.unibo.it</p>
+                                 
                             </li>
                         </ul>
                         <p>Un sito che si occupa della presentazione di libri universitari,
