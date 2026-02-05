@@ -25,8 +25,6 @@ $(document).ready(function () {
     },
     events: "utilis/get_bookings.php",
     eventRender: function (event, element) {
-      // 'event' contiene i dati dal database (title, start, end, ecc.)
-      // 'element' è l'elemento HTML dell'evento nel calendario
 
       $(element).tooltip({
         title:
@@ -62,9 +60,7 @@ function createEvent(date) {
 }
 
 function createSelection(startDate, endDate) {
-  //const start = document.querySelector("#data-inizio");
   const end = document.getElementById("data-fine");
-  //start.value = startDate.format();
   end.value = endDate.format();
 }
 
@@ -83,7 +79,7 @@ async function addBooking(formElement) {
     const libroSelect = document.querySelector("#libro");
     const feedback = document.querySelector(".invalid-feedback");
 
-    libroSelect.classList.add("is-invalid"); // Questo rende visibile il feedback
+    libroSelect.classList.add("is-invalid"); 
     feedback.textContent = result.message;
   }
 }
@@ -125,7 +121,7 @@ async function cancelBooking(formElement) {
     const libroSelect = document.querySelector("#id");
     const feedback = document.querySelector(".invalid-feedback.cancel");
 
-    libroSelect.classList.add("is-invalid"); // Questo rende visibile il feedback
+    libroSelect.classList.add("is-invalid"); 
     feedback.textContent = result.message;
   }
 }
