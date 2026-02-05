@@ -88,7 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 // 3) creazione templateParams
 $templateParams["titolo"] = "WebLio | Admin";
-$templateParams["header"] = "";
 $templateParams["baseUpperPage"] = "template/adminPage.php";
 $templateParams["script"] = ""; 
 $templateParams["libri"] = $dbh->getAvailableBooks();     

@@ -6,7 +6,9 @@ if (!$libro) {
 }
 # dati del libro
 $nome = htmlspecialchars(str_replace('_', ' ', $libro["nome_libro"]));
+$nome_url = rawurlencode(str_replace('_', ' ', $libro["nome_libro"]));
 $edizione = htmlspecialchars($libro["edizione"]);
+$edizione_url = rawurlencode($libro["edizione"]);
 $autori = htmlspecialchars($libro["autori"]);
 $disponibilità = intval($libro["disponibile"]);
 $descrizione = htmlspecialchars($libro["descrizione"]);
@@ -23,11 +25,11 @@ $img = htmlspecialchars(!empty($libro["immagine"]) ? $libro["immagine"] : "defau
                     <img src="uploads/books/<?php echo $img?>" alt="Copertina del libro: <?php echo $nome?>"/>
             </div>
             <div class="d-grid gap-2 mt-3">
-                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $nome?>&edizione=<?php echo $libro["edizione"]?>" 
+                <a href="prenotazioni.php?id=<?php echo $id?>&nome=<?php echo $nome_url?>&edizione=<?php echo $edizione_url?>" 
                 class="btn btn-<?php if($disponibilità==1): echo "danger";else:echo "success";endif;?>" <?php if($disponibilità==1): echo 'style="pointer-events: none;"'; endif;?>>Prenota</a>
             </div>
         </div>
-        <div class="cik-12 col-md-8 col-lg-9">
+        <div class="col-12 col-md-8 col-lg-9">
             <div class="card-shadow-sm">
                 <div class="card-body">
                     <h2 class="mb-1"><?= $nome ?></h2>
@@ -99,7 +101,7 @@ $img = htmlspecialchars(!empty($libro["immagine"]) ? $libro["immagine"] : "defau
                                             </select>
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label mb-1" required>Testo</label>
+                                            <label class="form-label mb-1">Testo</label>
                                             <textarea name="descrizione" class="form-control" rows="3" placeholder="Scrivi qui la tua recensione..." required></textarea>
                                         </div>
                                         <div class="col-12 col-md-3">

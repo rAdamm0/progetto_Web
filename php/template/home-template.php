@@ -1,8 +1,8 @@
-<section class="container my-5 bg-dark p-5 rounded">
+<div class="container my-5 bg-dark p-5 rounded">
     <p class="text-start text-white">Benvenuta matricola su WebLio, la prima biblioteca totalmente online.
         Qui puoi trovare qualsiasi libro utile per il tuo processo di studio</p>
     <a class="btn btn-light justify-content-end" href="#infos">Più informazioni</a>
-</section>
+</div>
 <section class="container my-5 bg-dark p-5 rounded">
     <h2 class="mb-4 fw-bold text-white">Cosa Forniamo</h2>
     <div class="row g-4">
@@ -91,9 +91,9 @@
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Puoi inoltre annullare la prenotazione, ma avrai disponibilità fino alla fine del giorno!</span></li>
         </ol>
     </div>
-</section>-->
+</section>
 
-<section>
+<div>
     <div class="container text-center">
         <h2 class="mb-5">Chi Siamo?</h2>
 
@@ -103,7 +103,8 @@
             <div class="col-12 col-md-5">
                 <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
                 <h2>Lorenzo Casadei</h2>
-                <p>matr:</p>
+                <p>Email: <a href="mailto:lorenzo.casadei16@studio.unibo.it">lorenzo.casadei16@studio.unibo.it</a></p>
+                <p>N° Matricola: 0001125166</p>
             </div>
 
             <!-- Profilo 2 -->
@@ -116,4 +117,4 @@
 
         </div>
     </div>
-</section>
+</div>

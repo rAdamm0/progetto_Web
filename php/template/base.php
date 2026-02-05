@@ -35,12 +35,12 @@
                         <ul>
                             <li>
                                 <p>Casadei Lorenzo - </p>
-                                <p>n° matricola:</p>
+                                <p>N° matricola: 0001125166</p>
                                 <p>email: lorenzo.casadei16@studio.unibo.it</p>
                             </li>
                             <li>
                                 <p>Razzino Adam Paolo -</p>
-                                <p>n° matricola: 0001126965</p>
+                                <p>N° matricola: 0001126965</p>
                                 <p>email: adampaolo.razzino@studio.unibo.it</p>
                                  
                             </li>
@@ -53,7 +53,7 @@
                 </div>
             </section>
             <!--NAVBAR-->
-            <section>
+            <div>
                 <nav class="navbar navbar-expand-lg text-white bg-dark mb-3">
                     <div class="container-fluid">
                         <a class="navbar-brand text-white" href="home.php">WebLio</a>
@@ -68,7 +68,7 @@
                                     <a class="nav-link active text-white" aria-current="page" href="home.php">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="courses.php">Courses</a>
+                                    <a class="nav-link text-white" href="courses.php">Corsi</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="catalogo.php">Catalogo</a>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </nav>
-            </section>
+            </div>
 
             <div class="mx-4">
                 <?php require($templateParams["baseUpperPage"]) ?>
