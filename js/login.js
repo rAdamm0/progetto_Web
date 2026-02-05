@@ -11,7 +11,7 @@ async function login(formElement){
       const loginInput = document.getElementById("emailLogin");
     const feedback = document.querySelector(".invalid-feedback, .login");
 
-    loginInput.classList.add("is-invalid"); // Questo rende visibile il feedback
+    loginInput.classList.add("is-invalid"); 
     feedback.textContent = result.message;
     }
 }
@@ -45,7 +45,7 @@ async function registration(formElement){
           ;
             break;
         }
-        loginInput.classList.add("is-invalid"); // Questo rende visibile il feedback
+        loginInput.classList.add("is-invalid");
         console.log(feedback);
         feedback.textContent = result.message;
     }

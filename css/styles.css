@@ -11,14 +11,6 @@ button>a{
   color:#000;
 }
 
-.badge:not(.disp){
-  cursor: pointer;
-}
-
-.disp{
-  cursor:default;
-}
-
 .ratio-6x9 {
   --bs-aspect-ratio: 150%; 
 }
