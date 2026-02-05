@@ -26,7 +26,7 @@
     }
     $templateParams["Libro"] = $dbh->getBookInfo($id);
     $templateParams["titolo"] = "WebLio - ".$templateParams["Libro"]["nome_libro"];
-    $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"];
+    $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"] ?? "";
     $templateParams["recensione"] = $dbh->bookReviews($id);
     $templateParams["baseUpperPage"] = "template/bookPage.php";
     require("template/base.php");

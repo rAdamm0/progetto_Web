@@ -51,7 +51,7 @@
 
             <!-- Colonna sinistra (testo) -->
             <div class="col-12 col-md-6">
-                <h2 class="fw-bold">Come Prenoto?</h2>
+                <h2 class="fw-bold" id="infos">Come Prenoto?</h2>
 
                 <h3>Sfoglia il catalogo</h3>
                 <p>Sfoglia il catalogo e trova uno o più libri che ti possano interessare</p>
