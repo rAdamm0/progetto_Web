@@ -11,14 +11,6 @@ button>a{
   color:#000;
 }
 
-.badge:not(.disp){
-  cursor: pointer;
-}
-
-.disp{
-  cursor:default;
-}
-
 .ratio-6x9 {
   --bs-aspect-ratio: 150%; 
 }
@@ -40,6 +32,59 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+li { display: list-item; }
+
+.homeList {
+  list-style-type: none !important;
+    list-style: none !important;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.homeList i {
+    font-size: 1.5rem;
+    color: #198754;
+}
+
+.homeList>a, span>a{
+  color: rgb(194, 194, 194);
+}
+
+.homeList>span{
+  font-size: large;
+}
+
+.position-relative {
+    position: relative;
+}
+
+/* Nascondiamo eventuali pezzi di immagine che escono dai bordi arrotondati */
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.img-decorativa1 {
+    position: absolute;
+    top: 25%;    
+    right: 15%;
+    transform: rotate(15deg);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.img-decorativa2 {
+    position: absolute;
+    top: 10%;    
+    left: 10%;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
 /*h1 { font-family: "Playfair Display"; font-size: 23px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; } 
 h2 { font-family: "Playfair Display"; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 23px; } 
 p { font-family: "Playfair Display"; font-size: 17px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 23px; } 
@@ -52,6 +97,18 @@ pre { font-family: "Playfair Display"; font-size: 11px; font-style: normal; font
         border-right: 1px solid #dee2e6 !important;
     }
     
+}
+
+@media(max-width:1415px){
+  .img-decorativa1{
+    opacity:0;
+  }
+}
+
+@media(max-width:1041px){
+  .img-decorativa2{
+    opacity:0;
+  }
 }
 
 @media(max-width:768px){

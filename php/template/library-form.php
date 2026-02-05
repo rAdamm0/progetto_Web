@@ -29,20 +29,20 @@
           <tr>
               <td>
                 <a href="book.php?id=<?= $libro["codice_libro"] ?>">
-                  <?= htmlspecialchars($libro["nome_libro"]) ?>
+                  <?= !empty(htmlspecialchars($libro["nome_libro"])) ? htmlspecialchars($libro["nome_libro"]) : "N/A" ?>
                 </a>
               </td>
 
               <td class="d-none d-md-table-cell">
-                <?= htmlspecialchars($libro["autore_completo"]) ?>
+                <?= !empty(htmlspecialchars($libro["autore_completo"])) ? htmlspecialchars($libro["autore_completo"]) : "N/A" ?>
               </td>
 
               <td class="d-none d-lg-table-cell">
-                <?= htmlspecialchars($libro["data_uscita"]) ?>
+                <?= !empty(htmlspecialchars($libro["data_uscita"])) ? htmlspecialchars($libro["data_uscita"]) : "N/A" ?>
               </td>
 
               <td class="d-none d-lg-table-cell">
-                <?= htmlspecialchars($libro["edizione"]) ?>
+                <?= !empty(htmlspecialchars($libro["edizione"])) ? htmlspecialchars($libro["edizione"]) : "N/A" ?>
               </td>
 
               <td>

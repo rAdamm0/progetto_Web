@@ -19,21 +19,25 @@ $(document).ready(function () {
         return false;
       }
       var duration = moment.duration(endDate.diff(startDate)).asDays();
-    if (duration > 1) {
+      if (duration > 1) {
         createSelection(startDate, endDate);
-    }
+      }
     },
     events: "utilis/get_bookings.php",
-    eventRender: function(event, element) {
-        // 'event' contiene i dati dal database (title, start, end, ecc.)
-        // 'element' è l'elemento HTML dell'evento nel calendario
-        
-        $(element).tooltip({
-            title: "Libro: " + event.title + " | Scadenza: " + (event.description ?? event.start.format()),
-            container: 'body',
-            trigger: 'hover',
-            placement: 'top'
-        });
+    eventRender: function (event, element) {
+      // 'event' contiene i dati dal database (title, start, end, ecc.)
+      // 'element' è l'elemento HTML dell'evento nel calendario
+
+      $(element).tooltip({
+        title:
+          "Libro: " +
+          event.title +
+          " | Scadenza: " +
+          (event.description ?? event.start.format()),
+        container: "body",
+        trigger: "hover",
+        placement: "top",
+      });
     },
     header: {
       left: "title",
@@ -52,10 +56,9 @@ $(document).ready(function () {
   });
 });
 
-
 function createEvent(date) {
   const end = document.querySelector("#data-fine");
-    end.value = date.format();
+  end.value = date.format();
 }
 
 function createSelection(startDate, endDate) {
@@ -74,7 +77,7 @@ async function addBooking(formElement) {
   const result = await response.json();
   if (result.success) {
     await showSweetAlert();
-    location.reload();  
+    location.reload();
   } else {
     console.error("Server Error: ", result.message);
     const libroSelect = document.querySelector("#libro");
@@ -85,28 +88,39 @@ async function addBooking(formElement) {
   }
 }
 
- function showSweetAlert() {
-            window.alert = function () { };
+function showSweetAlert() {
+  window.alert = function () {};
 
-           return Swal.fire({
-                title: 'Prenotazione Completata',
-                text: 'Libro prenotato con successo!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        }
+  return Swal.fire({
+    title: "Prenotazione Completata",
+    text: "Libro prenotato con successo!",
+    icon: "success",
+    confirmButtonText: "OK",
+  });
+}
 
-async function cancelBooking(formElement){
+function showBadAlert() {
+  window.alert = function () {};
+
+  return Swal.fire({
+    title: "Cancellazione Completata",
+    text: "Prenotazione cancellata con successo",
+    icon: "success",
+    confirmButtonText: "OK",
+  });
+}
+
+async function cancelBooking(formElement) {
   const formData = new FormData(formElement);
-  const response = await fetch('utilis/cancelBook.php',{
-    method : 'POST',
-    body : formData
+  const response = await fetch("utilis/cancelBook.php", {
+    method: "POST",
+    body: formData,
   });
   const result = await response.json();
-  if(result.success){
-    alert("Prenotazione Cancellata");
+  if (result.success) {
+    await showBadAlert();
     location.reload();
-  }else{
+  } else {
     console.error("Server Error: ", result.message);
     const libroSelect = document.querySelector("#id");
     const feedback = document.querySelector(".invalid-feedback.cancel");

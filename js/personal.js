@@ -92,7 +92,7 @@ async function updateTags(formElement){
 
  function delete_cookie( ) {
   fetch('utilis/logout.php',{method:'POST', credentials: 'include'});
-    location.replace('personal.php');
+    location.reload();
 }
 
 

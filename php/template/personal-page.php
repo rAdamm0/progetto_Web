@@ -6,7 +6,7 @@
             <!-- Immagine - in alto su mobile, destra su desktop -->
             <div class="col-12 col-md-4 order-first order-md-last text-center">
                 <div class="mb-4">
-                    <img src="<?php echo htmlspecialchars($templateParams["infos"][0]["immagine_profilo"]) ?>"
+                    <img src="<?php echo $templateParams["infos"][0]["immagine_profilo"] ?: './uploads/default_avatar.png'?>"
                         alt="Profile Image" class="rounded img-fluid ml-3 " style="object-fit: cover;">
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
                     <!--updateUserInfos($email, $nome, $cognome, $corso, $anno, $num_matricola, $immagine_profilo);-->
 
-                    <dialog id="editModal">
+                    <dialog id="editModal" class="modal-sm border-0 bg-light ">
                         <h2>Edit Profile</h2>
                         <form method="POST" action="utilis/update_profile.php"
                             onsubmit="event.preventDefault(); updateProfile(this);">
@@ -49,11 +49,11 @@
 
                             <label class="form-label">Corso:</label>
                             <input type="text" name="corso" class="form-control mb-2"
-                                value="<?php echo htmlspecialchars($templateParams["infos"][0]["corso"]); ?>" required>
+                                value="<?php echo htmlspecialchars(!empty($templateParams["infos"][0]["corso"]) ? $templateParams["infos"][0]["corso"] : ""); ?>" required>
 
                             <label class="form-label">Anno:</label>
                             <input type="text" name="anno" class="form-control mb-3"
-                                value="<?php echo htmlspecialchars($templateParams["infos"][0]["anno"]); ?>" required>
+                                value="<?php echo htmlspecialchars(!empty($templateParams["infos"][0]["anno"]) ? $templateParams["infos"][0]["anno"] : ""); ?>" required>
 
 
                             <label class="form-label me-3">Profile Picture:</label>
@@ -75,13 +75,13 @@
                         <!--Ognuno di questi badge avrà una funzionalità Js in cui onClick verrà eliminato e mandato una query deleteTagByEmail-->
                         <?php foreach ($templateParams["tags"] as $pill): ?>
 
-                            <span class="badge text-bg-secondary coursePill" id="<?php echo $pill["codice_corso"] ?>"><?php echo $pill["nome_corso"] ?></span>
+                            <button class="badge text-bg-secondary coursePill border-0" id="<?php echo $pill["codice_corso"] ?>"><?php echo $pill["nome_corso"] ?></button>
                         <?php endforeach; ?>
-                        <span class="badge text-bg-warning" id="add-course">Aggiungi
-                            Corso</span><!--Link gestito da Js Apre una lista di corsi-->
+                        <button class="badge text-bg-warning border-0" id="add-course" >Aggiungi
+                            Corso</button><!--Link gestito da Js Apre una lista di corsi-->
 
-                        <dialog id="course-edit" class="modal-sm border-0 bg-dark-subtle ">
-                            <h2>Add Course</h2>
+                        <dialog id="course-edit" class="modal-sm border-0 bg-light w-50">
+                            <h2 class="text-center">Aggiungi Corso/i</h2>
                             <form method="POST" action="utilis/update_tags.php"
                             onsubmit="event.preventDefault(); updateTags(this);">
                             <div class="btn-group-vertical d-block" role="group" aria-label="Basic checkbox toggle button group">
@@ -94,7 +94,7 @@
                                         <input type="checkbox" class="btn-check" name="codici[]" value="<?php echo $course["codice_corso"]; ?>"
                                             id="<?php echo $course["codice_corso"]; ?>">
 
-                                        <label class="btn btn-outline-light text-black" for="<?php echo $course["codice_corso"]; ?>">
+                                        <label class="btn btn-outline-warning text-black" for="<?php echo $course["codice_corso"]; ?>">
                                             <?php echo $course["nome_corso"]; ?>
                                         </label>
                                         <?php endif;?>
@@ -143,5 +143,5 @@
 </div>
 
 <hr class="hr my-4" />
-<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie("PHPSESSID")></span>
+<span><input class="btn btn-danger mx-auto"type="button" value="Logout" onclick=delete_cookie()></span>
                 </section>

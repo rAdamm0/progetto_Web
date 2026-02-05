@@ -11,7 +11,7 @@ $autori = htmlspecialchars($libro["autori"]);
 $disponibilità = intval($libro["disponibile"]);
 $descrizione = htmlspecialchars($libro["descrizione"]);
 $data_uscita = htmlspecialchars($libro["data_uscita"]);
-$img = htmlspecialchars($libro["immagine"] ?? "default_cover.png");
+$img = htmlspecialchars(!empty($libro["immagine"]) ? $libro["immagine"] : "default_cover.png");
 ?>
 <header>
     <h1><?=  $templateParams["h1"]?></h1>
