@@ -35,5 +35,5 @@ XAMPP(Apache + MySQL)
 
 6. Go to the following link and enjoy the site!
    ```
-   http://localhost/progetto_Web/php/
+   http://localhost/progetto_Web/php/home.php
    ```
