@@ -3,13 +3,14 @@ require_once '../db/Bootstrap.php';
 
 
 if(isset($_POST["nome"])){ 
-    
+    echo var_dump($_POST);
     $email = $_SESSION["email"];
     $nome = $_POST["nome"];
     $cognome = $_POST["cognome"];
     $corso = $_POST["corso"];
     $anno = $_POST["anno"];
     $finalImagePath = $_POST['current_image_hidden'] ?? $_SESSION["img"]; 
+    echo var_dump($_SESSION["img"]);
     
     if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'uploads/';
@@ -18,9 +19,10 @@ if(isset($_POST["nome"])){
 
         if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], '../'.$targetPath)) {
             $finalImagePath = $targetPath;
-        }
-        if($_POST['current_image_hidden']!='default_avatar.png'){
-            unlink('../'.$_POST['current_image_hidden']);
+            if($_POST['current_image_hidden']!='./uploads/default_avatar.png'){
+                echo var_dump($_POST['current_image_hidden']);
+                unlink('../'.$_POST['current_image_hidden']);
+            }
         }
     }
 
