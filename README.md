@@ -38,7 +38,7 @@ XAMPP(Apache + MySQL)
    http://localhost/progetto_Web/php/home.php
    ```
 
-7. Per accedere come admin effettuare l'accesso con le seguenti credenziali
+7. To enter as admin use the following credentials:
    ```
    email: admin@university.it - pw:adminpw123
    ```
