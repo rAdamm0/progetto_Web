@@ -101,7 +101,7 @@
 
             <!-- Profilo 1 -->
             <div class="col-12 col-md-5">
-                <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3" alt="...">
+                <img src="../php/uploads/service/images.jpeg" class="rounded w-75 img-fluid mb-3" alt="...">
                 <h2>Lorenzo Casadei</h2>
                 <p>Email: <a href="mailto:lorenzo.casadei16@studio.unibo.it">lorenzo.casadei16@studio.unibo.it</a></p>
                 <p>N° Matricola: 0001125166</p>
