@@ -62,7 +62,7 @@
                 <h3>Consulta la pagina Prenotazioni</h3>
                 <p>In questa pagina troverai un calendario con tutti i libri prenotati e la possibilità di prenotarli nuovamente</p>
                 <div class="d-sm-flex"> 
-                    <a href="catalogo.php" class="btn btn-light mb-3">Catalogo</a>
+                    <a href="catalogo.php" class="btn btn-light mb-3 me-3">Catalogo</a>
                     <a class="btn btn-light mb-3" href="book.php?id=<?php echo rand($templateParams["range"]["min"], $templateParams["range"]["max"])?>" >Libro Fortunato</a>
                 </div>
             </div>
