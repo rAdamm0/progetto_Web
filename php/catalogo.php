@@ -6,7 +6,6 @@
     $templateParams["h1"] = "Catalogo libri";
     $templateParams["selectedCourse"] = $course;
     $templateParams["css"] = "../html/css/catalogo.css";
-    $templateParams["header"] = "template/headerCatalogue.php";
     $templateParams["baseUpperPage"] = "template/library-form.php";
     $templateParams["Libri"] = $dbh->getBooksBySearch($q,$course);
     require("template/base.php");

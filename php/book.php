@@ -28,7 +28,6 @@
     $templateParams["titolo"] = "WebLio - ".$templateParams["Libro"]["nome_libro"];
     $templateParams["h1"] = $dbh->getCourseByBook($id)["nome_corso"];
     $templateParams["recensione"] = $dbh->bookReviews($id);
-    $templateParams["header"] = "template/headerBook.php";
     $templateParams["baseUpperPage"] = "template/bookPage.php";
     require("template/base.php");
 ?>

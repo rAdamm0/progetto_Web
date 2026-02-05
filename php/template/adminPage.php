@@ -269,7 +269,7 @@
       </div>
     </div>
 
-    <!-- Recensioni -->
+    <!-- RECENSIONI -->
     <div class=" table-responsive tab-pane fade" id="tab-recensioni" role="tabpanel" aria-labelledby="tab-recensioni">
       <h3>Lista recensioni</h3>
       <div class="table-responsive">
