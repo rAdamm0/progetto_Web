@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $lingua = trim($_POST["lingua"] ?? "Italiano");
             $docente = trim($_POST["docente"] ?? "");
 
-            $dbh->addCourse($codice, $nome, $descr, $lingua, $docente === "" ? null : $docente);
+            $dbh->addCourse($codice, $nome, $descr, $docente === "" ? null : $docente, $lingua);
             break;
 
         case "add_book":
