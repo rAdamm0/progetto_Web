@@ -35,12 +35,12 @@
                         <ul>
                             <li>
                                 <p>Casadei Lorenzo - </p>
-                                <p>n° matricola:</p>
+                                <p>N° matricola: 0001125166</p>
                                 <p>email: lorenzo.casadei16@studio.unibo.it</p>
                             </li>
                             <li>
                                 <p>Razzino Adam Paolo -</p>
-                                <p>n° matricola: 0001126965</p>
+                                <p>N° matricola: 0001126965</p>
                                 <p>email: adampaolo.razzino@studio.unibo.it</p>
                                  
                             </li>

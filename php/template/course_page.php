@@ -38,7 +38,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Successivo</span>
         </button>
-            <!-- trattini -->
+        <!-- trattini -->
         <div class="carousel-indicators position-static mt-3">
         <?php for ($i = 0; $i < count($randomCourses); $i++) : ?>
             <button type="button"
