@@ -441,7 +441,7 @@ class DatabaseHelper
   public function addCourse(int $codiceCorso,
                             string $nomeCorso,
                             string $descrizione,
-                            string $docente,
+                            $docente,
                             string $lingua = 'Italiano'){
     $query = "INSERT INTO corsi (codice_corso, nome_corso, descrizione, lingua, docente)
               VALUES (?, ?, ?, ?, ?)";
