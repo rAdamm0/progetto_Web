@@ -29,7 +29,7 @@ async function updateProfile(formElement) {
     const result = await response.text();
     if (result.includes("success")) {
         alert("Profile Updated!");
-        location.reload(); // Refresh to show new data
+        location.reload();
     }
 }
 

@@ -101,7 +101,7 @@
 
             <!-- Profilo 1 -->
             <div class="col-12 col-md-5">
-                <img src="../php/uploads/service/images.jpeg" class="rounded w-75 img-fluid mb-3" alt="...">
+                <img src="../php/uploads/service/images.jpeg" class="rounded w-75 img-fluid mb-3" style="height: 250px; object-fit: contain;" alt="...">
                 <h2>Lorenzo Casadei</h2>
                 <p>Email: <a href="mailto:lorenzo.casadei16@studio.unibo.it">lorenzo.casadei16@studio.unibo.it</a></p>
                 <p>N° Matricola: 0001125166</p>
@@ -109,7 +109,7 @@
 
             <!-- Profilo 2 -->
             <div class="col-12 col-md-5">
-                <img src="../php/uploads/service/Adam.jpg" class="rounded w-75 img-fluid mb-3" alt="Immagine di profilo github di Razzino Adam Paolo">
+                <img src="../php/uploads/service/Adam.jpg" class="rounded w-75 img-fluid mb-3" style="height: 250px; object-fit: contain;" alt="Immagine di profilo github di Razzino Adam Paolo">
                 <h2>Adam Paolo Razzino</h2>
                 <p>Email: <a href="mailto:adampaolo.razzino@studio.unibo.it">adampaolo.razzino@studio.unibo.it</a></p>
                 <p>N° Matricola: 0001126965</p>
