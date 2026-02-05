@@ -74,8 +74,8 @@
         </div>
     </div>
 </section>
-
-<!--<section class="container my-5 bg-dark p-5 rounded text-white text-center position-relative overflow-hidden">
+<!--
+<div class="container my-5 bg-dark p-5 rounded text-white text-center position-relative overflow-hidden">
     <h2 class="mb-4 fw-bold" id="infos">Come funziona</h2>
     <div class="mx-auto d-inline-block">
         <img src="../php/uploads/service/calendar.jpg" class="img-decorativa1" style="width: 200px;" alt="Immagine di un calendario. Rappresenta la pagina di prenotazioni">
@@ -91,8 +91,8 @@
             <li class="homeList"><i class="bi bi-arrow-down d-block text-center my-2"></i> <span>Puoi inoltre annullare la prenotazione, ma avrai disponibilità fino alla fine del giorno!</span></li>
         </ol>
     </div>
-</section>-->
-
+</div>
+-->
 <div>
     <div class="container text-center">
         <h2 class="mb-5">Chi Siamo?</h2>
@@ -101,7 +101,7 @@
 
             <!-- Profilo 1 -->
             <div class="col-12 col-md-5">
-                <img src="../html/assets/foto.png" class="rounded w-75 img-fluid mb-3"  alt="...">
+                <img src="../php/uploads/service/images.jpeg" class="rounded w-75 img-fluid mb-3" alt="...">
                 <h2>Lorenzo Casadei</h2>
                 <p>Email: <a href="mailto:lorenzo.casadei16@studio.unibo.it">lorenzo.casadei16@studio.unibo.it</a></p>
                 <p>N° Matricola: 0001125166</p>
