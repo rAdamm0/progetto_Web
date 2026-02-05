@@ -74,7 +74,7 @@
         </div>
     </div>
 </section>
-
+<!--
 <div class="container my-5 bg-dark p-5 rounded text-white text-center position-relative overflow-hidden">
     <h2 class="mb-4 fw-bold" id="infos">Come funziona</h2>
     <div class="mx-auto d-inline-block">
@@ -92,7 +92,7 @@
         </ol>
     </div>
 </div>
-
+-->
 <div>
     <div class="container text-center">
         <h2 class="mb-5">Chi Siamo?</h2>
