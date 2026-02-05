@@ -53,7 +53,7 @@
                 </div>
             </section>
             <!--NAVBAR-->
-            <section>
+            <div>
                 <nav class="navbar navbar-expand-lg text-white bg-dark mb-3">
                     <div class="container-fluid">
                         <a class="navbar-brand text-white" href="home.php">WebLio</a>
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </nav>
-            </section>
+            </div>
 
             <div class="mx-4">
                 <?php require($templateParams["baseUpperPage"]) ?>
